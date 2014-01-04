@@ -112,10 +112,7 @@ BB_USRBIN := \
 	getopt
 busybox:
 	mkdir -p $(DEBOOT)/busybox
-	$(DEBOOT)/bin/busybox --install $(DEBOOT)/busybox
-	for i in $(DEBOOT)/busybox/*; do \
-		ln -sf /bin/busybox $$i; \
-	done
+	qemu-i386 -L $(DEBOOT) $(DEBOOT)/bin/busybox --install -s $(DEBOOT)/busybox
 	perl -pi -e 's{(bin:/bin)}{$$1:/busybox}' $(DEBOOT)/etc/profile
 	cd $(DEBOOT)/busybox; mv -f $(BB_BIN) ../bin
 	cd $(DEBOOT)/busybox; mv -f $(BB_SBIN) ../sbin
