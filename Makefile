@@ -5,7 +5,8 @@
 
 ARCH=i386
 TARGET=root3.ramfs.gz
-DEBOOT=~/tmp/boot/linuxrescue3/files
+TMPDIR=~/tmp/boot/linuxrescue3
+DEBOOT=$(TMPDIR)/files
 TESTKERN=2.6.35-rc2.57
 
 all: $(TARGET)
@@ -17,9 +18,13 @@ all: $(TARGET)
 #
 #include .depfiles
 
-decache:
+debcache:
 	rm -rf $(DEBOOT)
-	cp -a ~/tmp/boot/linuxrescue3/deb ~/tmp/boot/linuxrescue3/files
+	cp -a $(TMPDIR)/deb $(DEBOOT)
+
+debcache_save:
+	mkdir -p $(TMPDIR)/deb
+	cp -u $(DEBOOT)/var/cache/apt/archives/* $(TMPDIR)/deb
 
 # TODO:
 # packages:
@@ -144,7 +149,7 @@ DEL_USRBIN += \
 	procan ptx readom shuf ssh-keyscan ssh-vulnkey stduf \
 	tic top who zipcloak zipnote zipsplit
 
-minimise:
+minimise: debcache_save
 	cd $(DEBOOT)/bin; echo $(DEL_BIN) | xargs rm -f
 	cd $(DEBOOT)/bin; echo $(DEL_SBIN) | xargs rm -f
 	cd $(DEBOOT)/usr/bin; echo $(DEL_USRBIN) | xargs rm -f
@@ -222,5 +227,6 @@ test: 	$(TARGET) $(TESTKERN)
 
 clean:
 	rm -f $(TARGET) test.iso .depfiles
+	rm -rf $(DEBOOT)
 
 
