@@ -30,7 +30,10 @@ debcache_save:
 # packages:
 #	sysklogd, binutils(ar), chvt, clamscan, lspci, showkey,n2n,
 #	avahi-utils, bind9-host, pcap-drone,
+#	iotop,
+#	tcc
 # busybox for many things
+# avoid sudo
 debootstrap:
 	mkdir -p $(DEBOOT)
 	sudo /usr/sbin/debootstrap \
@@ -62,6 +65,7 @@ fixlinks:
 	ln -fs domainname $(DEBOOT)/bin/ypdomainname
 	ln -fs domainname $(DEBOOT)/bin/dnsdomainname
 	ln -fs ifup $(DEBOOT)/sbin/ifdown
+	ln -fs ../bin/true $(DEBOOT)/sbin/ldconfig
 
 # FIXME - use the gen_init_cpio stuff properly to create dev nodes
 fixdev:
@@ -74,6 +78,8 @@ fixdev:
 	sudo mknod $(DEBOOT)/dev/tty6 c 4 6
 	sudo mknod $(DEBOOT)/dev/ttyS0 c 4 64
 
+# fixups are things that are needed to make the image actually work
+#
 fixup: fixlinks fixdev
 	ln -fs sbin/init $(DEBOOT)
 	perl -pi -e 's/:\*:/::/' $(DEBOOT)/etc/shadow
@@ -87,9 +93,13 @@ fixup: fixlinks fixdev
 	echo "#!/bin/sh" >$(DEBOOT)/usr/bin/mesg
 	echo "true" >>$(DEBOOT)/usr/bin/mesg
 	chmod a+x $(DEBOOT)/usr/bin/mesg
+	ln -sf /proc/mounts $(DEBOOT)/etc/mtab
 
+# customisations are things that go beyond makeing the image work
+#
 customise: busybox
 	echo "color normal white on black" >>$(DEBOOT)/etc/elvis/elvis.clr
+	echo "rescue" >$(DEBOOT)/etc/hostname
 
 find_busybox_dupes:
 	cd $(DEBOOT); \
@@ -105,10 +115,11 @@ find_busybox_dupes:
 
 BB_BIN := \
 	cat chgrp chmod chown cpio date df dmesg echo egrep false fgrep \
-	gunzip gzip hostname kill ln mkdir mknod mktemp mv netstat pidof \
-	pwd readlink rm rmdir sleep stty sync true uname uncompress zcat
+	gunzip gzip hostname kill ln mkdir mknod mktemp more mv nc netstat \
+	pidof pwd readlink rm rmdir sleep stty sync true uname uncompress \
+	zcat dnsdomainname mount ps sed umount
 BB_SBIN := \
-	blockdev ifconfig losetup nameif route swapoff swapon 
+	blockdev ifconfig losetup nameif route swapoff swapon sysctl
 BB_USRBIN := \
 	basename clear cmp cut dirname env expr head ionice killall last \
 	logname md5sum mkfifo printf renice reset sha1sum sha512sum sort \
@@ -116,13 +127,18 @@ BB_USRBIN := \
 	du id logger tee tr uniq uptime which \
 	free test [ unxz xz xzcat \
 	getopt
+BB_USRSBIN := \
+	chroot
 busybox:
 	mkdir -p $(DEBOOT)/busybox
 	qemu-$(ARCH) -L $(DEBOOT) $(DEBOOT)/bin/busybox --install -s $(DEBOOT)/busybox
 	perl -pi -e 's{(bin:/bin)}{$$1:/busybox}' $(DEBOOT)/etc/profile
+	echo "NOSWAP=yes" >> $(DEBOOT)/etc/default/rcS
+	echo "unset QUIET_SYSCTL" >> $(DEBOOT)/etc/default/rcS
 	cd $(DEBOOT)/busybox; mv -f $(BB_BIN) ../bin
 	cd $(DEBOOT)/busybox; mv -f $(BB_SBIN) ../sbin
 	cd $(DEBOOT)/busybox; mv -f $(BB_USRBIN) ../usr/bin
+	cd $(DEBOOT)/busybox; mv -f $(BB_USRSBIN) ../usr/sbin
 
 DEL_BIN := \
 	dir gzexe lessecho lesskey vdir zcmp zdiff zegrep zfgrep \
@@ -155,6 +171,7 @@ minimise: debcache_save
 	cd $(DEBOOT)/usr/bin; echo $(DEL_USRBIN) | xargs rm -f
 	rm -rf \
 		$(DEBOOT)/lib/udev/keymaps/* \
+		$(DEBOOT)/lib/security/pam_userdb.so \
 		$(DEBOOT)/sbin/fsck.cramfs \
 		$(DEBOOT)/sbin/fsck.minix \
 		$(DEBOOT)/sbin/ldconfig \
@@ -164,7 +181,9 @@ minimise: debcache_save
 		$(DEBOOT)/usr/lib/i586/* \
 		$(DEBOOT)/usr/lib/i686/* \
 		$(DEBOOT)/usr/lib/libX11.so.6.3.0 \
+		$(DEBOOT)/usr/lib/libdb-4.8.so \
 		$(DEBOOT)/usr/lib/libxml2.so.2.7.8 \
+		$(DEBOOT)/usr/sbin/arpd \
 		$(DEBOOT)/usr/sbin/xfs_db \
 		$(DEBOOT)/usr/sbin/xfs_io \
 		$(DEBOOT)/usr/sbin/xfs_logprint \
@@ -199,7 +218,7 @@ minimise: debcache_save
 
 bootstrap: debootstrap minimise fixup customise
 
-$(TARGET): gen_init_cpio
+$(TARGET): gen_init_cpio gen_initramfs_list.sh
 	./gen_initramfs_list.sh -o $@ -u squash -g squash $(DEBOOT)/
 
 test: 	$(TARGET) $(TESTKERN)
