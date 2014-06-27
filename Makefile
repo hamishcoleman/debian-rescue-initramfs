@@ -18,13 +18,20 @@ all: $(TARGET)
 #
 #include .depfiles
 
+# Install the cached downloads
 debcache:
 	rm -rf $(DEBOOT)
-	cp -a $(TMPDIR)/deb $(DEBOOT)
+	mkdir -p $(DEBOOT)/var/cache/apt/archives/
+	mkdir -p $(DEBOOT)/var/lib/apt/lists/
+	cp -a $(TMPDIR)/cache/archives/ $(DEBOOT)/var/cache/apt/
+	cp -a $(TMPDIR)/cache/lists/ $(DEBOOT)/var/lib/apt/
 
+
+# Save the downloaded archives from the bootstrap image
 debcache_save:
-	mkdir -p $(TMPDIR)/deb
-	cp -u $(DEBOOT)/var/cache/apt/archives/* $(TMPDIR)/deb
+	mkdir -p $(TMPDIR)/cache
+	cp -a $(DEBOOT)/var/cache/apt/archives $(TMPDIR)/cache
+	cp -a $(DEBOOT)/var/lib/apt/lists $(TMPDIR)/cache
 
 # TODO:
 # packages:
