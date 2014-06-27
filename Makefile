@@ -88,6 +88,7 @@ fixup: fixlinks fixdev
 	rm -rf \
 		$(DEBOOT)/etc/hostname \
 		$(DEBOOT)/dev/.udev \
+		$(DEBOOT)/dev/fd \
 		$(DEBOOT)/etc/ssh/ssh_host_*_key*
 	rm -f $(DEBOOT)/usr/bin/mesg
 	echo "#!/bin/sh" >$(DEBOOT)/usr/bin/mesg
