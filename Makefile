@@ -18,8 +18,14 @@ all: $(TARGET)
 #
 #include .depfiles
 
+$(TMPDIR):
+	mkdir -p $(TMPDIR)
+
+$(DEBOOT):
+	mkdir -p $(DEBOOT)
+
 # Install the cached downloads
-debcache:
+debcache: $(TMPDIR) $(DEBOOT)
 	rm -rf $(DEBOOT)
 	mkdir -p $(DEBOOT)/var/cache/apt/archives/
 	mkdir -p $(DEBOOT)/var/lib/apt/lists/
@@ -28,7 +34,7 @@ debcache:
 
 
 # Save the downloaded archives from the bootstrap image
-debcache_save:
+debcache_save: $(TMPDIR) $(DEBOOT)
 	mkdir -p $(TMPDIR)/cache
 	cp -a $(DEBOOT)/var/cache/apt/archives $(TMPDIR)/cache
 	cp -a $(DEBOOT)/var/lib/apt/lists $(TMPDIR)/cache
@@ -41,7 +47,7 @@ debcache_save:
 #	tcc
 # busybox for many things
 # avoid sudo
-debootstrap:
+debootstrap: $(DEBOOT)
 	mkdir -p $(DEBOOT)
 	sudo /usr/sbin/debootstrap \
 		--arch=$(ARCH) --variant=minbase \
@@ -52,11 +58,11 @@ debootstrap:
 	sudo chown -R $(LOGNAME) $(DEBOOT)
 	chmod -R a+r $(DEBOOT)
 
-findlinks:
+findlinks: $(DEBOOT)
 	find $(DEBOOT) -type f -links +1 -ls
 
 # FIXME - teach the gen_init_cpio stuff to find and create hard links
-fixlinks:
+fixlinks: $(DEBOOT)
 	ln -fs perl5.10.1 $(DEBOOT)/usr/bin/perl
 	ln -fs agetty $(DEBOOT)/sbin/getty
 	ln -fs tune2fs $(DEBOOT)/sbin/e2label
@@ -75,7 +81,7 @@ fixlinks:
 	ln -fs ../bin/true $(DEBOOT)/sbin/ldconfig
 
 # FIXME - use the gen_init_cpio stuff properly to create dev nodes
-fixdev:
+fixdev: $(DEBOOT)
 	rm -f $(DEBOOT)/dev/tty[123456] $(DEBOOT)/dev/ttyS0
 	sudo mknod $(DEBOOT)/dev/tty1 c 4 1
 	sudo mknod $(DEBOOT)/dev/tty2 c 4 2
@@ -87,7 +93,7 @@ fixdev:
 
 # fixups are things that are needed to make the image actually work
 #
-fixup: fixlinks fixdev
+fixup: $(DEBOOT) fixlinks fixdev
 	ln -fs sbin/init $(DEBOOT)
 	perl -pi -e 's/:\*:/::/' $(DEBOOT)/etc/shadow
 	perl -pi -e 's/^#T0:/T0:/' $(DEBOOT)/etc/inittab
@@ -103,13 +109,23 @@ fixup: fixlinks fixdev
 	chmod a+x $(DEBOOT)/usr/bin/mesg
 	ln -sf /proc/mounts $(DEBOOT)/etc/mtab
 
+# some unneeded things that just cause warnings
+fix_warnings: $(DEBOOT)
+	rm -f \
+		$(DEBOOT)/etc/init.d/loadcpufreq \
+		$(DEBOOT)/etc/rc*.d/*loadcpufreq \
+		$(DEBOOT)/etc/init.d/mountoverflowtmp \
+		$(DEBOOT)/etc/rc*.d/*mountoverflowtmp \
+		$(DEBOOT)/etc/init.d/ipmievd \
+		$(DEBOOT)/etc/rc*.d/*ipmievd \
+
 # customisations are things that go beyond makeing the image work
 #
-customise: busybox
+customise: $(DEBOOT) busybox fix_warnings
 	echo "color normal white on black" >>$(DEBOOT)/etc/elvis/elvis.clr
 	echo "rescue" >$(DEBOOT)/etc/hostname
 
-find_busybox_dupes:
+find_busybox_dupes: $(DEBOOT)
 	cd $(DEBOOT); \
 	for i in $$( ( \
 		ls --indicator-style=none busybox/; \
@@ -137,7 +153,7 @@ BB_USRBIN := \
 	getopt
 BB_USRSBIN := \
 	chroot
-busybox:
+busybox: $(DEBOOT)
 	mkdir -p $(DEBOOT)/busybox
 	qemu-$(ARCH) -L $(DEBOOT) $(DEBOOT)/bin/busybox --install -s $(DEBOOT)/busybox
 	perl -pi -e 's{(bin:/bin)}{$$1:/busybox}' $(DEBOOT)/etc/profile
@@ -173,7 +189,7 @@ DEL_USRBIN += \
 	procan ptx readom shuf ssh-keyscan ssh-vulnkey stduf \
 	tic top who zipcloak zipnote zipsplit
 
-minimise: debcache_save
+minimise: $(DEBOOT) debcache_save
 	cd $(DEBOOT)/bin; echo $(DEL_BIN) | xargs rm -f
 	cd $(DEBOOT)/bin; echo $(DEL_SBIN) | xargs rm -f
 	cd $(DEBOOT)/usr/bin; echo $(DEL_USRBIN) | xargs rm -f
@@ -226,7 +242,7 @@ minimise: debcache_save
 
 bootstrap: debootstrap minimise fixup customise
 
-$(TARGET): gen_init_cpio gen_initramfs_list.sh
+$(TARGET): $(DEBOOT) gen_init_cpio gen_initramfs_list.sh
 	./gen_initramfs_list.sh -o $@ -u squash -g squash $(DEBOOT)/
 
 test: 	$(TARGET) $(TESTKERN)

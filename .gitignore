@@ -1,0 +1,8 @@
+
+# compiled from source
+gen_init_cpio
+
+# The target generated output
+root3.ramfs.gz
+
+
