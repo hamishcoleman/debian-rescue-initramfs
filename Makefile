@@ -3,6 +3,12 @@
 #
 #
 
+# Typical workflow:
+#  make debcache
+#  make bootstrap
+#  make test
+#
+
 ARCH=i386
 TARGET=root3.ramfs.gz
 TMPDIR=~/tmp/boot/linuxrescue3
@@ -140,7 +146,7 @@ find_busybox_dupes: $(DEBOOT)
 BB_BIN := \
 	cat chgrp chmod chown cpio date df dmesg echo egrep false fgrep \
 	gunzip gzip hostname kill ln mkdir mknod mktemp more mv nc netstat \
-	pidof pwd readlink rm rmdir sleep stty sync true uname uncompress \
+	pidof pwd readlink rm rmdir sleep stty sync uname uncompress \
 	zcat dnsdomainname mount ps sed umount
 BB_SBIN := \
 	blockdev ifconfig losetup nameif route swapoff swapon sysctl
@@ -189,7 +195,11 @@ DEL_USRBIN += \
 	procan ptx readom shuf ssh-keyscan ssh-vulnkey stduf \
 	tic top who zipcloak zipnote zipsplit
 
+
 minimise: $(DEBOOT) debcache_save
+	rm -f $(DEBOOT)/bin/true
+	touch $(DEBOOT)/bin/true
+	chmod a+x $(DEBOOT)/bin/true
 	cd $(DEBOOT)/bin; echo $(DEL_BIN) | xargs rm -f
 	cd $(DEBOOT)/bin; echo $(DEL_SBIN) | xargs rm -f
 	cd $(DEBOOT)/usr/bin; echo $(DEL_USRBIN) | xargs rm -f
