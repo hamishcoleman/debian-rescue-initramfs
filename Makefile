@@ -58,7 +58,7 @@ debootstrap: $(DEBOOT)
 	sudo /usr/sbin/debootstrap \
 		--arch=$(ARCH) --variant=minbase \
 		--include=ifupdown,udhcpc,iproute,netcat-openbsd,iputils-ping,procps,btrfs-tools,dmraid,kexec-tools,mdadm,xfsprogs,xfsdump,vlan,lvm2,cpufrequtils,elvis-console,extlinux,ht,htop,ipmitool,less,lshw,mathomatic,ntfsprogs,psmisc,pv,rsync,openssh-client,screen,socat,strace,iputils-tracepath,traceroute,wget,whiptail,wodim,zip,batmand,chntpw,debootstrap,ethtool,iptraf,partimage,partimage-server,testdisk,powertop,tcpdump,dropbear,mc,kpartx \
-		squeeze \
+		wheezy \
 		$(DEBOOT)/ \
 		http://ftp.au.debian.org/debian/
 	sudo chown -R $(LOGNAME) $(DEBOOT)
@@ -160,6 +160,7 @@ BB_USRSBIN := \
 busybox: $(DEBOOT)
 	mkdir -p $(DEBOOT)/busybox
 	qemu-$(ARCH) -L $(DEBOOT) $(DEBOOT)/bin/busybox --install -s $(DEBOOT)/busybox
+	cd $(DEBOOT)/busybox; for i in *; do ln -sf /bin/busybox $$i; done
 	perl -pi -e 's{(bin:/bin)}{$$1:/busybox}' $(DEBOOT)/etc/profile
 	echo "NOSWAP=yes" >> $(DEBOOT)/etc/default/rcS
 	echo "unset QUIET_SYSCTL" >> $(DEBOOT)/etc/default/rcS
