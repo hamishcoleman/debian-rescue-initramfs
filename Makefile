@@ -109,10 +109,8 @@ fixup: $(DEBOOT) fixlinks fixdev
 		$(DEBOOT)/dev/.udev \
 		$(DEBOOT)/dev/fd \
 		$(DEBOOT)/etc/ssh/ssh_host_*_key*
-	rm -f $(DEBOOT)/usr/bin/mesg
-	echo "#!/bin/sh" >$(DEBOOT)/usr/bin/mesg
-	echo "true" >>$(DEBOOT)/usr/bin/mesg
-	chmod a+x $(DEBOOT)/usr/bin/mesg
+	cp zero_byte_exe $(DEBOOT)/bin/true
+	cp zero_byte_exe $(DEBOOT)/usr/bin/mesg
 	ln -sf /proc/mounts $(DEBOOT)/etc/mtab
 
 # some unneeded things that just cause warnings
@@ -197,9 +195,6 @@ DEL_USRBIN += \
 
 
 minimise: $(DEBOOT) debcache_save
-	rm -f $(DEBOOT)/bin/true
-	touch $(DEBOOT)/bin/true
-	chmod a+x $(DEBOOT)/bin/true
 	cd $(DEBOOT)/bin; echo $(DEL_BIN) | xargs rm -f
 	cd $(DEBOOT)/bin; echo $(DEL_SBIN) | xargs rm -f
 	cd $(DEBOOT)/usr/bin; echo $(DEL_USRBIN) | xargs rm -f
