@@ -69,7 +69,7 @@ findlinks: $(DEBOOT)
 
 # FIXME - teach the gen_init_cpio stuff to find and create hard links
 fixlinks: $(DEBOOT)
-	ln -fs perl5.10.1 $(DEBOOT)/usr/bin/perl
+	ln -fs perl5.14.2 $(DEBOOT)/usr/bin/perl
 	ln -fs agetty $(DEBOOT)/sbin/getty
 	ln -fs tune2fs $(DEBOOT)/sbin/e2label
 	ln -fs e2fsck $(DEBOOT)/sbin/fsck.ext2
@@ -104,6 +104,9 @@ fixup: $(DEBOOT) fixlinks fixdev
 	perl -pi -e 's/:\*:/::/' $(DEBOOT)/etc/shadow
 	perl -pi -e 's/^#T0:/T0:/' $(DEBOOT)/etc/inittab
 	perl -pi -e 's/(ttyS0 9600) vt100/$$1 xterm/' $(DEBOOT)/etc/inittab
+	perl -pi -e 's/--no-headers --format args/-o args/' $(DEBOOT)/etc/init.d/udev
+	perl -pi -e 's/--load=/-p /' $(DEBOOT)/etc/init.d/procps
+	perl -pi -e 's/sleep 30//' $(DEBOOT)/etc/init.d/udev
 	rm -rf \
 		$(DEBOOT)/etc/hostname \
 		$(DEBOOT)/dev/.udev \
@@ -111,6 +114,7 @@ fixup: $(DEBOOT) fixlinks fixdev
 		$(DEBOOT)/etc/ssh/ssh_host_*_key*
 	cp zero_byte_exe $(DEBOOT)/bin/true
 	cp zero_byte_exe $(DEBOOT)/usr/bin/mesg
+	cp zero_byte_exe $(DEBOOT)/usr/bin/locale
 	ln -sf /proc/mounts $(DEBOOT)/etc/mtab
 
 # some unneeded things that just cause warnings
@@ -128,15 +132,13 @@ fix_warnings: $(DEBOOT)
 customise: $(DEBOOT) busybox fix_warnings
 	echo "color normal white on black" >>$(DEBOOT)/etc/elvis/elvis.clr
 	echo "rescue" >$(DEBOOT)/etc/hostname
+	ln -sf /usr/bin/less $(DEBOOT)/bin/more
 
 find_busybox_dupes: $(DEBOOT)
 	cd $(DEBOOT); \
 	for i in $$( ( \
 		ls --indicator-style=none busybox/; \
-		ls --indicator-style=none bin/; \
-		ls --indicator-style=none sbin/; \
-		ls --indicator-style=none usr/bin/; \
-		ls --indicator-style=none usr/sbin/ \
+		find bin/ sbin/ usr/bin/ usr/sbin/ -type f -printf "%f\n"; \
 	) |sort |uniq -d); do \
 		echo $$(find busybox bin sbin usr/bin usr/sbin |grep /$$i$$); \
 	done 
@@ -147,7 +149,8 @@ BB_BIN := \
 	pidof pwd readlink rm rmdir sleep stty sync uname uncompress \
 	zcat dnsdomainname mount ps sed umount
 BB_SBIN := \
-	blockdev ifconfig losetup nameif route swapoff swapon sysctl
+	blockdev ifconfig losetup nameif route swapoff swapon sysctl \
+	modprobe
 BB_USRBIN := \
 	basename clear cmp cut dirname env expr head ionice killall last \
 	logname md5sum mkfifo printf renice reset sha1sum sha512sum sort \
@@ -207,12 +210,16 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/sbin/ldconfig \
 		$(DEBOOT)/sbin/mdmon \
 		$(DEBOOT)/usr/lib/gconv/* \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/gconv/* \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/i586/* \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/i686/* \
 		$(DEBOOT)/usr/lib/i486/* \
 		$(DEBOOT)/usr/lib/i586/* \
 		$(DEBOOT)/usr/lib/i686/* \
 		$(DEBOOT)/usr/lib/libX11.so.6.3.0 \
 		$(DEBOOT)/usr/lib/libdb-4.8.so \
 		$(DEBOOT)/usr/lib/libxml2.so.2.7.8 \
+		$(DEBOOT)/usr/lib/locale/* \
 		$(DEBOOT)/usr/sbin/arpd \
 		$(DEBOOT)/usr/sbin/xfs_db \
 		$(DEBOOT)/usr/sbin/xfs_io \
@@ -230,9 +237,10 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/usr/share/elvis/elvis.gnome \
 		$(DEBOOT)/usr/share/locale/* \
 		$(DEBOOT)/usr/share/man/* \
-		$(DEBOOT)/usr/share/mc/mc.hint* \
-		$(DEBOOT)/usr/share/mc/mc.hlp* \
+		$(DEBOOT)/usr/share/mc/hints/mc.hint* \
+		$(DEBOOT)/usr/share/mc/help/mc.hlp* \
 		$(DEBOOT)/usr/share/mc/syntax/* \
+		$(DEBOOT)/usr/share/perl/5.14.2/unicore/* \
 		$(DEBOOT)/usr/share/zoneinfo/* \
 		$(DEBOOT)/usr/share/X11/locale/* \
 		$(DEBOOT)/usr/share/screen/utf8encodings/* \
