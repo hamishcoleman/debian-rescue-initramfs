@@ -267,7 +267,7 @@ $(TARGET): $(DEBOOT) gen_init_cpio gen_initramfs_list.sh
 	./gen_initramfs_list.sh -o $@ -u squash -g squash $(DEBOOT)/
 
 test: 	$(TARGET) $(TESTKERN)
-	kvm \
+	qemu-system-i386 -enable-kvm \
 		-m 384 \
 		-serial stdio \
 		-append console=ttyS0 \
