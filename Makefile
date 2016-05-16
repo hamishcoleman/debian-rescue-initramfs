@@ -57,7 +57,7 @@ debootstrap: $(DEBOOT)
 	mkdir -p $(DEBOOT)
 	sudo /usr/sbin/debootstrap \
 		--arch=$(ARCH) --variant=minbase \
-		--include=ifupdown,udhcpc,iproute,netcat-openbsd,iputils-ping,procps,btrfs-tools,dmraid,kexec-tools,mdadm,xfsprogs,xfsdump,vlan,lvm2,cpufrequtils,elvis-console,extlinux,ht,htop,ipmitool,less,lshw,mathomatic,ntfsprogs,psmisc,pv,rsync,openssh-client,screen,socat,strace,iputils-tracepath,traceroute,wget,whiptail,wodim,zip,batmand,chntpw,debootstrap,ethtool,iptraf,partimage,partimage-server,testdisk,powertop,tcpdump,dropbear,mc,kpartx \
+		--include=ifupdown,udhcpc,iproute,netcat-openbsd,iputils-ping,procps,btrfs-tools,dmraid,kexec-tools,mdadm,xfsprogs,xfsdump,vlan,lvm2,cpufrequtils,elvis-console,extlinux,ht,htop,ipmitool,less,lshw,mathomatic,ntfsprogs,psmisc,pv,rsync,openssh-client,screen,socat,strace,iputils-tracepath,traceroute,wget,whiptail,wodim,zip,batmand,chntpw,debootstrap,ethtool,iptraf,partimage,partimage-server,testdisk,powertop,tcpdump,dropbear,mc,kpartx,wpasupplicant \
 		wheezy \
 		$(DEBOOT)/ \
 		http://ftp.au.debian.org/debian/
@@ -133,6 +133,13 @@ customise: $(DEBOOT) busybox fix_warnings
 	echo "color normal white on black" >>$(DEBOOT)/etc/elvis/elvis.clr
 	echo "rescue" >$(DEBOOT)/etc/hostname
 	ln -sf /usr/bin/less $(DEBOOT)/bin/more
+	echo "" >>$(DEBOOT)/etc/network/interfaces
+	echo "iface eth0 inet dhcp" >>$(DEBOOT)/etc/network/interfaces
+	echo "iface wlan0 inet manual" >>$(DEBOOT)/etc/network/interfaces
+	echo "    wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf" >>$(DEBOOT)/etc/network/interfaces
+	echo "iface default inet dhcp" >>$(DEBOOT)/etc/network/interfaces
+	echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" >$(DEBOOT)/etc/wpa_supplicant/wpa_supplicant.conf
+	echo "update_config=1" >>$(DEBOOT)/etc/wpa_supplicant/wpa_supplicant.conf
 
 find_busybox_dupes: $(DEBOOT)
 	cd $(DEBOOT); \
@@ -150,14 +157,14 @@ BB_BIN := \
 	zcat dnsdomainname mount ps sed umount
 BB_SBIN := \
 	blockdev ifconfig losetup nameif route swapoff swapon sysctl \
-	modprobe
+	modprobe vconfig mkswap
 BB_USRBIN := \
 	basename clear cmp cut dirname env expr head ionice killall last \
 	logname md5sum mkfifo printf renice reset sha1sum sha512sum sort \
 	tail touch tty watch wc whoami yes \
 	du id logger tee tr uniq uptime which \
 	free test [ unxz xz xzcat \
-	getopt
+	getopt xargs timeout stat seq
 BB_USRSBIN := \
 	chroot
 busybox: $(DEBOOT)
