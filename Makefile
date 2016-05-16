@@ -116,6 +116,8 @@ fixup: $(DEBOOT) fixlinks fixdev
 	cp zero_byte_exe $(DEBOOT)/usr/bin/mesg
 	cp zero_byte_exe $(DEBOOT)/usr/bin/locale
 	ln -sf /proc/mounts $(DEBOOT)/etc/mtab
+	mkdir -p $(DEBOOT)/var/log/fsck
+	perl -pi -e 's/START_DAEMON=true/START_DAEMON=false/' $(DEBOOT)/etc/default/mdadm
 
 # some unneeded things that just cause warnings
 fix_warnings: $(DEBOOT)
