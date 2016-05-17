@@ -253,6 +253,7 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/usr/share/zoneinfo/* \
 		$(DEBOOT)/usr/share/X11/locale/* \
 		$(DEBOOT)/usr/share/screen/utf8encodings/* \
+		$(DEBOOT)/usr/share/debootstrap/* \
 		$(DEBOOT)/var/cache/apt/archives/* \
 		$(DEBOOT)/var/cache/debconf/* \
 		$(DEBOOT)/var/lib/apt/lists/* \
