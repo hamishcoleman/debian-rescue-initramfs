@@ -1,6 +1,7 @@
 #
 #
-#
+# TODO:
+# xz --check=crc32 --lzma2=dict=1MiB
 #
 
 # Typical workflow:
@@ -13,7 +14,7 @@ ARCH=i386
 TARGET=root3.ramfs.gz
 TMPDIR=~/tmp/boot/linuxrescue3
 DEBOOT=$(TMPDIR)/files
-TESTKERN=2.6.35-rc2.57
+TESTKERN=4.6-15
 
 all: $(TARGET)
 
@@ -57,10 +58,21 @@ debootstrap: $(DEBOOT)
 	mkdir -p $(DEBOOT)
 	sudo /usr/sbin/debootstrap \
 		--arch=$(ARCH) --variant=minbase \
-		--include=ifupdown,udhcpc,iproute,netcat-openbsd,iputils-ping,procps,btrfs-tools,dmraid,kexec-tools,mdadm,xfsprogs,xfsdump,vlan,lvm2,cpufrequtils,elvis-console,extlinux,ht,htop,ipmitool,less,lshw,mathomatic,ntfsprogs,psmisc,pv,rsync,openssh-client,screen,socat,strace,iputils-tracepath,traceroute,wget,whiptail,wodim,zip,batmand,chntpw,debootstrap,ethtool,iptraf,partimage,partimage-server,testdisk,powertop,tcpdump,dropbear,mc,kpartx,wpasupplicant \
-		wheezy \
+		--include=ifupdown,udhcpc,iproute,netcat-openbsd,iputils-ping,procps,btrfs-tools,dmraid,kexec-tools,mdadm,xfsprogs,xfsdump,vlan,lvm2,cpufrequtils,extlinux,htop,ipmitool,less,lshw,mathomatic,psmisc,pv,rsync,openssh-client,screen,socat,strace,iputils-tracepath,traceroute,whiptail,wodim,zip,batmand,chntpw,debootstrap,ethtool,iptraf,partimage,partimage-server,testdisk,powertop,tcpdump,dropbear,kpartx,wpasupplicant,vim-tiny,radare2 \
+		jessie \
 		$(DEBOOT)/ \
 		http://ftp.au.debian.org/debian/
+	sudo chown -R $(LOGNAME) $(DEBOOT)
+	chmod -R a+r $(DEBOOT)
+
+# TODO:
+# - replace ntfsprogs with ntfs-3g? would require FUSE stuff too??
+
+# hack to reinsert elvis-console, but it is only ~200k smaller...
+install.elvis.hack:
+	cp elvis-common_2.2.0-11.1_all.deb elvis-console_2.2.0-11.1_i386.deb $(DEBOOT)
+	sudo /usr/sbin/chroot $(DEBOOT) dpkg -i elvis*2.2.0*
+	rm $(DEBOOT)/elvis-common_2.2.0-11.1_all.deb $(DEBOOT)/elvis-console_2.2.0-11.1_i386.deb
 	sudo chown -R $(LOGNAME) $(DEBOOT)
 	chmod -R a+r $(DEBOOT)
 
@@ -69,7 +81,7 @@ findlinks: $(DEBOOT)
 
 # FIXME - teach the gen_init_cpio stuff to find and create hard links
 fixlinks: $(DEBOOT)
-	ln -fs perl5.14.2 $(DEBOOT)/usr/bin/perl
+	ln -fs perl5.20.2 $(DEBOOT)/usr/bin/perl
 	ln -fs agetty $(DEBOOT)/sbin/getty
 	ln -fs tune2fs $(DEBOOT)/sbin/e2label
 	ln -fs e2fsck $(DEBOOT)/sbin/fsck.ext2
@@ -132,6 +144,7 @@ fix_warnings: $(DEBOOT)
 # customisations are things that go beyond makeing the image work
 #
 customise: $(DEBOOT) busybox fix_warnings
+	mkdir -p $(DEBOOT)/etc/elvis/
 	echo "color normal white on black" >>$(DEBOOT)/etc/elvis/elvis.clr
 	echo "rescue" >$(DEBOOT)/etc/hostname
 	ln -sf /usr/bin/less $(DEBOOT)/bin/more
@@ -142,6 +155,7 @@ customise: $(DEBOOT) busybox fix_warnings
 	echo "iface default inet dhcp" >>$(DEBOOT)/etc/network/interfaces
 	echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" >$(DEBOOT)/etc/wpa_supplicant/wpa_supplicant.conf
 	echo "update_config=1" >>$(DEBOOT)/etc/wpa_supplicant/wpa_supplicant.conf
+	echo "e scr.utf8 = true" >$(DEBOOT)/usr/share/radare2/radare2rc
 
 find_busybox_dupes: $(DEBOOT)
 	cd $(DEBOOT); \
@@ -156,19 +170,23 @@ BB_BIN := \
 	cat chgrp chmod chown cpio date df dmesg echo egrep false fgrep \
 	gunzip gzip hostname kill ln mkdir mknod mktemp more mv nc netstat \
 	pidof pwd readlink rm rmdir sleep stty sync uname uncompress \
-	zcat dnsdomainname mount ps sed umount
+	zcat dnsdomainname mount ps sed umount \
+    ping6
 BB_SBIN := \
 	blockdev ifconfig losetup nameif route swapoff swapon sysctl \
-	modprobe vconfig mkswap
+	modprobe vconfig mkswap \
+    switch_root start-stop-daemon pivot_root
 BB_USRBIN := \
 	basename clear cmp cut dirname env expr head ionice killall last \
 	logname md5sum mkfifo printf renice reset sha1sum sha512sum sort \
 	tail touch tty watch wc whoami yes \
 	du id logger tee tr uniq uptime which \
 	free test [ unxz xz xzcat \
-	getopt xargs timeout stat seq
+	getopt xargs timeout stat seq \
+    realpath
 BB_USRSBIN := \
 	chroot
+
 busybox: $(DEBOOT)
 	mkdir -p $(DEBOOT)/busybox
 	qemu-$(ARCH) -L $(DEBOOT) $(DEBOOT)/bin/busybox --install -s $(DEBOOT)/busybox
@@ -184,11 +202,14 @@ busybox: $(DEBOOT)
 DEL_BIN := \
 	dir gzexe lessecho lesskey vdir zcmp zdiff zegrep zfgrep \
 	zforce zgrep zless zmore znew
+DEL_BIN += \
+    loginctl machinectl systemd-inhibit
 DEL_SBIN := \
 	btrfs-debug-tree btrfs-image btrfs-map-logical btrfs-vol btrfsctl \
 	dumpe2fs e2image isosize lvmconf mkfs.bfs mkfs.cramfs mkfs.minix \
 	mkhomedir_helper pam_tally pam_tally2 plipconfig rarp raw rtacct \
 	rtmon shadowconfig slattach ss wipefs xfs_repair xfsdump xfsrestore \
+    fsck.cramfs fsck.minix ldconfig mdmon \
 	
 DEL_USRBIN := \
 	addpart apt-cdrom apt-mark bashbug captoinfo catchsegv chfn \
@@ -204,24 +225,55 @@ DEL_USRBIN += \
 	apt-key chage chcon csplit filan gpasswd gpg gpgsplit gpg-zip gpgv \
 	iconv infocmp join localedev lspgpot oldfind omshell pcretest pr \
 	procan ptx readom shuf ssh-keyscan ssh-vulnkey stduf \
-	tic top who zipcloak zipnote zipsplit
-
+	tic top who zipcloak zipnote zipsplit wget
+DEL_USRBIN += \
+    busctl hostnamectl localectl systemd-cgls timedatectl localedef/usr
 
 minimise: $(DEBOOT) debcache_save
 	cd $(DEBOOT)/bin; echo $(DEL_BIN) | xargs rm -f
 	cd $(DEBOOT)/bin; echo $(DEL_SBIN) | xargs rm -f
 	cd $(DEBOOT)/usr/bin; echo $(DEL_USRBIN) | xargs rm -f
 	rm -rf \
+		$(DEBOOT)/etc/netscsid.conf \
 		$(DEBOOT)/lib/udev/keymaps/* \
+		$(DEBOOT)/lib/udev/hwdb.bin \
+		$(DEBOOT)/lib/systemd/systemd-networkd \
+		$(DEBOOT)/lib/systemd/systemd-timedated \
+		$(DEBOOT)/lib/systemd/systemd-localed \
+		$(DEBOOT)/lib/systemd/systemd-hostnamed \
 		$(DEBOOT)/lib/security/pam_userdb.so \
-		$(DEBOOT)/sbin/fsck.cramfs \
-		$(DEBOOT)/sbin/fsck.minix \
-		$(DEBOOT)/sbin/ldconfig \
-		$(DEBOOT)/sbin/mdmon \
+		$(DEBOOT)/usr/include/btrfs/*.h \
+		$(DEBOOT)/usr/lib/apt/cdrom \
+		$(DEBOOT)/usr/lib/apt/ftp \
+		$(DEBOOT)/usr/lib/apt/rsh \
+		$(DEBOOT)/usr/lib/apt/mirror \
 		$(DEBOOT)/usr/lib/gconv/* \
+		$(DEBOOT)/usr/lib/ssh-keysign \
+		$(DEBOOT)/usr/lib/ssh-pkcs11-helper \
 		$(DEBOOT)/usr/lib/i386-linux-gnu/gconv/* \
 		$(DEBOOT)/usr/lib/i386-linux-gnu/i586/* \
 		$(DEBOOT)/usr/lib/i386-linux-gnu/i686/* \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/libicu*.so.52 \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/libicu*.so.52.1 \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/libpsl.so* \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/syscall/win* \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/syscall/*bsd* \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/syscall/darwin* \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/magic/darwin* \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_c55plus.so \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_sparc.so \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_mips.so \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_ppc.so \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/bin_java.so \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_java.so \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/bin_mach064.so \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/bin_mach0.so \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/io_mach.so \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_avr.so \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_dalvik.so \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_arm_winedbg.so \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_sh.so \
+		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_msil.so \
 		$(DEBOOT)/usr/lib/i486/* \
 		$(DEBOOT)/usr/lib/i586/* \
 		$(DEBOOT)/usr/lib/i686/* \
@@ -234,6 +286,15 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/usr/sbin/xfs_io \
 		$(DEBOOT)/usr/sbin/xfs_logprint \
 		$(DEBOOT)/usr/sbin/xfs_mdrestore \
+		$(DEBOOT)/usr/sbin/ipmievd \
+		$(DEBOOT)/usr/sbin/netscsid \
+		$(DEBOOT)/usr/sbin/usermod \
+		$(DEBOOT)/usr/sbin/useradd \
+		$(DEBOOT)/usr/sbin/userdel \
+		$(DEBOOT)/usr/sbin/groupmod \
+		$(DEBOOT)/usr/sbin/groupadd \
+		$(DEBOOT)/usr/sbin/groupdel \
+		$(DEBOOT)/usr/sbin/zic \
 		$(DEBOOT)/usr/share/common-licenses/* \
 		$(DEBOOT)/usr/share/doc/* \
 		$(DEBOOT)/usr/share/doc/* \
@@ -244,17 +305,18 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/usr/share/elvis/manual \
 		$(DEBOOT)/usr/share/elvis/stubs \
 		$(DEBOOT)/usr/share/elvis/elvis.gnome \
+		$(DEBOOT)/usr/share/file/magic.mgc \
 		$(DEBOOT)/usr/share/locale/* \
 		$(DEBOOT)/usr/share/man/* \
-		$(DEBOOT)/usr/share/mc/hints/mc.hint* \
-		$(DEBOOT)/usr/share/mc/help/mc.hlp* \
-		$(DEBOOT)/usr/share/mc/syntax/* \
-		$(DEBOOT)/usr/share/perl/5.14.2/unicore/* \
+		$(DEBOOT)/usr/share/perl/5.20.2/unicore/* \
 		$(DEBOOT)/usr/share/zoneinfo/* \
 		$(DEBOOT)/usr/share/X11/locale/* \
 		$(DEBOOT)/usr/share/screen/utf8encodings/* \
 		$(DEBOOT)/usr/share/debootstrap/* \
+		$(DEBOOT)/usr/share/radare2/0.9.6/debootstrap* \
 		$(DEBOOT)/var/cache/apt/archives/* \
+		$(DEBOOT)/var/cache/apt/pkgcache.bin \
+		$(DEBOOT)/var/cache/apt/srcpkgcache.bin \
 		$(DEBOOT)/var/cache/debconf/* \
 		$(DEBOOT)/var/lib/apt/lists/* \
 		$(DEBOOT)/var/lib/dpkg/*-old \
@@ -271,7 +333,7 @@ $(TARGET): $(DEBOOT) gen_init_cpio gen_initramfs_list.sh
 
 test: 	$(TARGET) $(TESTKERN)
 	qemu-system-i386 -enable-kvm \
-		-m 384 \
+		-m 512 \
 		-serial stdio \
 		-append console=ttyS0 \
 		-kernel $(TESTKERN) -initrd $(TARGET)
