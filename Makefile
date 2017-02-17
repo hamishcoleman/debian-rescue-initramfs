@@ -16,6 +16,8 @@ TMPDIR=~/tmp/boot/linuxrescue3
 DEBOOT=$(TMPDIR)/files
 TESTKERN=4.6-15
 
+fakeroot=fakeroot -i $(TMPDIR)/fakeroot.save -s $(TMPDIR)/fakeroot.save
+
 all: $(TARGET)
 
 # FIXME - perl module docs with two colons confuses make
@@ -34,6 +36,7 @@ $(DEBOOT):
 # Install the cached downloads
 debcache: $(TMPDIR) $(DEBOOT)
 	rm -rf $(DEBOOT)
+	rm -f $(TMPDIR)/fakeroot.save
 	mkdir -p $(DEBOOT)/var/cache/apt/archives/
 	mkdir -p $(DEBOOT)/var/lib/apt/lists/
 	cp -a $(TMPDIR)/cache/archives/ $(DEBOOT)/var/cache/apt/
@@ -62,8 +65,10 @@ debootstrap: $(DEBOOT)
 		jessie \
 		$(DEBOOT)/ \
 		http://httpredir.debian.org/debian
+	sudo find $(DEBOOT) -printf "%y %m %u %g %p\n" >tmp.perms
 	sudo chown -R $(LOGNAME) $(DEBOOT)
 	chmod -R a+r $(DEBOOT)
+	$(fakeroot) bash -c 'cat tmp.perms | egrep "^[df]" | while read y m u g p; do chown $$u:$$g $$p; chmod $$m $$p; done'
 
 # TODO:
 # - replace ntfsprogs with ntfs-3g? would require FUSE stuff too??
@@ -101,13 +106,13 @@ fixlinks: $(DEBOOT)
 # FIXME - use the gen_init_cpio stuff properly to create dev nodes
 fixdev: $(DEBOOT)
 	rm -f $(DEBOOT)/dev/tty[123456] $(DEBOOT)/dev/ttyS0
-	sudo mknod $(DEBOOT)/dev/tty1 c 4 1
-	sudo mknod $(DEBOOT)/dev/tty2 c 4 2
-	sudo mknod $(DEBOOT)/dev/tty3 c 4 3
-	sudo mknod $(DEBOOT)/dev/tty4 c 4 4
-	sudo mknod $(DEBOOT)/dev/tty5 c 4 5
-	sudo mknod $(DEBOOT)/dev/tty6 c 4 6
-	sudo mknod $(DEBOOT)/dev/ttyS0 c 4 64
+	$(fakeroot) mknod $(DEBOOT)/dev/tty1 c 4 1
+	$(fakeroot) mknod $(DEBOOT)/dev/tty2 c 4 2
+	$(fakeroot) mknod $(DEBOOT)/dev/tty3 c 4 3
+	$(fakeroot) mknod $(DEBOOT)/dev/tty4 c 4 4
+	$(fakeroot) mknod $(DEBOOT)/dev/tty5 c 4 5
+	$(fakeroot) mknod $(DEBOOT)/dev/tty6 c 4 6
+	$(fakeroot) mknod $(DEBOOT)/dev/ttyS0 c 4 64
 
 # fixups are things that are needed to make the image actually work
 #
@@ -329,7 +334,7 @@ minimise: $(DEBOOT) debcache_save
 bootstrap: debootstrap minimise fixup customise
 
 $(TARGET): $(DEBOOT) gen_init_cpio gen_initramfs_list.sh
-	./gen_initramfs_list.sh -o $@ -u squash -g squash $(DEBOOT)/
+	$(fakeroot) ./gen_initramfs_list.sh -o $@ -u squash -g squash $(DEBOOT)/
 
 test: 	$(TARGET) $(TESTKERN)
 	qemu-system-i386 -enable-kvm \
