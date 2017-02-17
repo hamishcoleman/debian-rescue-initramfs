@@ -5,7 +5,7 @@
 #
 
 # Typical workflow:
-#  make debcache
+#  make clean debcache
 #  make bootstrap
 #  make test
 #
@@ -65,10 +65,13 @@ debootstrap: $(DEBOOT)
 		jessie \
 		$(DEBOOT)/ \
 		http://httpredir.debian.org/debian
+
+save_perms:
 	sudo find $(DEBOOT) -printf "%y %m %u %g %p\n" >tmp.perms
 	sudo chown -R $(LOGNAME) $(DEBOOT)
 	chmod -R a+r $(DEBOOT)
 	$(fakeroot) bash -c 'cat tmp.perms | egrep "^[df]" | while read y m u g p; do chown $$u:$$g $$p; chmod $$m $$p; done'
+	rm -f tmp.perms
 
 # TODO:
 # - replace ntfsprogs with ntfs-3g? would require FUSE stuff too??
@@ -331,7 +334,7 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/var/lib/dpkg/info/openssh-client.preinst \
 		$(DEBOOT)/var/log/* \
 
-bootstrap: debootstrap minimise fixup customise
+bootstrap: debootstrap save_perms minimise fixup customise
 
 $(TARGET): $(DEBOOT) gen_init_cpio gen_initramfs_list.sh
 	$(fakeroot) ./gen_initramfs_list.sh -o $@ -u squash -g squash $(DEBOOT)/
