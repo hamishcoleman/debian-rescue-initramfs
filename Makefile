@@ -12,11 +12,12 @@
 
 ARCH=i386
 TARGET=root3.ramfs.gz
-TMPDIR=~/tmp/boot/linuxrescue3
+TMPDIR=$(HOME)/tmp/boot/linuxrescue3
 DEBOOT=$(TMPDIR)/files
+SAVEPERM=$(DEBOOT)/fakeroot.save
 TESTKERN=4.6-15
 
-fakeroot=fakeroot -i $(TMPDIR)/fakeroot.save -s $(TMPDIR)/fakeroot.save
+fakeroot=fakeroot -i $(SAVEPERM) -s $(SAVEPERM)
 
 all: $(TARGET)
 
@@ -36,7 +37,7 @@ $(DEBOOT):
 # Install the cached downloads
 debcache: $(TMPDIR) $(DEBOOT)
 	rm -rf $(DEBOOT)
-	rm -f $(TMPDIR)/fakeroot.save
+	rm -rf $(SAVEPERM)
 	mkdir -p $(DEBOOT)/var/cache/apt/archives/
 	mkdir -p $(DEBOOT)/var/lib/apt/lists/
 	cp -a $(TMPDIR)/cache/archives/ $(DEBOOT)/var/cache/apt/
