@@ -200,7 +200,7 @@ BB_USRSBIN := \
 
 busybox: $(DEBOOT)
 	mkdir -p $(DEBOOT)/busybox
-	qemu-$(QEMU_ARCH) $(DEBOOT)/bin/busybox --install -s $(DEBOOT)/busybox
+	qemu-$(QEMU_ARCH) -L $(DEBOOT) $(DEBOOT)/bin/busybox --install -s $(DEBOOT)/busybox
 	cd $(DEBOOT)/busybox; for i in *; do ln -sf /bin/busybox $$i; done
 	perl -pi -e 's{(bin:/bin)}{$$1:/busybox}' $(DEBOOT)/etc/profile
 	echo "NOSWAP=yes" >> $(DEBOOT)/etc/default/rcS
