@@ -11,6 +11,7 @@
 #
 
 ARCH=i386
+QEMU_ARCH=i386
 TARGET=root3.ramfs.gz
 TMPDIR=$(HOME)/tmp/boot/linuxrescue3
 DEBOOT=$(TMPDIR)/files
@@ -198,7 +199,7 @@ BB_USRSBIN := \
 
 busybox: $(DEBOOT)
 	mkdir -p $(DEBOOT)/busybox
-	qemu-$(ARCH) $(DEBOOT)/bin/busybox --install -s $(DEBOOT)/busybox
+	qemu-$(QEMU_ARCH) $(DEBOOT)/bin/busybox --install -s $(DEBOOT)/busybox
 	cd $(DEBOOT)/busybox; for i in *; do ln -sf /bin/busybox $$i; done
 	perl -pi -e 's{(bin:/bin)}{$$1:/busybox}' $(DEBOOT)/etc/profile
 	echo "NOSWAP=yes" >> $(DEBOOT)/etc/default/rcS
