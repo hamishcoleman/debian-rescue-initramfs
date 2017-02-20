@@ -59,11 +59,12 @@ debcache_save: $(TMPDIR) $(DEBOOT)
 #	tcc
 # busybox for many things
 # avoid sudo
+
 debootstrap: $(DEBOOT)
 	mkdir -p $(DEBOOT)
 	sudo /usr/sbin/debootstrap \
 		--arch=$(ARCH) --variant=minbase \
-		--include=ifupdown,udhcpc,iproute,netcat-openbsd,iputils-ping,procps,btrfs-tools,dmraid,kexec-tools,mdadm,xfsprogs,xfsdump,vlan,lvm2,cpufrequtils,extlinux,htop,ipmitool,less,lshw,mathomatic,psmisc,pv,rsync,openssh-client,screen,socat,strace,iputils-tracepath,traceroute,whiptail,wodim,zip,batmand,chntpw,debootstrap,ethtool,iptraf,partimage,partimage-server,testdisk,powertop,tcpdump,dropbear,kpartx,wpasupplicant,vim-tiny,radare2 \
+		--include=ifupdown,udhcpc,iproute,netcat-openbsd,iputils-ping,procps,btrfs-tools,dmraid,kexec-tools,mdadm,xfsprogs,xfsdump,vlan,lvm2,cpufrequtils,htop,ipmitool,less,lshw,mathomatic,psmisc,pv,rsync,openssh-client,screen,socat,strace,iputils-tracepath,traceroute,whiptail,wodim,zip,batmand,chntpw,debootstrap,ethtool,iptraf,partimage,partimage-server,testdisk,powertop,tcpdump,dropbear,kpartx,wpasupplicant,vim-tiny,radare2 \
 		jessie \
 		$(DEBOOT)/ \
 		http://httpredir.debian.org/debian
