@@ -252,6 +252,7 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/lib/systemd/systemd-timedated \
 		$(DEBOOT)/lib/systemd/systemd-localed \
 		$(DEBOOT)/lib/systemd/systemd-hostnamed \
+		$(DEBOOT)/lib/systemd/system/systemd-modules-load.service \
 		$(DEBOOT)/lib/security/pam_userdb.so \
 		$(DEBOOT)/usr/include/btrfs/*.h \
 		$(DEBOOT)/usr/lib/apt/cdrom \
