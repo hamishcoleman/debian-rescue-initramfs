@@ -1,50 +1,61 @@
 #
+# List of packages to be installed in the minimal system
 #
+# Other packages will also be included, as needed for a minimal system or to
+# provide the needed dependancies.
 #
+
+# networking
 ifupdown
 udhcpc
 iproute
 netcat-openbsd
 iputils-ping
-procps
+vlan
+openssh-client
+socat
+iputils-tracepath
+traceroute
+batmand
+ethtool
+iptraf
+tcpdump
+dropbear
+wpasupplicant
+
+# filesystem
 btrfs-tools
 dmraid
-kexec-tools
 mdadm
 xfsprogs
 xfsdump
-vlan
 lvm2
+wodim
+testdisk
+kpartx
+
+# monitoring
 cpufrequtils
 htop
 ipmitool
-less
 lshw
+pv
+strace
+powertop
+
+# no specific category
+procps
+kexec-tools
+less
 mathomatic
 psmisc
-pv
 rsync
-openssh-client
 screen
-socat
-strace
-iputils-tracepath
-traceroute
 whiptail
-wodim
 zip
-batmand
 chntpw
 debootstrap
-ethtool
-iptraf
 partimage
 partimage-server
-testdisk
-powertop
-tcpdump
-dropbear
-kpartx
-wpasupplicant
 vim-tiny
 radare2
