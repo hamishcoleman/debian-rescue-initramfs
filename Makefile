@@ -380,7 +380,7 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/var/lib/dpkg/info/openssh-client.preinst \
 		$(DEBOOT)/var/log/* \
 
-bootstrap: debootstrap save_perms minimise fixup customise
+bootstrap: multistrap save_perms minimise fixup customise
 
 $(TARGET): $(DEBOOT) gen_init_cpio gen_initramfs_list.sh
 	$(fakeroot) ./gen_initramfs_list.sh -o $@ -u squash -g squash $(DEBOOT)/
