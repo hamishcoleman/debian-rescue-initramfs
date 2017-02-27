@@ -10,6 +10,7 @@
 #  make test
 #
 
+MIRROR=http://httpredir.debian.org/debian
 ARCH=i386
 QEMU_ARCH=i386
 TARGET=root3.ramfs.gz
@@ -17,6 +18,10 @@ TMPDIR=$(HOME)/tmp/boot/linuxrescue3
 DEBOOT=$(TMPDIR)/files
 SAVEPERM=$(TMPDIR)/fakeroot.save
 TESTKERN=4.6-15
+
+# Not simply user changable - the minimisation process will break differently
+# for other debian versions, so the fixup process will need adjustments
+VERSION=jessie
 
 fakeroot=fakeroot -i $(SAVEPERM) -s $(SAVEPERM)
 
@@ -76,7 +81,7 @@ debootstrap: $(DEBOOT) packages.txt
 		--include=$(subst $(SPACE),$(COMMA),$(packages)) \
 		jessie \
 		$(DEBOOT)/ \
-		http://httpredir.debian.org/debian
+		$(MIRROR)
 
 multistrap.conf: packages.txt
 	echo "[General]" >$@
@@ -85,7 +90,7 @@ multistrap.conf: packages.txt
 	echo "configscript=multistrap.configscript" >>$@
 
 	echo "[DebianRescue]" >>$@
-	echo "source=http://httpredir.debian.org/debian" >>$@
+	echo "source=$(MIRROR)" >>$@
 	echo "suite=jessie" >>$@
 	echo "keyring=debian-archive-keyring" >>$@
 	echo packages=`egrep -v "^\#" $^` >>$@
