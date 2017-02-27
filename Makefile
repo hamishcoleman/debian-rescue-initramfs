@@ -76,6 +76,10 @@ debootstrap: $(DEBOOT) packages.txt
 		$(DEBOOT)/ \
 		http://httpredir.debian.org/debian
 
+# Extract the permissions from the actual filesystem into the fakeroot
+# database.  Which allows us to chown/chmod the whole dir tree to the
+# unprivileged user
+#
 save_perms:
 	sudo find $(DEBOOT) -printf "%y %m %u %g %p\n" >tmp.perms
 	sudo chown -R $(LOGNAME) $(DEBOOT)
