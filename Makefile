@@ -76,6 +76,30 @@ debootstrap: $(DEBOOT) packages.txt
 		$(DEBOOT)/ \
 		http://httpredir.debian.org/debian
 
+multistrap.conf: packages.txt
+	echo "[General]" >$@
+	echo "bootstrap=DebianRescue" >>$@
+	echo "aptsources=DebianRescue" >>$@
+	echo "configscript=multistrap.configscript" >>$@
+
+	echo "[DebianRescue]" >>$@
+	echo "source=http://httpredir.debian.org/debian" >>$@
+	echo "suite=jessie" >>$@
+	echo "keyring=debian-archive-keyring" >>$@
+	echo packages=`egrep -v "^\#" $^` >>$@
+
+multistrap: $(DEBOOT) multistrap.conf
+	mkdir -p $(DEBOOT)/dev
+	sudo mknod $(DEBOOT)/dev/urandom c 1 9
+	sudo /usr/sbin/multistrap \
+		-a $(ARCH) -d $(DEBOOT) -f multistrap.conf
+	sudo chroot $(DEBOOT) ./multistrap.configscript
+	sudo kill -9 `sudo lsof -Fp $(DEBOOT) | tr -d p`
+	-sudo umount $(DEBOOT)/proc
+	sudo rm -f $(DEBOOT)/multistrap.configscript
+
+# TODO - make multistrap.configscript smarter and remove the kill+umount here
+
 # Extract the permissions from the actual filesystem into the fakeroot
 # database.  Which allows us to chown/chmod the whole dir tree to the
 # unprivileged user
@@ -378,7 +402,7 @@ test: 	$(TARGET) $(TESTKERN)
 #	kvm -cdrom test.iso 
 
 clean:
-	rm -f $(TARGET) test.iso .depfiles
+	rm -f $(TARGET) multistrap.conf test.iso .depfiles
 	rm -rf $(DEBOOT)
 
 
