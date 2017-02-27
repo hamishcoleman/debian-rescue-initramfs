@@ -1,0 +1,43 @@
+#!/bin/bash
+
+DEBOOT="$1"
+STAGE="$2"
+
+DEL="
+    /bin/dir
+    /bin/vdir
+    /usr/bin/comm
+    /usr/bin/expand
+    /usr/bin/factor
+    /usr/bin/fmt
+    /usr/bin/fold
+    /usr/bin/groups
+    /usr/bin/hostid
+    /usr/bin/link
+    /usr/bin/nl
+    /usr/bin/nproc
+    /usr/bin/od
+    /usr/bin/paste
+    /usr/bin/pathchk
+    /usr/bin/runcon
+    /usr/bin/stdbuf
+    /usr/bin/tac
+    /usr/bin/tsort
+    /usr/bin/unexpand
+    /usr/bin/unlink
+    /usr/bin/users
+"
+# /usr/share/doc, /usr/share/info and /usr/share/man are all dealt with
+# centrally
+
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -f $DEBOOT/$i
+    done
+else
+    echo ERROR: unknown stage
+    exit 1
+fi
+

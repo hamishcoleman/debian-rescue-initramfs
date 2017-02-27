@@ -253,7 +253,7 @@ busybox: $(DEBOOT)
 	cd $(DEBOOT)/busybox; mv -f $(BB_USRSBIN) ../usr/sbin
 
 DEL_BIN := \
-	dir gzexe lessecho lesskey vdir zcmp zdiff zegrep zfgrep \
+	gzexe lessecho lesskey zcmp zdiff zegrep zfgrep \
 	zforce zgrep zless zmore znew
 DEL_BIN += \
     loginctl machinectl systemd-inhibit
@@ -266,13 +266,13 @@ DEL_SBIN := \
 	
 DEL_USRBIN := \
 	addpart apt-cdrom apt-mark bashbug captoinfo catchsegv chfn \
-	chsh clear_console comm ddate expand \
-	expiry factor faillog fmt fold getent groups hostid infotocap \
-	ipcmk ipcrm ipcs line link locale lzmainfo mcookie \
-	ncurses5-config ncursesw5-config newgrp nl nproc ntfscluster ntfscmp \
-	od paste pathchk pg pmap prtstat pwdx rename.ul rev runcon setsid \
-	sha224sum sha256sum sha384sum skill snice ssh-argv0 stdbuf tabs \
-	tac taskset toe tsort unexpand unlink usb-devices users wall whereis \
+	chsh clear_console ddate \
+	expiry faillog getent infotocap \
+	ipcmk ipcrm ipcs line locale lzmainfo mcookie \
+	ncurses5-config ncursesw5-config newgrp ntfscluster ntfscmp \
+	pg pmap prtstat pwdx rename.ul rev setsid \
+	sha224sum sha256sum sha384sum skill snice ssh-argv0 tabs \
+	taskset toe usb-devices wall whereis \
 	zdump sg
 DEL_USRBIN += \
 	apt-key chage chcon csplit filan gpasswd gpg gpgsplit gpg-zip gpgv \
@@ -283,6 +283,12 @@ DEL_USRBIN += \
     busctl hostnamectl localectl systemd-cgls timedatectl localedef/usr
 
 minimise: $(DEBOOT) debcache_save
+	for package in `dpkg-query --admindir=$(DEBOOT)/var/lib/dpkg --show --showformat='$${binary:Package}\n'`; do \
+            if [ -x packages/$$package ]; then \
+		echo Package $$package minimise; \
+                packages/$$package $(DEBOOT) minimise; \
+            fi; \
+	done
 	cd $(DEBOOT)/bin; echo $(DEL_BIN) | xargs rm -f
 	cd $(DEBOOT)/bin; echo $(DEL_SBIN) | xargs rm -f
 	cd $(DEBOOT)/usr/bin; echo $(DEL_USRBIN) | xargs rm -f
