@@ -39,10 +39,12 @@ $(DEBOOT):
 debcache: $(TMPDIR) $(DEBOOT)
 	rm -rf $(DEBOOT)
 	rm -rf $(SAVEPERM)
+	mkdir -p $(TMPDIR)/cache/archives
+	mkdir -p $(TMPDIR)/cache/lists
 	mkdir -p $(DEBOOT)/var/cache/apt/archives/
 	mkdir -p $(DEBOOT)/var/lib/apt/lists/
-	cp -a $(TMPDIR)/cache/archives/*_all.deb $(DEBOOT)/var/cache/apt/archives/
-	cp -a $(TMPDIR)/cache/archives/*_$(ARCH).deb $(DEBOOT)/var/cache/apt/archives/
+	-cp -a $(TMPDIR)/cache/archives/*_all.deb $(DEBOOT)/var/cache/apt/archives/
+	-cp -a $(TMPDIR)/cache/archives/*_$(ARCH).deb $(DEBOOT)/var/cache/apt/archives/
 	cp -a $(TMPDIR)/cache/lists/ $(DEBOOT)/var/lib/apt/
 
 
