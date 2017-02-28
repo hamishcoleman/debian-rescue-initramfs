@@ -283,12 +283,18 @@ DEL_USRBIN += \
     busctl hostnamectl localectl systemd-cgls timedatectl localedef/usr
 
 minimise: $(DEBOOT) debcache_save
-	for package in `dpkg-query --admindir=$(DEBOOT)/var/lib/dpkg --show --showformat='$${binary:Package}\n'`; do \
+	unset NO; \
+	echo "\n\nRunning package scripts for minimise phase"; \
+	echo -n "\nMinimising:\n\t"; \
+        for package in `dpkg-query --admindir=$(DEBOOT)/var/lib/dpkg --show --showformat='$${Package}\n'`; do \
             if [ -x packages/$$package ]; then \
-		echo Package $$package minimise; \
+		echo -n "$$package "; \
                 packages/$$package $(DEBOOT) minimise; \
+            else \
+		NO="$$NO$$package "; \
             fi; \
-	done
+	done; \
+        echo "\n\nNo script:\n\t$$NO\n"
 	cd $(DEBOOT)/bin; echo $(DEL_BIN) | xargs rm -f
 	cd $(DEBOOT)/bin; echo $(DEL_SBIN) | xargs rm -f
 	cd $(DEBOOT)/usr/bin; echo $(DEL_USRBIN) | xargs rm -f
