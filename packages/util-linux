@@ -1,0 +1,41 @@
+#!/bin/bash
+
+DEBOOT="$1"
+STAGE="$2"
+
+DEL="
+    /sbin/fsck.cramfs
+    /sbin/fsck.minix
+    /sbin/isosize
+    /sbin/mkfs.bfs
+    /sbin/mkfs.cramfs
+    /sbin/mkfs.minix
+    /sbin/raw
+    /sbin/wipefs
+    /usr/bin/addpart
+    /usr/bin/ipcmk
+    /usr/bin/ipcrm
+    /usr/bin/ipcs
+    /usr/bin/line
+    /usr/bin/mcookie
+    /usr/bin/pg
+    /usr/bin/rename.ul
+    /usr/bin/rev
+    /usr/bin/setsid
+    /usr/bin/taskset
+    /usr/bin/whereis
+"
+# /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
+# are all dealt with centrally
+
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -f $DEBOOT/$i
+    done
+else
+    echo ERROR: unknown stage
+    exit 1
+fi
+

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+DEBOOT="$1"
+STAGE="$2"
+
+DEL="
+    /sbin/mdmon
+"
+# TODO
+# - /etc/cron.d
+# - /etc/init.d
+# - /etc/logcheck
+# - /etc/default/mdam START_DAEMON=false
+# - /etc/mdadm
+# - /usr/share/bug
+# - /usr/share/doc-base/mdadm-*
+# - /usr/share/initramfs-tools/hooks/mdadm
+# - /usr/share/initramfs-tools/scripts/local-top/mdadm
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -f $DEBOOT/$i
+    done
+else
+    echo ERROR: unknown stage
+    exit 1
+fi
+

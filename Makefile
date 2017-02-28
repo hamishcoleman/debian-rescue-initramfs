@@ -118,8 +118,7 @@ save_perms:
 	$(fakeroot) bash -c 'cat tmp.perms | egrep "^[df]" | while read y m u g p; do chown $$u:$$g $$p; chmod $$m $$p; done'
 	rm -f tmp.perms
 
-# TODO:
-# - replace ntfsprogs with ntfs-3g? would require FUSE stuff too??
+
 
 # hack to reinsert elvis-console, but it is only ~200k smaller...
 install.elvis.hack:
@@ -252,36 +251,6 @@ busybox: $(DEBOOT)
 	cd $(DEBOOT)/busybox; mv -f $(BB_USRBIN) ../usr/bin
 	cd $(DEBOOT)/busybox; mv -f $(BB_USRSBIN) ../usr/sbin
 
-DEL_BIN := \
-	gzexe lessecho lesskey zcmp zdiff zegrep zfgrep \
-	zforce zgrep zless zmore znew
-DEL_BIN += \
-    loginctl machinectl systemd-inhibit
-DEL_SBIN := \
-	btrfs-debug-tree btrfs-image btrfs-map-logical btrfs-vol btrfsctl \
-	dumpe2fs e2image isosize lvmconf mkfs.bfs mkfs.cramfs mkfs.minix \
-	mkhomedir_helper pam_tally pam_tally2 plipconfig rarp raw rtacct \
-	rtmon shadowconfig slattach ss wipefs xfs_repair xfsdump xfsrestore \
-    fsck.cramfs fsck.minix ldconfig mdmon \
-	
-DEL_USRBIN := \
-	addpart apt-cdrom apt-mark bashbug captoinfo catchsegv chfn \
-	chsh clear_console ddate \
-	expiry faillog getent infotocap \
-	ipcmk ipcrm ipcs line locale lzmainfo mcookie \
-	ncurses5-config ncursesw5-config newgrp ntfscluster ntfscmp \
-	pg pmap prtstat pwdx rename.ul rev setsid \
-	sha224sum sha256sum sha384sum skill snice ssh-argv0 tabs \
-	taskset toe usb-devices wall whereis \
-	zdump sg
-DEL_USRBIN += \
-	apt-key chage chcon csplit filan gpasswd gpg gpgsplit gpg-zip gpgv \
-	iconv infocmp join localedev lspgpot oldfind omshell pcretest pr \
-	procan ptx readom shuf ssh-keyscan ssh-vulnkey stduf \
-	tic top who zipcloak zipnote zipsplit wget
-DEL_USRBIN += \
-    busctl hostnamectl localectl systemd-cgls timedatectl localedef/usr
-
 minimise: $(DEBOOT) debcache_save
 	unset NO; \
 	echo "\n\nRunning package scripts for minimise phase"; \
@@ -295,24 +264,10 @@ minimise: $(DEBOOT) debcache_save
             fi; \
 	done; \
         echo "\n\nNo script:\n\t$$NO\n"
-	cd $(DEBOOT)/bin; echo $(DEL_BIN) | xargs rm -f
-	cd $(DEBOOT)/bin; echo $(DEL_SBIN) | xargs rm -f
-	cd $(DEBOOT)/usr/bin; echo $(DEL_USRBIN) | xargs rm -f
 	rm -rf \
-		$(DEBOOT)/etc/netscsid.conf \
 		$(DEBOOT)/lib/udev/keymaps/* \
 		$(DEBOOT)/lib/udev/hwdb.bin \
-		$(DEBOOT)/lib/systemd/systemd-networkd \
-		$(DEBOOT)/lib/systemd/systemd-timedated \
-		$(DEBOOT)/lib/systemd/systemd-localed \
-		$(DEBOOT)/lib/systemd/systemd-hostnamed \
-		$(DEBOOT)/lib/systemd/system/systemd-modules-load.service \
 		$(DEBOOT)/lib/security/pam_userdb.so \
-		$(DEBOOT)/usr/include/btrfs/*.h \
-		$(DEBOOT)/usr/lib/apt/cdrom \
-		$(DEBOOT)/usr/lib/apt/ftp \
-		$(DEBOOT)/usr/lib/apt/rsh \
-		$(DEBOOT)/usr/lib/apt/mirror \
 		$(DEBOOT)/usr/lib/gconv/* \
 		$(DEBOOT)/usr/lib/ssh-keysign \
 		$(DEBOOT)/usr/lib/ssh-pkcs11-helper \
@@ -348,19 +303,7 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/usr/lib/libxml2.so.2.7.8 \
 		$(DEBOOT)/usr/lib/locale/* \
 		$(DEBOOT)/usr/sbin/arpd \
-		$(DEBOOT)/usr/sbin/xfs_db \
-		$(DEBOOT)/usr/sbin/xfs_io \
-		$(DEBOOT)/usr/sbin/xfs_logprint \
-		$(DEBOOT)/usr/sbin/xfs_mdrestore \
 		$(DEBOOT)/usr/sbin/ipmievd \
-		$(DEBOOT)/usr/sbin/netscsid \
-		$(DEBOOT)/usr/sbin/usermod \
-		$(DEBOOT)/usr/sbin/useradd \
-		$(DEBOOT)/usr/sbin/userdel \
-		$(DEBOOT)/usr/sbin/groupmod \
-		$(DEBOOT)/usr/sbin/groupadd \
-		$(DEBOOT)/usr/sbin/groupdel \
-		$(DEBOOT)/usr/sbin/zic \
 		$(DEBOOT)/usr/share/common-licenses/* \
 		$(DEBOOT)/usr/share/doc/* \
 		$(DEBOOT)/usr/share/doc/* \

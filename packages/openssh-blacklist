@@ -1,0 +1,20 @@
+#!/bin/bash
+
+DEBOOT="$1"
+STAGE="$2"
+
+DEL="
+    /usr/bin/ssh-vulnkey
+"
+
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -f $DEBOOT/$i
+    done
+else
+    echo ERROR: unknown stage
+    exit 1
+fi
+

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+DEBOOT="$1"
+STAGE="$2"
+
+DEL="
+    /usr/bin/captoinfo
+    /usr/bin/infocmp
+    /usr/bin/infotocap
+    /usr/bin/ncurses5-config
+    /usr/bin/ncursesw5-config
+    /usr/bin/tabs
+    /usr/bin/tic
+    /usr/bin/toe
+"
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -f $DEBOOT/$i
+    done
+else
+    echo ERROR: unknown stage
+    exit 1
+fi
+

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+DEBOOT="$1"
+STAGE="$2"
+
+DEL="
+    /bin/gzexe
+    /bin/zcmp
+    /bin/zdiff
+    /bin/zegrep
+    /bin/zfgrep
+    /bin/zforce
+    /bin/zgrep
+    /bin/zless
+    /bin/zmore
+    /bin/znew
+"
+# /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
+# are all dealt with centrally
+
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -f $DEBOOT/$i
+    done
+else
+    echo ERROR: unknown stage
+    exit 1
+fi
+

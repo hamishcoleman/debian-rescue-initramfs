@@ -1,0 +1,30 @@
+#!/bin/bash
+
+DEBOOT="$1"
+STAGE="$2"
+
+DEL="
+    /sbin/ldconfig
+    /usr/bin/catchsegv
+    /usr/bin/getent
+    /usr/bin/iconv
+    /usr/bin/locale
+    /usr/bin/localedef
+    /usr/bin/zdump
+    /usr/sbin/zic
+"
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -f $DEBOOT/$i
+    done
+else
+    echo ERROR: unknown stage
+    exit 1
+fi
+

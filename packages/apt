@@ -1,0 +1,33 @@
+#!/bin/bash
+
+DEBOOT="$1"
+STAGE="$2"
+
+DEL="
+    /usr/bin/apt-cdrom
+    /usr/bin/apt-key
+    /usr/bin/apt-mark
+    /usr/lib/apt/methods/cdrom
+    /usr/lib/apt/methods/ftp
+    /usr/lib/apt/methods/mirror
+    /usr/lib/apt/methods/rsh
+"
+
+# TODO
+# - /var/cache/apt/
+# - /var/lib/apt/lists
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -f $DEBOOT/$i
+    done
+else
+    echo ERROR: unknown stage
+    exit 1
+fi
+

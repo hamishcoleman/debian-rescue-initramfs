@@ -1,0 +1,25 @@
+#!/bin/bash
+
+DEBOOT="$1"
+STAGE="$2"
+
+DEL="
+    /usr/bin/gpg
+    /usr/bin/gpg-zip
+    /usr/bin/gpgsplit
+    /usr/bin/lspgpot
+"
+# /usr/share/doc, /usr/share/info and /usr/share/man are all dealt with
+# centrally
+
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -f $DEBOOT/$i
+    done
+else
+    echo ERROR: unknown stage
+    exit 1
+fi
+
