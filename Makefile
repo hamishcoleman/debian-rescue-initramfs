@@ -264,18 +264,11 @@ minimise: $(DEBOOT) debcache_save
 	done; \
         echo "\n\nNo script:\n\t$$NO\n"
 	rm -rf \
-		$(DEBOOT)/usr/lib/locale/* \
 		$(DEBOOT)/usr/share/doc/* \
 		$(DEBOOT)/usr/share/info/* \
 		$(DEBOOT)/usr/share/lintian/* \
-		$(DEBOOT)/usr/share/elvis/tags \
-		$(DEBOOT)/usr/share/elvis/elvis.glade \
-		$(DEBOOT)/usr/share/elvis/manual \
-		$(DEBOOT)/usr/share/elvis/stubs \
-		$(DEBOOT)/usr/share/elvis/elvis.gnome \
 		$(DEBOOT)/usr/share/locale/* \
 		$(DEBOOT)/usr/share/man/* \
-		$(DEBOOT)/usr/share/X11/locale/* \
 		$(DEBOOT)/var/cache/apt/archives/* \
 		$(DEBOOT)/var/cache/apt/pkgcache.bin \
 		$(DEBOOT)/var/cache/apt/srcpkgcache.bin \
