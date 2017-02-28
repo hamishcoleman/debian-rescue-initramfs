@@ -258,7 +258,7 @@ minimise: $(DEBOOT) debcache_save
         for package in `dpkg-query --admindir=$(DEBOOT)/var/lib/dpkg --show --showformat='$${Package}\n'`; do \
             if [ -x packages/$$package ]; then \
 		echo -n "$$package "; \
-                packages/$$package $(DEBOOT) minimise; \
+                packages/$$package $(DEBOOT) $(ARCH) minimise; \
             else \
 		NO="$$NO$$package "; \
             fi; \

@@ -1,7 +1,8 @@
 #!/bin/bash
 
 DEBOOT="$1"
-STAGE="$2"
+ARCH="$2"
+STAGE="$3"
 
 # This package is only installed due to other dependancies, which we
 # are either ignoring, or filling with the busybox wget, so while it
