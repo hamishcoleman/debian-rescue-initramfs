@@ -190,7 +190,6 @@ fix_warnings: $(DEBOOT)
 		$(DEBOOT)/etc/rc*.d/*loadcpufreq \
 		$(DEBOOT)/etc/init.d/mountoverflowtmp \
 		$(DEBOOT)/etc/rc*.d/*mountoverflowtmp \
-		$(DEBOOT)/etc/init.d/ipmievd \
 		$(DEBOOT)/etc/rc*.d/*ipmievd \
 
 # customisations are things that go beyond makeing the image work
@@ -266,35 +265,6 @@ minimise: $(DEBOOT) debcache_save
         echo "\n\nNo script:\n\t$$NO\n"
 	rm -rf \
 		$(DEBOOT)/lib/udev/keymaps/* \
-		$(DEBOOT)/lib/udev/hwdb.bin \
-		$(DEBOOT)/lib/security/pam_userdb.so \
-		$(DEBOOT)/usr/lib/gconv/* \
-		$(DEBOOT)/usr/lib/ssh-keysign \
-		$(DEBOOT)/usr/lib/ssh-pkcs11-helper \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/gconv/* \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/i586/* \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/i686/* \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/libicu*.so.52 \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/libicu*.so.52.1 \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/libpsl.so* \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/syscall/win* \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/syscall/*bsd* \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/syscall/darwin* \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/magic/darwin* \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_c55plus.so \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_sparc.so \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_mips.so \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_ppc.so \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/bin_java.so \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_java.so \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/bin_mach064.so \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/bin_mach0.so \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/io_mach.so \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_avr.so \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_dalvik.so \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_arm_winedbg.so \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_sh.so \
-		$(DEBOOT)/usr/lib/i386-linux-gnu/radare2/0.9.6/asm_msil.so \
 		$(DEBOOT)/usr/lib/i486/* \
 		$(DEBOOT)/usr/lib/i586/* \
 		$(DEBOOT)/usr/lib/i686/* \
@@ -302,9 +272,6 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/usr/lib/libdb-4.8.so \
 		$(DEBOOT)/usr/lib/libxml2.so.2.7.8 \
 		$(DEBOOT)/usr/lib/locale/* \
-		$(DEBOOT)/usr/sbin/arpd \
-		$(DEBOOT)/usr/sbin/ipmievd \
-		$(DEBOOT)/usr/share/common-licenses/* \
 		$(DEBOOT)/usr/share/doc/* \
 		$(DEBOOT)/usr/share/doc/* \
 		$(DEBOOT)/usr/share/info/* \
@@ -314,14 +281,9 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/usr/share/elvis/manual \
 		$(DEBOOT)/usr/share/elvis/stubs \
 		$(DEBOOT)/usr/share/elvis/elvis.gnome \
-		$(DEBOOT)/usr/share/file/magic.mgc \
 		$(DEBOOT)/usr/share/locale/* \
 		$(DEBOOT)/usr/share/man/* \
-		$(DEBOOT)/usr/share/perl/5.20.2/unicore/* \
-		$(DEBOOT)/usr/share/zoneinfo/* \
 		$(DEBOOT)/usr/share/X11/locale/* \
-		$(DEBOOT)/usr/share/screen/utf8encodings/* \
-		$(DEBOOT)/usr/share/debootstrap/* \
 		$(DEBOOT)/usr/share/radare2/0.9.6/debootstrap* \
 		$(DEBOOT)/var/cache/apt/archives/* \
 		$(DEBOOT)/var/cache/apt/pkgcache.bin \

@@ -1,0 +1,30 @@
+#!/bin/bash
+
+DEBOOT="$1"
+ARCH="$2"
+STAGE="$3"
+
+DEL="
+    /usr/lib/i386-linux-gnu/i586/libcrypto.so.1.0.0
+    /usr/lib/i386-linux-gnu/i586/libssl.so.1.0.0
+    /usr/lib/i386-linux-gnu/i686/cmov/libcrypto.so.1.0.0
+    /usr/lib/i386-linux-gnu/i686/cmov/libssl.so.1.0.0
+"
+
+# FIXME
+# - clearly, this is architecture specific
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -f $DEBOOT/$i
+    done
+else
+    echo ERROR: unknown stage
+    exit 1
+fi
+

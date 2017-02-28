@@ -7,9 +7,10 @@ STAGE="$3"
 DEL="
     /usr/bin/ssh-argv0
     /usr/bin/ssh-keyscan
+    /usr/lib/openssh/ssh-keysign
+    /usr/lib/openssh/ssh-pkcs11-helper
 "
 # TODO
-# - /usr/lib/openssh
 # - /usr/share/apport
 # - /usr/share/upstart
 

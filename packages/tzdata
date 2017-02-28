@@ -1,0 +1,25 @@
+#!/bin/bash
+
+DEBOOT="$1"
+ARCH="$2"
+STAGE="$3"
+
+DEL="
+    /usr/sbin/tzconfig
+    /usr/share/zoneinfo/*
+"
+
+# /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
+# are all dealt with centrally
+
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -rf $DEBOOT/$i
+    done
+else
+    echo ERROR: unknown stage
+    exit 1
+fi
+
