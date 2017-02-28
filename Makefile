@@ -264,15 +264,7 @@ minimise: $(DEBOOT) debcache_save
 	done; \
         echo "\n\nNo script:\n\t$$NO\n"
 	rm -rf \
-		$(DEBOOT)/lib/udev/keymaps/* \
-		$(DEBOOT)/usr/lib/i486/* \
-		$(DEBOOT)/usr/lib/i586/* \
-		$(DEBOOT)/usr/lib/i686/* \
-		$(DEBOOT)/usr/lib/libX11.so.6.3.0 \
-		$(DEBOOT)/usr/lib/libdb-4.8.so \
-		$(DEBOOT)/usr/lib/libxml2.so.2.7.8 \
 		$(DEBOOT)/usr/lib/locale/* \
-		$(DEBOOT)/usr/share/doc/* \
 		$(DEBOOT)/usr/share/doc/* \
 		$(DEBOOT)/usr/share/info/* \
 		$(DEBOOT)/usr/share/lintian/* \
@@ -284,7 +276,6 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/usr/share/locale/* \
 		$(DEBOOT)/usr/share/man/* \
 		$(DEBOOT)/usr/share/X11/locale/* \
-		$(DEBOOT)/usr/share/radare2/0.9.6/debootstrap* \
 		$(DEBOOT)/var/cache/apt/archives/* \
 		$(DEBOOT)/var/cache/apt/pkgcache.bin \
 		$(DEBOOT)/var/cache/apt/srcpkgcache.bin \
