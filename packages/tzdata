@@ -6,7 +6,9 @@ STAGE="$3"
 
 DEL="
     /usr/sbin/tzconfig
-    /usr/share/zoneinfo/*
+"
+DEL2="
+    $DEBOOT/usr/share/zoneinfo/*
 "
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
@@ -16,8 +18,9 @@ DEL="
 if [ "$STAGE" = "minimise" ]; then
     # remove files
     for i in $DEL; do
-        rm -rf $DEBOOT/$i
+        rm -f $DEBOOT/$i
     done
+    rm -rf $DEL2
 else
     echo ERROR: unknown stage
     exit 1

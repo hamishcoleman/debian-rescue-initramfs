@@ -8,6 +8,8 @@ DEL="
     /usr/bin/faillog
     /usr/bin/newgrp
     /usr/bin/sg
+    /var/log/faillog
+    /var/log/lastlog
 "
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man

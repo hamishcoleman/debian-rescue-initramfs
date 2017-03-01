@@ -269,17 +269,6 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/usr/share/lintian/* \
 		$(DEBOOT)/usr/share/locale/* \
 		$(DEBOOT)/usr/share/man/* \
-		$(DEBOOT)/var/cache/apt/archives/* \
-		$(DEBOOT)/var/cache/apt/pkgcache.bin \
-		$(DEBOOT)/var/cache/apt/srcpkgcache.bin \
-		$(DEBOOT)/var/cache/debconf/* \
-		$(DEBOOT)/var/lib/apt/lists/* \
-		$(DEBOOT)/var/lib/dpkg/*-old \
-		$(DEBOOT)/var/lib/dpkg/info/*.symbols \
-		$(DEBOOT)/var/lib/dpkg/info/*.templates \
-		$(DEBOOT)/var/lib/dpkg/info/*.md5sums \
-		$(DEBOOT)/var/lib/dpkg/info/openssh-client.preinst \
-		$(DEBOOT)/var/log/* \
 
 bootstrap: multistrap save_perms minimise fixup customise
 

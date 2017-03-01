@@ -12,11 +12,19 @@ DEL="
     /usr/lib/apt/methods/ftp
     /usr/lib/apt/methods/mirror
     /usr/lib/apt/methods/rsh
+    /var/cache/apt/pkgcache.bin
+    /var/cache/apt/srcpkgcache.bin
+    /var/lib/apt/lists/lock
 "
 
-# TODO
-# - /var/cache/apt/
-# - /var/lib/apt/lists
+DEL2="
+    $DEBOOT/var/cache/apt/archives/*.deb
+    $DEBOOT/var/lib/apt/lists/*_Release
+    $DEBOOT/var/lib/apt/lists/*_Release.gpg
+    $DEBOOT/var/lib/apt/lists/*_Packages
+    $DEBOOT/var/lib/apt/lists/*_Translation-*
+    $DEBOOT/var/lib/apt/lists/*_Sources
+"
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
 # are all dealt with centrally
@@ -27,6 +35,7 @@ if [ "$STAGE" = "minimise" ]; then
     for i in $DEL; do
         rm -f $DEBOOT/$i
     done
+    rm -f $DEL2
 else
     echo ERROR: unknown stage
     exit 1
