@@ -134,20 +134,6 @@ findlinks: $(DEBOOT)
 # FIXME - teach the gen_init_cpio stuff to find and create hard links
 fixlinks: $(DEBOOT)
 	ln -fs perl5.20.2 $(DEBOOT)/usr/bin/perl
-	ln -fs agetty $(DEBOOT)/sbin/getty
-	ln -fs tune2fs $(DEBOOT)/sbin/e2label
-	ln -fs e2fsck $(DEBOOT)/sbin/fsck.ext2
-	ln -fs e2fsck $(DEBOOT)/sbin/fsck.ext3
-	ln -fs e2fsck $(DEBOOT)/sbin/fsck.ext4
-	ln -fs e2fsck $(DEBOOT)/sbin/fsck.ext4dev
-	ln -fs mke2fs $(DEBOOT)/sbin/mkfs.ext2
-	ln -fs mke2fs $(DEBOOT)/sbin/mkfs.ext3
-	ln -fs mke2fs $(DEBOOT)/sbin/mkfs.ext4
-	ln -fs mke2fs $(DEBOOT)/sbin/mkfs.ext4dev
-	ln -fs domainname $(DEBOOT)/bin/nisdomainname
-	ln -fs domainname $(DEBOOT)/bin/ypdomainname
-	ln -fs domainname $(DEBOOT)/bin/dnsdomainname
-	ln -fs ifup $(DEBOOT)/sbin/ifdown
 	ln -fs ../bin/true $(DEBOOT)/sbin/ldconfig
 
 # FIXME - use the gen_init_cpio stuff properly to create dev nodes
