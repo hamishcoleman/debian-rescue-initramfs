@@ -4,17 +4,15 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/lib/$ARCH-linux-gnu/libicu*.so.52
-    /usr/lib/$ARCH-linux-gnu/libicu*.so.52.1
+DEL2="
+    $DEBOOT/usr/lib/$ARCH-linux-gnu/libicu*.so.52
+    $DEBOOT/usr/lib/$ARCH-linux-gnu/libicu*.so.52.1
 "
 
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
-    done
+    rm -f $DEL2
 else
     echo ERROR: unknown stage
     exit 1

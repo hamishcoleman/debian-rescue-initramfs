@@ -4,8 +4,8 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/share/screen/utf8encodings/*
+DEL2="
+    $DEBOOT/usr/share/screen/utf8encodings/*
 "
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
@@ -14,9 +14,7 @@ DEL="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
-    done
+    rm -f $DEL2
 else
     echo ERROR: unknown stage
     exit 1

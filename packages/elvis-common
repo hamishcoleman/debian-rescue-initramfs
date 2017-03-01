@@ -8,10 +8,12 @@ DEL="
     /usr/share/doc-base/elvis
     /usr/share/elvis/elvis.glade
     /usr/share/elvis/elvis.gnome
-    /usr/share/elvis/manual/*
-    /usr/share/elvis/stubs/*
     /usr/share/elvis/tags
     /usr/share/pixmaps/elvis_32x32.xpm
+"
+DEL2="
+    $DEBOOT/usr/share/elvis/manual/*
+    $DEBOOT/usr/share/elvis/stubs/*
 "
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
@@ -23,6 +25,7 @@ if [ "$STAGE" = "minimise" ]; then
     for i in $DEL; do
         rm -f $DEBOOT/$i
     done
+    rm -f $DEL2
 else
     echo ERROR: unknown stage
     exit 1

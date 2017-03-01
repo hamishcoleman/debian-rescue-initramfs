@@ -19,11 +19,12 @@ DEL="
     /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/bin_mach0.so
     /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/bin_mach064.so
     /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/io_mach.so
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/magic/darwin*
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/syscall/*bsd*
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/syscall/darwin*
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/syscall/win*
-
+"
+DEL2="
+    $DEBOOT/usr/lib/$ARCH-linux-gnu/radare2/0.9.6/magic/darwin*
+    $DEBOOT/usr/lib/$ARCH-linux-gnu/radare2/0.9.6/syscall/*bsd*
+    $DEBOOT/usr/lib/$ARCH-linux-gnu/radare2/0.9.6/syscall/darwin*
+    $DEBOOT/usr/lib/$ARCH-linux-gnu/radare2/0.9.6/syscall/win*
 "
 
 
@@ -32,6 +33,7 @@ if [ "$STAGE" = "minimise" ]; then
     for i in $DEL; do
         rm -f $DEBOOT/$i
     done
+    rm -f $DEL2
 else
     echo ERROR: unknown stage
     exit 1

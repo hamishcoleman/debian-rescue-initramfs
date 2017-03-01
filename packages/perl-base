@@ -4,8 +4,8 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/share/perl/5.20.2/unicore/*
+DEL2="
+    $DEBOOT/usr/share/perl/5.20.2/unicore/*
 "
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
@@ -14,9 +14,7 @@ DEL="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -rf $DEBOOT/$i
-    done
+    rm -rf $DEL2
 else
     echo ERROR: unknown stage
     exit 1

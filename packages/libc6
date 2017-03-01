@@ -4,16 +4,14 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/lib/$ARCH-linux-gnu/gconv/*
+DEL2="
+    $DEBOOT/usr/lib/$ARCH-linux-gnu/gconv/*
 "
 
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
-    done
+    rm -f $DEL2/$i
 else
     echo ERROR: unknown stage
     exit 1

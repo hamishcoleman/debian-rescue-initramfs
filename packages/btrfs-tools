@@ -8,8 +8,11 @@ DEL="
     /bin/btrfs-debug-tree
     /bin/btrfs-image
     /bin/btrfs-map-logical
-    /usr/include/btrfs/*
 "
+DEL2="
+    $DEBOOT/usr/include/btrfs/*
+"
+
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
 # are all dealt with centrally
 
@@ -19,6 +22,7 @@ if [ "$STAGE" = "minimise" ]; then
     for i in $DEL; do
         rm -f $DEBOOT/$i
     done
+    rm -f $DEL2
 else
     echo ERROR: unknown stage
     exit 1
