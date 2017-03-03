@@ -95,7 +95,7 @@ multistrap.conf: packages.txt
 	echo "keyring=debian-archive-keyring" >>$@
 	echo packages=`egrep -v "^\#" $^` >>$@
 
-multistrap: $(DEBOOT) multistrap.conf
+multistrap: $(DEBOOT) multistrap.conf multistrap.configscript
 	mkdir -p $(DEBOOT)/dev
 	sudo mknod $(DEBOOT)/dev/urandom c 1 9
 	sudo /usr/sbin/multistrap \
