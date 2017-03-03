@@ -105,7 +105,11 @@ multistrap: $(DEBOOT) multistrap.conf multistrap.configscript
 	-sudo umount $(DEBOOT)/proc
 	sudo rm -f $(DEBOOT)/multistrap.configscript
 
-# TODO - make multistrap.configscript smarter and remove the kill+umount here
+# TODO
+# - make multistrap.configscript smarter and remove the kill+umount here
+# - This multistrap rule does not handle foreign arch, so extract the 
+#   logic from qemu-debootstrap (basically determine QEMU_ARCH, copy the
+#   static qemu-user bin to the right place and use chroot.
 
 # Extract the permissions from the actual filesystem into the fakeroot
 # database.  Which allows us to chown/chmod the whole dir tree to the
