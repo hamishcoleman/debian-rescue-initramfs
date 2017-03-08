@@ -1,0 +1,32 @@
+#!/bin/bash
+
+DEBOOT="$1"
+ARCH="$2"
+STAGE="$3"
+
+DEL="
+    /var/log/dpkg.log
+    /var/log/alternatives.log
+"
+DEL2="
+    $DEBOOT/var/lib/dpkg/*-old
+    $DEBOOT/var/lib/dpkg/info/*.md5sums
+    $DEBOOT/var/lib/dpkg/info/*.symbols
+    $DEBOOT/var/lib/dpkg/info/*.templates
+"
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -f $DEBOOT/$i
+    done
+    rm -f $DEL2
+else
+    echo ERROR: unknown stage
+    exit 1
+fi
+
