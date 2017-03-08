@@ -25,6 +25,7 @@ if [ "$STAGE" = "minimise" ]; then
     for i in $DEL; do
         rm -f $DEBOOT/$i
     done
+    ln -fs gunzip $DEBOOT/bin/uncompress
 else
     echo ERROR: unknown stage
     exit 1

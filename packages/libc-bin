@@ -5,7 +5,7 @@ ARCH="$2"
 STAGE="$3"
 
 DEL="
-    /sbin/ldconfig
+    /sbin/ldconfig.real
     /usr/bin/catchsegv
     /usr/bin/getent
     /usr/bin/iconv
@@ -36,6 +36,7 @@ if [ "$STAGE" = "minimise" ]; then
     for i in $DEL; do
         rm -f $DEBOOT/$i
     done
+    ln -fs ../bin/true $DEBOOT/sbin/ldconfig
 else
     echo ERROR: unknown stage
     exit 1

@@ -11,7 +11,7 @@ DEL2="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    rm -f $DEL2/$i
+    rm -f $DEL2
 else
     echo ERROR: unknown stage
     exit 1

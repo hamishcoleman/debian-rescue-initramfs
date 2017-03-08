@@ -132,13 +132,11 @@ install.elvis.hack:
 	sudo chown -R $(LOGNAME) $(DEBOOT)
 	chmod -R a+r $(DEBOOT)
 
+# Because the gen_init_cpio tools dont support hardlinks very well, we
+# need to check for them and add them to the package scripts
+# FIXME - teach the gen_init_cpio stuff to find and create hard links
 findlinks: $(DEBOOT)
 	find $(DEBOOT) -type f -links +1 -ls
-
-# FIXME - teach the gen_init_cpio stuff to find and create hard links
-fixlinks: $(DEBOOT)
-	ln -fs perl5.20.2 $(DEBOOT)/usr/bin/perl
-	ln -fs ../bin/true $(DEBOOT)/sbin/ldconfig
 
 # FIXME - use the gen_init_cpio stuff properly to create dev nodes
 fixdev: $(DEBOOT)
@@ -153,7 +151,7 @@ fixdev: $(DEBOOT)
 
 # fixups are things that are needed to make the image actually work
 #
-fixup: $(DEBOOT) fixlinks fixdev
+fixup: $(DEBOOT) fixdev
 	ln -fs sbin/init $(DEBOOT)
 	perl -pi -e 's/:\*:/::/' $(DEBOOT)/etc/shadow
 	perl -pi -e 's/^#T0:/T0:/' $(DEBOOT)/etc/inittab

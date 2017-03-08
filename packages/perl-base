@@ -15,6 +15,7 @@ DEL2="
 if [ "$STAGE" = "minimise" ]; then
     # remove files
     rm -rf $DEL2
+    ln -sf perl5.20.2 $DEBOOT/usr/bin/perl
 else
     echo ERROR: unknown stage
     exit 1
