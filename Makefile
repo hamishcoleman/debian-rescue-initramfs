@@ -138,20 +138,9 @@ install.elvis.hack:
 findlinks: $(DEBOOT)
 	find $(DEBOOT) -type f -links +1 -ls
 
-# FIXME - use the gen_init_cpio stuff properly to create dev nodes
-fixdev: $(DEBOOT)
-	rm -f $(DEBOOT)/dev/tty[123456] $(DEBOOT)/dev/ttyS0
-	$(fakeroot) mknod $(DEBOOT)/dev/tty1 c 4 1
-	$(fakeroot) mknod $(DEBOOT)/dev/tty2 c 4 2
-	$(fakeroot) mknod $(DEBOOT)/dev/tty3 c 4 3
-	$(fakeroot) mknod $(DEBOOT)/dev/tty4 c 4 4
-	$(fakeroot) mknod $(DEBOOT)/dev/tty5 c 4 5
-	$(fakeroot) mknod $(DEBOOT)/dev/tty6 c 4 6
-	$(fakeroot) mknod $(DEBOOT)/dev/ttyS0 c 4 64
-
 # fixups are things that are needed to make the image actually work
 #
-fixup: $(DEBOOT) fixdev
+fixup: $(DEBOOT)
 	ln -fs sbin/init $(DEBOOT)
 	perl -pi -e 's/:\*:/::/' $(DEBOOT)/etc/shadow
 	perl -pi -e 's/^#T0:/T0:/' $(DEBOOT)/etc/inittab
