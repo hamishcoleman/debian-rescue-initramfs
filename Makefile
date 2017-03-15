@@ -143,21 +143,14 @@ findlinks: $(DEBOOT)
 fixup: $(DEBOOT)
 	ln -fs sbin/init $(DEBOOT)
 	perl -pi -e 's/:\*:/::/' $(DEBOOT)/etc/shadow
-	perl -pi -e 's/^#T0:/T0:/' $(DEBOOT)/etc/inittab
-	perl -pi -e 's/(ttyS0 9600) vt100/$$1 xterm/' $(DEBOOT)/etc/inittab
 	perl -pi -e 's/--no-headers --format args/-o args/' $(DEBOOT)/etc/init.d/udev
-	perl -pi -e 's/--load=/-p /' $(DEBOOT)/etc/init.d/procps
 	perl -pi -e 's/sleep 30//' $(DEBOOT)/etc/init.d/udev
 	rm -rf \
-		$(DEBOOT)/etc/hostname \
-		$(DEBOOT)/dev/.udev \
-		$(DEBOOT)/dev/fd \
 		$(DEBOOT)/etc/ssh/ssh_host_*_key*
 	cp zero_byte_exe $(DEBOOT)/bin/true
 	cp zero_byte_exe $(DEBOOT)/usr/bin/mesg
 	cp zero_byte_exe $(DEBOOT)/usr/bin/locale
 	ln -sf /proc/mounts $(DEBOOT)/etc/mtab
-	mkdir -p $(DEBOOT)/var/log/fsck
 	perl -pi -e 's/START_DAEMON=true/START_DAEMON=false/' $(DEBOOT)/etc/default/mdadm
 
 # some unneeded things that just cause warnings
