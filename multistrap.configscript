@@ -4,7 +4,7 @@
 # It is expected to be run as root, in a chroot, using the target
 # architecture, after multistrap has been run
 
-# Mount root if needed
+# Mount proc, if needed
 if [ ! -e /proc/uptime ]; then
     mount proc -t proc /proc
     PROC_NEEDS_UMOUNT=1
@@ -19,7 +19,8 @@ dpkg --configure -a
 
 # TODO
 # - the dpkg --configure starts up all the services.. please dont!
-# - some of the services fail (eg, dropbear) causing a dpkg exit code
+# - some of the services fail (eg, dropbear) causing a dpkg exit code,
+#   otherwise we could use the exitcode as our script exitcode
 
 # FIXME
 # - find the services started above and kill them off, allowing proc to be
