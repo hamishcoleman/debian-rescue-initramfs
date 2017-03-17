@@ -37,6 +37,10 @@ if [ "$STAGE" = "minimise" ]; then
         rm -f $DEBOOT/$i
     done
     ln -fs ../bin/true $DEBOOT/sbin/ldconfig
+
+    # A zero byte exe returns a success errorcode
+    touch $DEBOOT/usr/bin/locale
+    chmod a=rx $DEBOOT/usr/bin/locale
 else
     echo ERROR: unknown stage
     exit 1

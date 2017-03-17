@@ -147,9 +147,6 @@ fixup: $(DEBOOT)
 	perl -pi -e 's/sleep 30//' $(DEBOOT)/etc/init.d/udev
 	rm -rf \
 		$(DEBOOT)/etc/ssh/ssh_host_*_key*
-	cp zero_byte_exe $(DEBOOT)/bin/true
-	cp zero_byte_exe $(DEBOOT)/usr/bin/mesg
-	cp zero_byte_exe $(DEBOOT)/usr/bin/locale
 	ln -sf /proc/mounts $(DEBOOT)/etc/mtab
 	perl -pi -e 's/START_DAEMON=true/START_DAEMON=false/' $(DEBOOT)/etc/default/mdadm
 

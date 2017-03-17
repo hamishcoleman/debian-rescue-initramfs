@@ -19,6 +19,7 @@ DEL="
     /usr/bin/ipcs
     /usr/bin/line
     /usr/bin/mcookie
+    /usr/bin/mesg
     /usr/bin/pg
     /usr/bin/rename.ul
     /usr/bin/rev
@@ -35,6 +36,10 @@ if [ "$STAGE" = "minimise" ]; then
     for i in $DEL; do
         rm -f $DEBOOT/$i
     done
+
+    # A zero byte exe returns a success errorcode
+    touch $DEBOOT/usr/bin/mesg
+    chmod a=rx $DEBOOT/usr/bin/mesg
 else
     echo ERROR: unknown stage
     exit 1
