@@ -27,7 +27,7 @@ if [ "$STAGE" = "minimise" ]; then
     done
     ln -fs gunzip $DEBOOT/bin/uncompress
 else
-    echo ERROR: unknown stage
+    # unsupported stage
     exit 1
 fi
 

@@ -42,7 +42,7 @@ if [ "$STAGE" = "minimise" ]; then
     touch $DEBOOT/usr/bin/locale
     chmod a=rx $DEBOOT/usr/bin/locale
 else
-    echo ERROR: unknown stage
+    # unsupported stage
     exit 1
 fi
 

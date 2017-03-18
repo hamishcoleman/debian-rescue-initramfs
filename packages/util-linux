@@ -41,7 +41,7 @@ if [ "$STAGE" = "minimise" ]; then
     touch $DEBOOT/usr/bin/mesg
     chmod a=rx $DEBOOT/usr/bin/mesg
 else
-    echo ERROR: unknown stage
+    # unsupported stage
     exit 1
 fi
 

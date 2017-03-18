@@ -58,7 +58,7 @@ if [ "$STAGE" = "minimise" ]; then
     touch $DEBOOT/bin/true
     chmod a=rx $DEBOOT/bin/true
 else
-    echo ERROR: unknown stage
+    # unsupported stage
     exit 1
 fi
 

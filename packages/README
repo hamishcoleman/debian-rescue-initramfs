@@ -10,3 +10,12 @@ Curently the phases are:
 "minimise"
     During this phase, all un-needed files are deleted.
 
+Output and exit codes:
+
+These scripts are expected to be silent on their output unless they encounter
+an error.  The exit codes are interpreted as follows:
+
+    0       all successful
+    1       the requested stage is not supported by this script (not an error)
+    other   an error was encountered - stop the build
+

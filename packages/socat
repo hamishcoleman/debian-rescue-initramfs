@@ -21,7 +21,7 @@ if [ "$STAGE" = "minimise" ]; then
         rm -f $DEBOOT/$i
     done
 else
-    echo ERROR: unknown stage
+    # unsupported stage
     exit 1
 fi
 

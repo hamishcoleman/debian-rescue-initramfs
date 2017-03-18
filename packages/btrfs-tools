@@ -25,7 +25,7 @@ if [ "$STAGE" = "minimise" ]; then
     rm -f $DEL2
     ln -sf btrfs $DEBOOT/sbin/btrfsck
 else
-    echo ERROR: unknown stage
+    # unsupported stage
     exit 1
 fi
 
