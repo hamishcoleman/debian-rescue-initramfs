@@ -17,7 +17,7 @@ TARGET=root3.ramfs.gz
 TMPDIR=$(HOME)/tmp/boot/linuxrescue3
 DEBOOT=$(TMPDIR)/files
 SAVEPERM=$(TMPDIR)/fakeroot.save
-TESTKERN=4.6-15
+TESTKERN=kernel/4.6-15
 
 # Not simply user changable - the minimisation process will break differently
 # for other debian versions, so the fixup process will need adjustments
