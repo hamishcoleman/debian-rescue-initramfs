@@ -217,19 +217,9 @@ busybox: $(DEBOOT)
 	cd $(DEBOOT)/busybox; mv -f $(BB_USRBIN) ../usr/bin
 	cd $(DEBOOT)/busybox; mv -f $(BB_USRSBIN) ../usr/sbin
 
+# TODO - automatic dependancies for the runscripts
 minimise: $(DEBOOT) debcache_save
-	unset NO; \
-	echo "\n\nRunning package scripts for minimise phase"; \
-	echo -n "\nMinimising:\n\t"; \
-        for package in `dpkg-query --admindir=$(DEBOOT)/var/lib/dpkg --show --showformat='$${Package}\n'`; do \
-            if [ -x packages/$$package ]; then \
-		echo -n "$$package "; \
-                packages/$$package $(DEBOOT) $(ARCH) minimise; \
-            else \
-		NO="$$NO$$package "; \
-            fi; \
-	done; \
-        echo "\n\nNo script:\n\t$$NO\n"
+	./packages.runscripts $(DEBOOT) $(ARCH) minimise
 	rm -rf \
 		$(DEBOOT)/usr/share/doc/* \
 		$(DEBOOT)/usr/share/info/* \

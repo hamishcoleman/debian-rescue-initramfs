@@ -1,0 +1,83 @@
+#!/bin/bash
+#
+# Check the debian root dir and try to run the script for each installed
+# package.
+#
+
+if [ $# -lt 3 ]; then
+    echo Usage: $0 DEBOOT ARCH STAGE
+    exit 1
+fi
+
+DEBOOT="$1"
+ARCH="$2"
+STAGE="$3"
+VERBOSE="$4"
+
+PACKAGEDIR=packages
+PACKAGES=`dpkg-query --admindir=${DEBOOT}/var/lib/dpkg --show --showformat='${Package}\n'`
+
+unset NO_SCRIPT
+unset NO_SUPPORT
+unset OK
+
+run_script() {
+    local package=$1
+
+    if [ ! -x $PACKAGEDIR/$package ]; then
+        NO_SCRIPT+="$package "
+        return
+    fi
+
+    if [ -n "$VERBOSE" ]; then
+        echo -n "$package "
+    fi
+    $PACKAGEDIR/$package ${DEBOOT} ${ARCH} ${STAGE}
+    S=$?
+
+    if [ $S -eq 1 ]; then
+        NO_SUPPORT+="$package "
+        return 1
+    fi
+    if [ $S -gt 1 ]; then
+        echo "Error: package script $package failed"
+        exit $S
+    fi
+
+    OK+="$package "
+}
+
+echo "Running package scripts for $STAGE phase"
+if [ -n "$VERBOSE" ]; then
+    echo 
+    echo "Packages:"
+    echo -e -n "\t"
+fi
+
+for package in $PACKAGES; do
+    run_script $package
+done
+
+if [ -n "$VERBOSE" ]; then
+    echo
+    echo
+fi
+
+echo "No script: `echo $NO_SCRIPT |wc -w`"
+if [ -n "$VERBOSE" ]; then
+    echo -e "\t$NO_SCRIPT"
+    echo
+fi
+
+echo "No support: `echo $NO_SUPPORT |wc -w`"
+if [ -n "$VERBOSE" ]; then
+    echo -e "\t$NO_SUPPORT"
+    echo
+fi
+
+echo "Ran OK: `echo $OK |wc -w`"
+if [ -n "$VERBOSE" ]; then
+    echo
+fi
+
+
