@@ -8,7 +8,12 @@ during each phase.
 Curently the phases are:
 
 "minimise"
-    During this phase, all un-needed files are deleted.
+    During this phase, anything that can be removed to minimise the
+    installed size is removed.
+
+"fixup"
+    This phase performs the changes needed to make the image actually
+    bootable.
 
 Output and exit codes:
 

@@ -141,7 +141,7 @@ findlinks: $(DEBOOT)
 # fixups are things that are needed to make the image actually work
 #
 fixup: $(DEBOOT)
-	ln -fs sbin/init $(DEBOOT)
+	./packages.runscripts $(DEBOOT) $(ARCH) fixup
 	perl -pi -e 's/:\*:/::/' $(DEBOOT)/etc/shadow
 	perl -pi -e 's/--no-headers --format args/-o args/' $(DEBOOT)/etc/init.d/udev
 	perl -pi -e 's/sleep 30//' $(DEBOOT)/etc/init.d/udev

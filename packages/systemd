@@ -26,6 +26,11 @@ if [ "$STAGE" = "minimise" ]; then
     for i in $DEL; do
         rm -f $DEBOOT/$i
     done
+elif [ "$STAGE" = "fixup" ]; then
+    # the initrd looks for a different file to start as init than
+    # a normal bootup.  # so, we need to specifically create a link
+    # for it.
+    ln -fs sbin/init $DEBOOT/init
 else
     # unsupported stage
     exit 1
