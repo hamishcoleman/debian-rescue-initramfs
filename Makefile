@@ -101,13 +101,19 @@ multistrap_pre: $(DEBOOT) multistrap.conf
 	sudo /usr/sbin/multistrap \
 		-a $(ARCH) -d $(DEBOOT) -f multistrap.conf
 
+# TODO:
+# - change these fixups into a package script phase?
+multistrap_fixup:
+	sudo perl -pi -e 's/rmdir/rm -rf/' $(DEBOOT)/var/lib/dpkg/info/base-files.postinst
+	sudo perl -pi -e 's/ invoke-rc.d/ true/' $(DEBOOT)/var/lib/dpkg/info/dropbear.postinst
+
 multistrap_post: multistrap.configscript
 	sudo chroot $(DEBOOT) ./multistrap.configscript
 	sudo kill -9 `sudo lsof -Fp $(DEBOOT) | tr -d p`
 	-sudo umount $(DEBOOT)/proc
 	sudo rm -f $(DEBOOT)/multistrap.configscript
 
-multistrap: multistrap_pre multistrap_post
+multistrap: multistrap_pre multistrap_fixup multistrap_post
 
 # TODO
 # - make multistrap.configscript smarter and remove the kill+umount here
