@@ -95,15 +95,19 @@ multistrap.conf: packages.txt
 	echo "keyring=debian-archive-keyring" >>$@
 	echo packages=$(packages) >>$@
 
-multistrap: $(DEBOOT) multistrap.conf multistrap.configscript
+multistrap_pre: $(DEBOOT) multistrap.conf
 	mkdir -p $(DEBOOT)/dev
 	sudo mknod $(DEBOOT)/dev/urandom c 1 9
 	sudo /usr/sbin/multistrap \
 		-a $(ARCH) -d $(DEBOOT) -f multistrap.conf
+
+multistrap_post: multistrap.configscript
 	sudo chroot $(DEBOOT) ./multistrap.configscript
 	sudo kill -9 `sudo lsof -Fp $(DEBOOT) | tr -d p`
 	-sudo umount $(DEBOOT)/proc
 	sudo rm -f $(DEBOOT)/multistrap.configscript
+
+multistrap: multistrap_pre multistrap_post
 
 # TODO
 # - make multistrap.configscript smarter and remove the kill+umount here
