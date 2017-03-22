@@ -1,0 +1,25 @@
+#!/bin/bash
+
+DEBOOT="$1"
+ARCH="$2"
+STAGE="$3"
+
+DEL="
+    /etc/ssh/ssh_host_*_key*
+"
+
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -f $DEBOOT/$i
+    done
+elif [ "$STAGE" = "fixup" ]; then
+    exit 2
+    # FIXME
+    # - add a script to generate new host keys on bootup..
+else
+    # unsupported stage
+    exit 1
+fi
+

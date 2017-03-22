@@ -27,6 +27,10 @@ if [ "$STAGE" = "minimise" ]; then
     for i in $DEL; do
         rm -f $DEBOOT/$i
     done
+elif [ "$STAGE" = "fixup" ]; then
+    # The rescue system just wants the mdadm tools, not the running daemon
+    # TODO - does this actually belong in the fixup phase?
+    perl -pi -e 's/START_DAEMON=true/START_DAEMON=false/' ${DEBOOT}/etc/default/mdadm
 else
     # unsupported stage
     exit 1

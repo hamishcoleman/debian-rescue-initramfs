@@ -1,0 +1,30 @@
+#!/bin/bash
+
+DEBOOT="$1"
+ARCH="$2"
+STAGE="$3"
+
+DEL="
+    /usr/sbin/update-passwd
+    /usr/share/base-passwd/group.master
+    /usr/share/base-passwd/passwd.master
+"
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -f $DEBOOT/$i
+    done
+elif [ "$STAGE" = "fixup" ]; then
+    # remove root password, allowing console login
+    # TODO:
+    # - use a well known password here?
+    perl -pi -e 's/^root:\*:/root::/' ${DEBOOT}/etc/shadow
+else
+    # unsupported stage
+    exit 1
+fi
+

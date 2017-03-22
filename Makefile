@@ -142,13 +142,6 @@ findlinks: $(DEBOOT)
 #
 fixup: $(DEBOOT)
 	./packages.runscripts $(DEBOOT) $(ARCH) fixup
-	perl -pi -e 's/:\*:/::/' $(DEBOOT)/etc/shadow
-	perl -pi -e 's/--no-headers --format args/-o args/' $(DEBOOT)/etc/init.d/udev
-	perl -pi -e 's/sleep 30//' $(DEBOOT)/etc/init.d/udev
-	rm -rf \
-		$(DEBOOT)/etc/ssh/ssh_host_*_key*
-	ln -sf /proc/mounts $(DEBOOT)/etc/mtab
-	perl -pi -e 's/START_DAEMON=true/START_DAEMON=false/' $(DEBOOT)/etc/default/mdadm
 
 # some unneeded things that just cause warnings
 fix_warnings: $(DEBOOT)

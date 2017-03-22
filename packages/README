@@ -13,7 +13,8 @@ Curently the phases are:
 
 "fixup"
     This phase performs the changes needed to make the image actually
-    bootable.
+    bootable.  Any service startup warnings and errors are also addressed
+    here.
 
 Output and exit codes:
 
