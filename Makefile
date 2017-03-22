@@ -153,18 +153,9 @@ findlinks: $(DEBOOT)
 fixup: $(DEBOOT)
 	./packages.runscripts $(DEBOOT) $(ARCH) fixup
 
-# some unneeded things that just cause warnings
-fix_warnings: $(DEBOOT)
-	rm -f \
-		$(DEBOOT)/etc/init.d/loadcpufreq \
-		$(DEBOOT)/etc/rc*.d/*loadcpufreq \
-		$(DEBOOT)/etc/init.d/mountoverflowtmp \
-		$(DEBOOT)/etc/rc*.d/*mountoverflowtmp \
-		$(DEBOOT)/etc/rc*.d/*ipmievd \
-
 # customisations are things that go beyond makeing the image work
 #
-customise: $(DEBOOT) busybox fix_warnings
+customise: $(DEBOOT) busybox
 	mkdir -p $(DEBOOT)/etc/elvis/
 	echo "color normal white on black" >>$(DEBOOT)/etc/elvis/elvis.clr
 	echo "rescue" >$(DEBOOT)/etc/hostname

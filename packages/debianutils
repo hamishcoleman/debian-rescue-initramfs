@@ -1,0 +1,41 @@
+#!/bin/bash
+
+DEBOOT="$1"
+ARCH="$2"
+STAGE="$3"
+
+DEL="
+    /usr/bin/ischroot
+    /usr/sbin/add-shell
+    /usr/sbin/remove-shell
+    /usr/share/debianutils/shells
+"
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -f $DEBOOT/$i
+    done
+
+    # the add-shell script uses "chmod --reference=RFILE", which is
+    # not supported by the busybox chmod, so we remove those scripts
+    # (adding and removing shells is not likely to be a common operation)
+
+    # A zero byte exe returns a success errorcode
+    touch $DEBOOT/usr/sbin/add-shell
+    chmod a=rx $DEBOOT/usr/sbin/add-shell
+    touch $DEBOOT/usr/sbin/remove-shell
+    chmod a=rx $DEBOOT/usr/sbin/remove-shell
+
+    # Just always pretend we are not in a chroot
+    echo "#!/bin/sh" >$DEBOOT/usr/bin/ischroot
+    echo "false" >$DEBOOT/usr/bin/ischroot
+    chmod a=rx $DEBOOT/usr/bin/ischroot
+else
+    # unsupported stage
+    exit 1
+fi
+

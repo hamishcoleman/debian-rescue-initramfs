@@ -7,11 +7,11 @@ STAGE="$3"
 DEL="
     /etc/default/ipmievd
     /etc/init.d/ipmievd
+    /lib/systemd/system/ipmievd.service
+    /usr/lib/modules-load.d/ipmievd.conf
     /usr/sbin/ipmievd
+    /usr/share/ipmitool/oem_ibm_sel_map
 "
-# TODO
-# - /etc/iproute2
-# - /usr/lib/tc
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
 # are all dealt with centrally

@@ -1,0 +1,34 @@
+#!/bin/bash
+
+DEBOOT="$1"
+ARCH="$2"
+STAGE="$3"
+
+DEL="
+    /etc/init.d/cpufrequtils
+    /usr/bin/cpufreq-aperf
+"
+DEL2="
+    $DEBOOT/etc/rc*.d/*cpufrequtils
+"
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+
+
+if [ "$STAGE" = "minimise" ]; then
+    # remove files
+    for i in $DEL; do
+        rm -f $DEBOOT/$i
+    done
+    rm -f $DEL2
+elif [ "$STAGE" = "fixup" ]; then
+    # we dont have kernel modules inside the initramfs, so
+    # trying to load the modules just causes system errors
+    rm -f ${DEBOOT}/etc/init.d/loadcpufreq
+    rm -f ${DEBOOT}/etc/rc*.d/*loadcpufreq
+else
+    # unsupported stage
+    exit 1
+fi
+
