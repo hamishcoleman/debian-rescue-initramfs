@@ -72,7 +72,7 @@ SPACE :=
 SPACE +=
 COMMA :=,
 
-packages := $(shell egrep -v "^\#" packages.txt)
+packages = $(shell sed -e 's/\#.*//' packages.txt)
 
 debootstrap: $(DEBOOT) packages.txt
 	mkdir -p $(DEBOOT)
@@ -93,7 +93,7 @@ multistrap.conf: packages.txt
 	echo "source=$(MIRROR)" >>$@
 	echo "suite=jessie" >>$@
 	echo "keyring=debian-archive-keyring" >>$@
-	echo packages=`egrep -v "^\#" $^` >>$@
+	echo packages=$(packages) >>$@
 
 multistrap: $(DEBOOT) multistrap.conf multistrap.configscript
 	mkdir -p $(DEBOOT)/dev
