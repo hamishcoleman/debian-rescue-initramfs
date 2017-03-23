@@ -142,9 +142,9 @@ install.elvis.hack:
 	sudo chown -R $(LOGNAME) $(DEBOOT)
 	chmod -R a+r $(DEBOOT)
 
-# Because the gen_init_cpio tools dont support hardlinks very well, we
+# Because the cpio tools dont support hardlinks very well, we
 # need to check for them and add them to the package scripts
-# FIXME - teach the gen_init_cpio stuff to find and create hard links
+# FIXME - teach the cpio stuff to find and create hard links
 findlinks: $(DEBOOT)
 	find $(DEBOOT) -type f -links +1 -ls
 
@@ -223,8 +223,11 @@ minimise: $(DEBOOT) debcache_save
 
 bootstrap: multistrap save_perms minimise fixup customise
 
-$(TARGET): $(DEBOOT) gen_init_cpio gen_initramfs_list.sh
-	$(fakeroot) ./gen_initramfs_list.sh -o $@ -u squash -g squash $(DEBOOT)/
+$(TARGET): $(DEBOOT)
+	( \
+	    cd $(DEBOOT); \
+	    find . -print0 | $(fakeroot) cpio -0 -H newc -R 0:0 -o \
+	) | gzip > $@
 
 test: 	$(TARGET) $(TESTKERN)
 	qemu-system-i386 -enable-kvm \
