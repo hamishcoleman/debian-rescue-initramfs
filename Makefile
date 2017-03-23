@@ -13,7 +13,7 @@
 MIRROR=http://httpredir.debian.org/debian
 ARCH=i386
 QEMU_ARCH=i386
-TARGET=root3.ramfs.gz
+TARGET=root3.ramfs.xz
 TMPDIR=$(HOME)/tmp/boot/linuxrescue3
 DEBOOT=$(TMPDIR)/files
 SAVEPERM=$(TMPDIR)/fakeroot.save
@@ -227,7 +227,7 @@ $(TARGET): $(DEBOOT)
 	( \
 	    cd $(DEBOOT); \
 	    find . -print0 | $(fakeroot) cpio -0 -H newc -R 0:0 -o \
-	) | gzip > $@
+	) | xz --check=crc32 > $@
 
 test: 	$(TARGET) $(TESTKERN)
 	qemu-system-i386 -enable-kvm \
