@@ -155,7 +155,7 @@ fixup: $(DEBOOT)
 
 # customisations are things that go beyond makeing the image work
 #
-customise: $(DEBOOT) busybox
+customise: $(DEBOOT)
 	mkdir -p $(DEBOOT)/etc/elvis/
 	echo "color normal white on black" >>$(DEBOOT)/etc/elvis/elvis.clr
 	echo "rescue" >$(DEBOOT)/etc/hostname
@@ -169,47 +169,11 @@ customise: $(DEBOOT) busybox
 	echo "update_config=1" >>$(DEBOOT)/etc/wpa_supplicant/wpa_supplicant.conf
 	echo "e scr.utf8 = true" >$(DEBOOT)/usr/share/radare2/radare2rc
 
-find_busybox_dupes: $(DEBOOT)
-	cd $(DEBOOT); \
-	for i in $$( ( \
-		ls --indicator-style=none busybox/; \
-		find bin/ sbin/ usr/bin/ usr/sbin/ -type f -printf "%f\n"; \
-	) |sort |uniq -d); do \
-		echo $$(find busybox bin sbin usr/bin usr/sbin |grep /$$i$$); \
-	done 
-
-BB_BIN := \
-	cat chgrp chmod chown cpio date df dmesg echo egrep false fgrep \
-	gunzip gzip hostname kill ln mkdir mknod mktemp more mv nc netstat \
-	pidof pwd readlink rm rmdir sleep stty sync uname uncompress \
-	zcat dnsdomainname mount ps sed umount \
-    ping6
-BB_SBIN := \
-	blockdev ifconfig losetup nameif route swapoff swapon sysctl \
-	modprobe vconfig mkswap \
-    switch_root start-stop-daemon pivot_root
-BB_USRBIN := \
-	basename clear cmp cut dirname env expr head ionice killall last \
-	logname md5sum mkfifo printf renice reset sha1sum sha512sum sort \
-	tail touch tty watch wc whoami yes \
-	du id logger tee tr uniq uptime which \
-	free test [ unxz xz xzcat \
-	getopt xargs timeout stat seq \
-    realpath
-BB_USRSBIN := \
-	chroot
-
 busybox: $(DEBOOT)
-	mkdir -p $(DEBOOT)/busybox
-	qemu-$(QEMU_ARCH) -L $(DEBOOT) $(DEBOOT)/bin/busybox --install -s $(DEBOOT)/busybox
-	cd $(DEBOOT)/busybox; for i in *; do ln -sf /bin/busybox $$i; done
+	./packages.runscripts $(DEBOOT) $(ARCH) busybox
 	perl -pi -e 's{(bin:/bin)}{$$1:/busybox}' $(DEBOOT)/etc/profile
 	echo "NOSWAP=yes" >> $(DEBOOT)/etc/default/rcS
 	echo "unset QUIET_SYSCTL" >> $(DEBOOT)/etc/default/rcS
-	cd $(DEBOOT)/busybox; mv -f $(BB_BIN) ../bin
-	cd $(DEBOOT)/busybox; mv -f $(BB_SBIN) ../sbin
-	cd $(DEBOOT)/busybox; mv -f $(BB_USRBIN) ../usr/bin
-	cd $(DEBOOT)/busybox; mv -f $(BB_USRSBIN) ../usr/sbin
 
 # TODO - automatic dependancies for the runscripts
 minimise: $(DEBOOT) debcache_save
@@ -221,7 +185,7 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/usr/share/locale/* \
 		$(DEBOOT)/usr/share/man/* \
 
-bootstrap: multistrap save_perms minimise fixup customise
+bootstrap: multistrap save_perms minimise busybox fixup customise
 
 $(TARGET): $(DEBOOT)
 	( \

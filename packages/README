@@ -11,6 +11,14 @@ Curently the phases are:
     During this phase, anything that can be removed to minimise the
     installed size is removed.
 
+"busybox"
+    If busybox is used, it can replace a large number of binaries
+    belonging to other packages.  This is technically a space minimisation
+    technique, but it is put in a separate phase so that these actions are
+    clearly separated from the other packages deleting their own files.
+    (It is expected that only the busybox package script will implement
+    this phase)
+
 "fixup"
     This phase performs the changes needed to make the image actually
     bootable.  Any service startup warnings and errors are also addressed
