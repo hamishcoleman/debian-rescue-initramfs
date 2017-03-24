@@ -24,6 +24,9 @@ if [ "$STAGE" = "minimise" ]; then
     for i in $DEL; do
         rm -f $DEBOOT/$i
     done
+elif [ "$STAGE" = "fixup" ]; then
+    # ifup complains if there is no fstab
+    touch ${DEBOOT}/etc/fstab
 else
     # unsupported stage
     exit 1
