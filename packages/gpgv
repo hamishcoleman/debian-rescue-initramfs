@@ -5,7 +5,6 @@ ARCH="$2"
 STAGE="$3"
 
 DEL="
-    /usr/bin/gpgv
 "
 # /usr/share/doc, /usr/share/info and /usr/share/man are all dealt with
 # centrally
