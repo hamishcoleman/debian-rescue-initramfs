@@ -4,10 +4,17 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
+# we dont have kernel modules inside the initramfs, so trying to load
+# the modules with /etc/init.d/loadcpufreq just causes system errors
+
 FILES_LIST="
 r   /etc/init.d/cpufrequtils
+r   /etc/init.d/loadcpufreq
 r   /etc/rc*.d/*cpufrequtils
+r   /etc/rc*.d/*loadcpufreq
 r   /usr/bin/cpufreq-aperf
+k   /usr/bin/cpufreq-info
+k   /usr/bin/cpufreq-set
 "
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
@@ -22,12 +29,6 @@ if [ "$STAGE" = "minimise" ]; then
             ;;
         esac
     done
-
-elif [ "$STAGE" = "fixup" ]; then
-    # we dont have kernel modules inside the initramfs, so
-    # trying to load the modules just causes system errors
-    rm -f ${DEBOOT}/etc/init.d/loadcpufreq
-    rm -f ${DEBOOT}/etc/rc*.d/*loadcpufreq
 else
     # unsupported stage
     exit 1

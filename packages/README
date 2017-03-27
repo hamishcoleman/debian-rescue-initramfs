@@ -33,3 +33,22 @@ an error.  The exit codes are interpreted as follows:
     1       the requested stage is not supported by this script (not an error)
     other   an error was encountered - stop the build
 
+The "FILES_LIST" variable:
+
+The package scripts all define a "FILES_LIST" variable that is used
+to delete files and directories (during the minimise phase).  In the
+future, this list will also be used to highlight when the installed
+package version contains files that are not expected (and thus might
+be suitable for deleting, or need new fixups).  To facilitate this,
+the list is structured as a tagged list, with one line for each file.
+
+Each line is a tag followed by a filename, with the following defined
+tags:
+
+    k   - keep this file, mark it as known when comparing package lists
+    r   - remove this file
+    rr  - recursively remove this directory
+
+The list of "keep" files can also serve as a hit-list of files that that
+it might be possible to delete.
+

@@ -5,9 +5,24 @@ ARCH="$2"
 STAGE="$3"
 
 FILES_LIST="
+k   /bin/bash
+k   /bin/rbash
+k   /etc/bash.bashrc
+k   /etc/skel/.bash_logout
+k   /etc/skel/.bashrc
+k   /etc/skel/.profile
 r   /usr/bin/bashbug
 r   /usr/bin/clear_console
+r   /usr/share/menu/bash
 "
+
+# TODO
+# - the following could be made smaller by replacing them with a version
+#   without all the comments and unused sections:
+#       - /etc/bash.bashrc
+#       - /etc/skel/.bash_logout
+#       - /etc/skel/.bashrc
+#       - /etc/skel/.profile
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
 # are all dealt with centrally
