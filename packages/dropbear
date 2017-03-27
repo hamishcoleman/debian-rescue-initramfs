@@ -4,17 +4,21 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-#DEL="
-#    /etc/dropbear/dropbear_*_host_key*
+#FILES_LIST="
+#r   /etc/dropbear/dropbear_*_host_key*
 #"
 
 
 if [ "$STAGE" = "minimise" ]; then
     exit 1
-#    # remove files
-#    for i in $DEL; do
-#        rm -f $DEBOOT/$i
-#    done
+
+    # remove files
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
+    done
 elif [ "$STAGE" = "fixup" ]; then
     exit 1
     # FIXME

@@ -4,17 +4,17 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /bin/gzexe
-    /bin/zcmp
-    /bin/zdiff
-    /bin/zegrep
-    /bin/zfgrep
-    /bin/zforce
-    /bin/zgrep
-    /bin/zless
-    /bin/zmore
-    /bin/znew
+FILES_LIST="
+r   /bin/gzexe
+r   /bin/zcmp
+r   /bin/zdiff
+r   /bin/zegrep
+r   /bin/zfgrep
+r   /bin/zforce
+r   /bin/zgrep
+r   /bin/zless
+r   /bin/zmore
+r   /bin/znew
 "
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
 # are all dealt with centrally
@@ -22,9 +22,13 @@ DEL="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
+
     ln -fs gunzip $DEBOOT/bin/uncompress
 else
     # unsupported stage

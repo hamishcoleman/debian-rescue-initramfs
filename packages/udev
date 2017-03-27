@@ -4,15 +4,18 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /lib/udev/hwdb.bin
+FILES_LIST="
+r   /lib/udev/hwdb.bin
 "
 
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
 elif [ "$STAGE" = "fixup" ]; then
     # If using the busybox ps command, this check cannot use the params

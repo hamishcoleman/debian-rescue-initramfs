@@ -4,8 +4,24 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL2="
-    $DEBOOT/usr/share/common-licenses/*
+FILES_LIST="
+k   /etc/debian_version
+r   /etc/dpkg/origins/debian
+k   /etc/host.conf
+k   /etc/issue
+k   /etc/issue.net
+k   /etc/os-release
+k   /usr/lib/os-release
+k   /usr/share/base-files/dot.bashrc
+k   /usr/share/base-files/dot.profile
+k   /usr/share/base-files/info.dir
+k   /usr/share/base-files/motd
+k   /usr/share/base-files/nsswitch.conf
+k   /usr/share/base-files/nsswitch.conf.md5sums
+k   /usr/share/base-files/profile
+k   /usr/share/base-files/profile.md5sums
+k   /usr/share/base-files/staff-group-for-usr-local
+r   /usr/share/common-licenses/*
 "
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
@@ -14,7 +30,12 @@ DEL2="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    rm -f $DEL2
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
+    done
 else
     # unsupported stage
     exit 1

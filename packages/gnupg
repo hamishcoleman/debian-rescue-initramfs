@@ -4,11 +4,11 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/bin/gpg
-    /usr/bin/gpg-zip
-    /usr/bin/gpgsplit
-    /usr/bin/lspgpot
+FILES_LIST="
+r   /usr/bin/gpg
+r   /usr/bin/gpg-zip
+r   /usr/bin/gpgsplit
+r   /usr/bin/lspgpot
 "
 # /usr/share/doc, /usr/share/info and /usr/share/man are all dealt with
 # centrally
@@ -16,8 +16,11 @@ DEL="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
 else
     # unsupported stage

@@ -4,27 +4,30 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /bin/loginctl
-    /bin/machinectl
-    /bin/systemd-inhibit
-    /usr/bin/busctl
-    /usr/bin/hostnamectl
-    /usr/bin/localectl
-    /usr/bin/systemd-cgls
-    /usr/bin/timedatectl
-    /lib/systemd/systemd-networkd
-    /lib/systemd/systemd-timedated
-    /lib/systemd/systemd-localed
-    /lib/systemd/systemd-hostnamed
-    /lib/systemd/system/systemd-modules-load.service
+FILES_LIST="
+r   /bin/loginctl
+r   /bin/machinectl
+r   /bin/systemd-inhibit
+r   /usr/bin/busctl
+r   /usr/bin/hostnamectl
+r   /usr/bin/localectl
+r   /usr/bin/systemd-cgls
+r   /usr/bin/timedatectl
+r   /lib/systemd/systemd-networkd
+r   /lib/systemd/systemd-timedated
+r   /lib/systemd/systemd-localed
+r   /lib/systemd/systemd-hostnamed
+r   /lib/systemd/system/systemd-modules-load.service
 "
 
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
 elif [ "$STAGE" = "fixup" ]; then
     # the initrd looks for a different file to start as init than

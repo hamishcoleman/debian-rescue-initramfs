@@ -4,16 +4,19 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/lib/$ARCH-linux-gnu/libpsl.so.0
-    /usr/lib/$ARCH-linux-gnu/libpsl.so.0.2.2
+FILES_LIST="
+r   /usr/lib/$ARCH-linux-gnu/libpsl.so.0
+r   /usr/lib/$ARCH-linux-gnu/libpsl.so.0.2.2
 "
 
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
 else
     # unsupported stage

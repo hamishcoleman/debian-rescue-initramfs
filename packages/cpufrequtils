@@ -4,12 +4,10 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /etc/init.d/cpufrequtils
-    /usr/bin/cpufreq-aperf
-"
-DEL2="
-    $DEBOOT/etc/rc*.d/*cpufrequtils
+FILES_LIST="
+r   /etc/init.d/cpufrequtils
+r   /etc/rc*.d/*cpufrequtils
+r   /usr/bin/cpufreq-aperf
 "
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
@@ -18,10 +16,13 @@ DEL2="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
-    rm -f $DEL2
+
 elif [ "$STAGE" = "fixup" ]; then
     # we dont have kernel modules inside the initramfs, so
     # trying to load the modules just causes system errors

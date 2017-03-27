@@ -4,34 +4,34 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/share/debootstrap/scripts/breezy
-    /usr/share/debootstrap/scripts/dapper
-    /usr/share/debootstrap/scripts/edgy
-    /usr/share/debootstrap/scripts/feisty
-    /usr/share/debootstrap/scripts/gutsy
-    /usr/share/debootstrap/scripts/hardy
-    /usr/share/debootstrap/scripts/hoary
-    /usr/share/debootstrap/scripts/hoary.buildd
-    /usr/share/debootstrap/scripts/intrepid
-    /usr/share/debootstrap/scripts/jaunty
-    /usr/share/debootstrap/scripts/jessie
-    /usr/share/debootstrap/scripts/karmic
-    /usr/share/debootstrap/scripts/lucid
-    /usr/share/debootstrap/scripts/maverick
-    /usr/share/debootstrap/scripts/natty
-    /usr/share/debootstrap/scripts/oldstable
-    /usr/share/debootstrap/scripts/oneiric
-    /usr/share/debootstrap/scripts/potato
-    /usr/share/debootstrap/scripts/precise
-    /usr/share/debootstrap/scripts/quantal
-    /usr/share/debootstrap/scripts/raring
-    /usr/share/debootstrap/scripts/saucy
-    /usr/share/debootstrap/scripts/trusty
-    /usr/share/debootstrap/scripts/utopic
-    /usr/share/debootstrap/scripts/vivid
-    /usr/share/debootstrap/scripts/warty
-    /usr/share/debootstrap/scripts/warty.buildd
+FILES_LIST="
+r   /usr/share/debootstrap/scripts/breezy
+r   /usr/share/debootstrap/scripts/dapper
+r   /usr/share/debootstrap/scripts/edgy
+r   /usr/share/debootstrap/scripts/feisty
+r   /usr/share/debootstrap/scripts/gutsy
+r   /usr/share/debootstrap/scripts/hardy
+r   /usr/share/debootstrap/scripts/hoary
+r   /usr/share/debootstrap/scripts/hoary.buildd
+r   /usr/share/debootstrap/scripts/intrepid
+r   /usr/share/debootstrap/scripts/jaunty
+r   /usr/share/debootstrap/scripts/jessie
+r   /usr/share/debootstrap/scripts/karmic
+r   /usr/share/debootstrap/scripts/lucid
+r   /usr/share/debootstrap/scripts/maverick
+r   /usr/share/debootstrap/scripts/natty
+r   /usr/share/debootstrap/scripts/oldstable
+r   /usr/share/debootstrap/scripts/oneiric
+r   /usr/share/debootstrap/scripts/potato
+r   /usr/share/debootstrap/scripts/precise
+r   /usr/share/debootstrap/scripts/quantal
+r   /usr/share/debootstrap/scripts/raring
+r   /usr/share/debootstrap/scripts/saucy
+r   /usr/share/debootstrap/scripts/trusty
+r   /usr/share/debootstrap/scripts/utopic
+r   /usr/share/debootstrap/scripts/vivid
+r   /usr/share/debootstrap/scripts/warty
+r   /usr/share/debootstrap/scripts/warty.buildd
 "
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
@@ -40,8 +40,11 @@ DEL="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
 else
     # unsupported stage

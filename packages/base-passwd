@@ -4,10 +4,10 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/sbin/update-passwd
-    /usr/share/base-passwd/group.master
-    /usr/share/base-passwd/passwd.master
+FILES_LIST="
+r   /usr/sbin/update-passwd
+r   /usr/share/base-passwd/group.master
+r   /usr/share/base-passwd/passwd.master
 "
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
@@ -15,8 +15,11 @@ DEL="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
 elif [ "$STAGE" = "fixup" ]; then
     # remove root password, allowing console login

@@ -4,12 +4,12 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/bin/pmap
-    /usr/bin/pwdx
-    /usr/bin/skill
-    /usr/bin/snice
-    /usr/bin/top
+FILES_LIST="
+r   /usr/bin/pmap
+r   /usr/bin/pwdx
+r   /usr/bin/skill
+r   /usr/bin/snice
+r   /usr/bin/top
 "
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
@@ -18,8 +18,11 @@ DEL="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
 else
     # unsupported stage

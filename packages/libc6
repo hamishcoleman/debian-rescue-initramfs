@@ -4,14 +4,19 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL2="
-    $DEBOOT/usr/lib/$ARCH-linux-gnu/gconv/*
+FILES_LIST="
+r   /usr/lib/$ARCH-linux-gnu/gconv/*
 "
 
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    rm -f $DEL2
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
+    done
 else
     # unsupported stage
     exit 1

@@ -4,11 +4,11 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/bin/ischroot
-    /usr/sbin/add-shell
-    /usr/sbin/remove-shell
-    /usr/share/debianutils/shells
+FILES_LIST="
+r   /usr/bin/ischroot
+r   /usr/sbin/add-shell
+r   /usr/sbin/remove-shell
+r   /usr/share/debianutils/shells
 "
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
@@ -16,8 +16,11 @@ DEL="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
 
     # the add-shell script uses "chmod --reference=RFILE", which is

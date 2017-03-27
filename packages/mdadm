@@ -4,8 +4,8 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /sbin/mdmon
+FILES_LIST="
+r   /sbin/mdmon
 "
 # TODO
 # - /etc/cron.d
@@ -24,8 +24,11 @@ DEL="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
 elif [ "$STAGE" = "fixup" ]; then
     # The rescue system just wants the mdadm tools, not the running daemon

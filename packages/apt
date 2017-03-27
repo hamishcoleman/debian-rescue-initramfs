@@ -4,36 +4,53 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /etc/apt/apt.conf.d/01autoremove
-    /etc/cron.daily/apt-compat
-    /etc/kernel/postinst.d/apt-auto-removal
-    /etc/logrotate.d/apt
-    /lib/systemd/system/apt-daily.service
-    /lib/systemd/system/apt-daily.timer
-    /usr/bin/apt-cdrom
-    /usr/bin/apt-key
-    /usr/bin/apt-mark
-    /usr/lib/apt/apt.systemd.daily
-    /usr/lib/apt/methods/cdrom
-    /usr/lib/apt/methods/ftp
-    /usr/lib/apt/methods/mirror
-    /usr/lib/apt/methods/rred
-    /usr/lib/apt/methods/rsh
-    /usr/lib/apt/methods/ssh
-    /usr/share/bug/apt/script
-    /var/cache/apt/pkgcache.bin
-    /var/cache/apt/srcpkgcache.bin
-    /var/lib/apt/lists/lock
-"
-
-DEL2="
-    $DEBOOT/var/cache/apt/archives/*.deb
-    $DEBOOT/var/lib/apt/lists/*_Release
-    $DEBOOT/var/lib/apt/lists/*_Release.gpg
-    $DEBOOT/var/lib/apt/lists/*_Packages
-    $DEBOOT/var/lib/apt/lists/*_Translation-*
-    $DEBOOT/var/lib/apt/lists/*_Sources
+FILES_LIST="
+r   /etc/apt/apt.conf.d/01autoremove
+r   /etc/cron.daily/apt
+r   /etc/kernel/postinst.d/apt-auto-removal
+r   /etc/logrotate.d/apt
+r   /lib/systemd/system/apt-daily.service
+r   /lib/systemd/system/apt-daily.timer
+k   /usr/bin/apt
+k   /usr/bin/apt-cache
+r   /usr/bin/apt-cdrom
+k   /usr/bin/apt-config
+k   /usr/bin/apt-get
+r   /usr/bin/apt-key
+r   /usr/bin/apt-mark
+r   /usr/lib/apt/apt.systemd.daily
+k   /usr/lib/apt/methods/bzip2
+r   /usr/lib/apt/methods/cdrom
+k   /usr/lib/apt/methods/copy
+k   /usr/lib/apt/methods/file
+r   /usr/lib/apt/methods/ftp
+k   /usr/lib/apt/methods/gpgv
+k   /usr/lib/apt/methods/gzip
+k   /usr/lib/apt/methods/http
+k   /usr/lib/apt/methods/lzma
+r   /usr/lib/apt/methods/mirror
+r   /usr/lib/apt/methods/rred
+r   /usr/lib/apt/methods/rsh
+r   /usr/lib/apt/methods/ssh
+k   /usr/lib/apt/methods/xz
+k   /usr/lib/dpkg/methods/apt/desc.apt
+k   /usr/lib/dpkg/methods/apt/install
+k   /usr/lib/dpkg/methods/apt/names
+k   /usr/lib/dpkg/methods/apt/setup
+k   /usr/lib/dpkg/methods/apt/update
+k   /usr/lib/${ARCH}-linux-gnu/libapt-private.so.0.0
+k   /usr/lib/${ARCH}-linux-gnu/libapt-private.so.0.0.0
+r   /usr/share/bug/apt/script
+r   /var/cache/apt/archives/lock
+r   /var/cache/apt/archives/*.deb
+r   /var/cache/apt/pkgcache.bin
+r   /var/cache/apt/srcpkgcache.bin
+r   /var/lib/apt/lists/lock
+r   /var/lib/apt/lists/*_Packages
+r   /var/lib/apt/lists/*_Release
+r   /var/lib/apt/lists/*_Release.gpg
+r   /var/lib/apt/lists/*_Sources
+r   /var/lib/apt/lists/*_Translation-*
 "
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
@@ -42,10 +59,12 @@ DEL2="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
-    rm -f $DEL2
 else
     # unsupported stage
     exit 1

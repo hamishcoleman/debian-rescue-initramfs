@@ -4,8 +4,8 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/bin/prtstat
+FILES_LIST="
+r   /usr/bin/prtstat
 "
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
@@ -14,8 +14,11 @@ DEL="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
 else
     # unsupported stage

@@ -4,36 +4,36 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_arm_winedbg.so
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_avr.so
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_c55plus.so
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_dalvik.so
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_java.so
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_mips.so
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_msil.so
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_ppc.so
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_sh.so
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_sparc.so
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/bin_java.so
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/bin_mach0.so
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/bin_mach064.so
-    /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/io_mach.so
-"
-DEL2="
-    $DEBOOT/usr/lib/$ARCH-linux-gnu/radare2/0.9.6/magic/darwin*
-    $DEBOOT/usr/lib/$ARCH-linux-gnu/radare2/0.9.6/syscall/*bsd*
-    $DEBOOT/usr/lib/$ARCH-linux-gnu/radare2/0.9.6/syscall/darwin*
-    $DEBOOT/usr/lib/$ARCH-linux-gnu/radare2/0.9.6/syscall/win*
+FILES_LIST="
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_arm_winedbg.so
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_avr.so
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_c55plus.so
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_dalvik.so
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_java.so
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_mips.so
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_msil.so
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_ppc.so
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_sh.so
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_sparc.so
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/bin_java.so
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/bin_mach0.so
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/bin_mach064.so
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/io_mach.so
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/magic/darwin*
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/syscall/*bsd*
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/syscall/darwin*
+r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/syscall/win*
 "
 
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
-    rm -f $DEL2
 else
     # unsupported stage
     exit 1

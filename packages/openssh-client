@@ -4,11 +4,11 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/bin/ssh-argv0
-    /usr/bin/ssh-keyscan
-    /usr/lib/openssh/ssh-keysign
-    /usr/lib/openssh/ssh-pkcs11-helper
+FILES_LIST="
+r   /usr/bin/ssh-argv0
+r   /usr/bin/ssh-keyscan
+r   /usr/lib/openssh/ssh-keysign
+r   /usr/lib/openssh/ssh-pkcs11-helper
 "
 # TODO
 # - /usr/share/apport
@@ -20,8 +20,11 @@ DEL="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
 else
     # unsupported stage

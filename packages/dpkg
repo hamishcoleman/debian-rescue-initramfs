@@ -4,15 +4,13 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /var/log/dpkg.log
-    /var/log/alternatives.log
-"
-DEL2="
-    $DEBOOT/var/lib/dpkg/*-old
-    $DEBOOT/var/lib/dpkg/info/*.md5sums
-    $DEBOOT/var/lib/dpkg/info/*.symbols
-    $DEBOOT/var/lib/dpkg/info/*.templates
+FILES_LIST="
+r   /var/lib/dpkg/*-old
+r   /var/lib/dpkg/info/*.md5sums
+r   /var/lib/dpkg/info/*.symbols
+r   /var/lib/dpkg/info/*.templates
+r   /var/log/dpkg.log
+r   /var/log/alternatives.log
 "
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
@@ -21,10 +19,12 @@ DEL2="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
-    rm -f $DEL2
 else
     # unsupported stage
     exit 1

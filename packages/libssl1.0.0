@@ -4,11 +4,11 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/lib/i386-linux-gnu/i586/libcrypto.so.1.0.0
-    /usr/lib/i386-linux-gnu/i586/libssl.so.1.0.0
-    /usr/lib/i386-linux-gnu/i686/cmov/libcrypto.so.1.0.0
-    /usr/lib/i386-linux-gnu/i686/cmov/libssl.so.1.0.0
+FILES_LIST="
+r   /usr/lib/i386-linux-gnu/i586/libcrypto.so.1.0.0
+r   /usr/lib/i386-linux-gnu/i586/libssl.so.1.0.0
+r   /usr/lib/i386-linux-gnu/i686/cmov/libcrypto.so.1.0.0
+r   /usr/lib/i386-linux-gnu/i686/cmov/libssl.so.1.0.0
 "
 
 # FIXME
@@ -20,8 +20,11 @@ DEL="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
 else
     # unsupported stage

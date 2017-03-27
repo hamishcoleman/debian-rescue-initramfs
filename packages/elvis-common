@@ -4,16 +4,14 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/share/doc-base/elvis
-    /usr/share/elvis/elvis.glade
-    /usr/share/elvis/elvis.gnome
-    /usr/share/elvis/tags
-    /usr/share/pixmaps/elvis_32x32.xpm
-"
-DEL2="
-    $DEBOOT/usr/share/elvis/manual/*
-    $DEBOOT/usr/share/elvis/stubs/*
+FILES_LIST="
+r   /usr/share/doc-base/elvis
+r   /usr/share/elvis/elvis.glade
+r   /usr/share/elvis/elvis.gnome
+r   /usr/share/elvis/manual/*
+r   /usr/share/elvis/stubs/*
+r   /usr/share/elvis/tags
+r   /usr/share/pixmaps/elvis_32x32.xpm
 "
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
@@ -22,10 +20,12 @@ DEL2="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
-    rm -f $DEL2
 else
     # unsupported stage
     exit 1

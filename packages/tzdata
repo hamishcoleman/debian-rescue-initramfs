@@ -4,11 +4,9 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/sbin/tzconfig
-"
-DEL2="
-    $DEBOOT/usr/share/zoneinfo/*
+FILES_LIST="
+r   /usr/sbin/tzconfig
+rr  /usr/share/zoneinfo/*
 "
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
@@ -17,10 +15,14 @@ DEL2="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        rr) eval rm -rf "${DEBOOT}/$file"
+            ;;
+        esac
     done
-    rm -rf $DEL2
 else
     # unsupported stage
     exit 1

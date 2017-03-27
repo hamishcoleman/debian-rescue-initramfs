@@ -4,12 +4,12 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /var/cache/debconf/passwords.dat
-    /var/cache/debconf/config.dat-old
-    /var/cache/debconf/config.dat
-    /var/cache/debconf/templates.dat-old
-    /var/cache/debconf/templates.dat
+FILES_LIST="
+r   /var/cache/debconf/passwords.dat
+r   /var/cache/debconf/config.dat-old
+r   /var/cache/debconf/config.dat
+r   /var/cache/debconf/templates.dat-old
+r   /var/cache/debconf/templates.dat
 "
 
 # TODO
@@ -22,9 +22,13 @@ DEL="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
+
 else
     # unsupported stage
     exit 1

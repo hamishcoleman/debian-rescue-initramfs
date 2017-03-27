@@ -4,12 +4,12 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /sbin/xfs_repair
-    /usr/sbin/xfs_db
-    /usr/sbin/xfs_io
-    /usr/sbin/xfs_logprint
-    /usr/sbin/xfs_mdrestore
+FILES_LIST="
+r   /sbin/xfs_repair
+r   /usr/sbin/xfs_db
+r   /usr/sbin/xfs_io
+r   /usr/sbin/xfs_logprint
+r   /usr/sbin/xfs_mdrestore
 "
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
@@ -18,8 +18,11 @@ DEL="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
 else
     # unsupported stage

@@ -4,17 +4,20 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /usr/bin/zipcloak
-    /usr/bin/zipnote
-    /usr/bin/zipsplit
+FILES_LIST="
+r   /usr/bin/zipcloak
+r   /usr/bin/zipnote
+r   /usr/bin/zipsplit
 "
 
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
 else
     # unsupported stage

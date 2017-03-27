@@ -9,16 +9,19 @@ STAGE="$3"
 # looks strange that we are deleting the only real files from this package
 # it is not a mistake.
 
-DEL="
-    /etc/wgetrc
-    /usr/bin/wget
+FILES_LIST="
+r   /etc/wgetrc
+r   /usr/bin/wget
 "
 
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
 else
     # unsupported stage

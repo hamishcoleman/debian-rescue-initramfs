@@ -4,13 +4,11 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-DEL="
-    /bin/btrfs-debug-tree
-    /bin/btrfs-image
-    /bin/btrfs-map-logical
-"
-DEL2="
-    $DEBOOT/usr/include/btrfs/*
+FILES_LIST="
+r   /bin/btrfs-debug-tree
+r   /bin/btrfs-image
+r   /bin/btrfs-map-logical
+r   /usr/include/btrfs/*
 "
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
@@ -19,10 +17,13 @@ DEL2="
 
 if [ "$STAGE" = "minimise" ]; then
     # remove files
-    for i in $DEL; do
-        rm -f $DEBOOT/$i
+    echo "$FILES_LIST" | while read action file; do
+        case "$action" in
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        esac
     done
-    rm -f $DEL2
+
     ln -sf btrfs $DEBOOT/sbin/btrfsck
 else
     # unsupported stage
