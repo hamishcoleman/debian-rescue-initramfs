@@ -1,0 +1,24 @@
+r   /lib/udev/rules.d/70-btrfs.rules
+r   /lib/udev/rules.d/80-btrfs-lvm.rules
+k   /sbin/btrfs
+k   /sbin/btrfs-calc-size
+k   /sbin/btrfs-convert
+r   /sbin/btrfs-debug-tree
+k   /sbin/btrfs-find-root
+r   /sbin/btrfs-image
+r   /sbin/btrfs-map-logical
+k   /sbin/btrfs-select-super
+k   /sbin/btrfs-show-super
+k   /sbin/btrfs-zero-log
+k   /sbin/btrfsck
+k   /sbin/btrfstune
+k   /sbin/fsck.btrfs
+k   /sbin/mkfs.btrfs
+r   /usr/include/btrfs/*
+r   /usr/lib/${ARCH}-linux-gnu/libbtrfs.a
+r   /usr/share/initramfs-tools/hooks/btrfs
+r   /usr/share/initramfs-tools/scripts/local-premount/btrfs
+
+# /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
+# are all dealt with centrally
+

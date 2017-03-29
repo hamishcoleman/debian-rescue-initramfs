@@ -1,13 +1,6 @@
-#!/bin/bash
-
-DEBOOT="$1"
-ARCH="$2"
-STAGE="$3"
-
 # we dont have kernel modules inside the initramfs, so trying to load
 # the modules with /etc/init.d/loadcpufreq just causes system errors
 
-FILES_LIST="
 r   /etc/init.d/cpufrequtils
 r   /etc/init.d/loadcpufreq
 r   /etc/rc*.d/*cpufrequtils
@@ -15,22 +8,7 @@ r   /etc/rc*.d/*loadcpufreq
 r   /usr/bin/cpufreq-aperf
 k   /usr/bin/cpufreq-info
 k   /usr/bin/cpufreq-set
-"
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
 # are all dealt with centrally
-
-
-if [ "$STAGE" = "minimise" ]; then
-    # remove files
-    echo "$FILES_LIST" | while read action file; do
-        case "$action" in
-        r)  eval rm -f "${DEBOOT}/$file"
-            ;;
-        esac
-    done
-else
-    # unsupported stage
-    exit 1
-fi
 

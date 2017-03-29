@@ -1,0 +1,3 @@
+r   /usr/sbin/update-passwd
+r   /usr/share/base-passwd/group.master
+r   /usr/share/base-passwd/passwd.master

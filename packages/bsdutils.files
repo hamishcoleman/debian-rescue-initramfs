@@ -1,10 +1,3 @@
-#!/bin/bash
-
-DEBOOT="$1"
-ARCH="$2"
-STAGE="$3"
-
-FILES_LIST="
 k   /usr/bin/logger
 k   /usr/bin/renice
 k   /usr/bin/script
@@ -14,7 +7,6 @@ k   /usr/share/bash-completion/completions/logger
 k   /usr/share/bash-completion/completions/script
 r   /usr/share/bash-completion/completions/scriptreplay
 r   /usr/share/bash-completion/completions/wall
-"
 
 # TODO
 # - surely there is a journald replacement for logger that we can use
@@ -22,18 +14,4 @@ r   /usr/share/bash-completion/completions/wall
 
 # /usr/share/doc, /usr/share/info and /usr/share/man are all dealt with
 # centrally
-
-
-if [ "$STAGE" = "minimise" ]; then
-    # remove files
-    echo "$FILES_LIST" | while read action file; do
-        case "$action" in
-        r)  eval rm -f "${DEBOOT}/$file"
-            ;;
-        esac
-    done
-else
-    # unsupported stage
-    exit 1
-fi
 
