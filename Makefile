@@ -1,8 +1,5 @@
 #
 #
-# TODO:
-# xz --check=crc32 --lzma2=dict=1MiB
-#
 
 # Typical workflow:
 #  make clean debcache
