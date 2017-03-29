@@ -20,7 +20,9 @@ PACKAGES=`dpkg-query --admindir=${DEBOOT}/var/lib/dpkg --show --showformat='${Pa
 unset NO_FILES
 unset NO_SCRIPT
 unset NO_SUPPORT
-unset OK
+
+unset DO_FILES
+unset DO_SCRIPT
 
 do_files_list() {
     local package=$1
@@ -34,7 +36,12 @@ do_files_list() {
         return
     fi
 
-    cat "$PACKAGEDIR/${package}.files" | while read action file; do
+    if [ -n "$VERBOSE" ]; then
+        echo -n "${package}.files "
+    fi
+
+    RESULT=0
+    while read action file; do
         case "$action" in
         '') true
             # skip blank lines
@@ -44,20 +51,21 @@ do_files_list() {
             ;;
         k)  eval file="$file"
             if [ ! -e "${DEBOOT}/$file" ]; then
-                echo Package $package is missing file $file
-                exit 2
+                echo MISSING $package $file
+                RESULT=2
             fi
             ;;
         r)  eval rm -f "${DEBOOT}/$file"
             ;;
         rr) eval rm -rf "${DEBOOT}/$file"
             ;;
-        *)  echo Unknown action $action in files list for $package
-            exit 2
+        *)  echo ERROR: action $action in files list for $package
+            RESULT=2
             ;;
         esac
-    done
-
+    done <"$PACKAGEDIR/${package}.files"
+    DO_FILES+="${package} "
+    return $RESULT
 }
 
 do_package() {
@@ -89,13 +97,13 @@ do_package() {
         exit $S
     fi
 
-    OK+="$package "
+    DO_SCRIPT+="${package} "
 }
 
 echo "Running package scripts for $STAGE phase"
 if [ -n "$VERBOSE" ]; then
     echo 
-    echo "Packages:"
+    echo "Processing:"
     echo -e -n "\t"
 fi
 
@@ -112,26 +120,26 @@ if [ -n "$VERBOSE" ]; then
     echo
 fi
 
-echo "No files: `echo $NO_FILES |wc -w`"
+NR_PACKAGES=`echo $PACKAGES |wc -w`
+
+echo "Packages with files list: `echo $DO_FILES |wc -w`/$NR_PACKAGES"
 if [ -n "$VERBOSE" ]; then
+    echo "Missing files list:"
     echo -e "\t$NO_FILES"
     echo
 fi
 
-echo "No script: `echo $NO_SCRIPT |wc -w`"
+echo "Packages with all-in-one script: `echo $DO_SCRIPT |wc -w`/$NR_PACKAGES"
 if [ -n "$VERBOSE" ]; then
+    echo "Missing script:"
     echo -e "\t$NO_SCRIPT"
     echo
 fi
 
-echo "No support: `echo $NO_SUPPORT |wc -w`"
+echo "Scripts with no support for ${STAGE}: `echo $NO_SUPPORT |wc -w`/$NR_PACKAGES"
 if [ -n "$VERBOSE" ]; then
+    echo "Missing support:"
     echo -e "\t$NO_SUPPORT"
-    echo
-fi
-
-echo "Ran OK: `echo $OK |wc -w`"
-if [ -n "$VERBOSE" ]; then
     echo
 fi
 
