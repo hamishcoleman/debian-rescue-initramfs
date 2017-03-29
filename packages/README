@@ -1,5 +1,8 @@
-This directory contains scripts named after debian packages.  Each script is
-responsible for the customisations that need to be applied to that package.
+This directory contains files named after debian packages.  There are
+two types of files - "${package}.files" and "${package}".  The ".files"
+contain lists of files to check or remove from each package and the
+"package" files are scripts that are responsible for any more complex
+customisations that need to be applied to that package.
 
 These customisations are applied in several phases, and each package that is
 found installed in the rescue system will attempt to run its matching script
@@ -9,7 +12,7 @@ Curently the phases are:
 
 "minimise"
     During this phase, anything that can be removed to minimise the
-    installed size is removed.
+    installed size is removed.  This is when the ".files" are processed.
 
 "busybox"
     If busybox is used, it can replace a large number of binaries
@@ -33,10 +36,10 @@ an error.  The exit codes are interpreted as follows:
     1       the requested stage is not supported by this script (not an error)
     other   an error was encountered - stop the build
 
-The "FILES_LIST" variable:
+The ".files" file format:
 
-The package scripts all define a "FILES_LIST" variable that is used
-to delete files and directories (during the minimise phase).  In the
+For simple minimisation by removal of files, the ".files" defines a list
+of files and directories to delete (during the minimise phase).  In the
 future, this list will also be used to highlight when the installed
 package version contains files that are not expected (and thus might
 be suitable for deleting, or need new fixups).  To facilitate this,
@@ -46,6 +49,7 @@ Each line is a tag followed by a filename, with the following defined
 tags:
 
     k   - keep this file, mark it as known when comparing package lists
+          (it is an error for a "k" file to not exist)
     r   - remove this file
     rr  - recursively remove this directory
 

@@ -17,12 +17,57 @@ VERBOSE="$4"
 PACKAGEDIR=packages
 PACKAGES=`dpkg-query --admindir=${DEBOOT}/var/lib/dpkg --show --showformat='${Package}\n'`
 
+unset NO_FILES
 unset NO_SCRIPT
 unset NO_SUPPORT
 unset OK
 
-run_script() {
+do_files_list() {
     local package=$1
+
+    if [ "${STAGE}" != "minimise" ]; then
+        return
+    fi
+
+    if [ ! -e "$PACKAGEDIR/${package}.files" ]; then
+        NO_FILES+="${package} "
+        return
+    fi
+
+    cat "$PACKAGEDIR/${package}.files" | while read action file; do
+        case "$action" in
+        '') true
+            # skip blank lines
+            ;;
+        '#') true
+            # skip comment lines
+            ;;
+        k)  eval file="$file"
+            if [ ! -e "${DEBOOT}/$file" ]; then
+                echo Package $package is missing file $file
+                exit 2
+            fi
+            ;;
+        r)  eval rm -f "${DEBOOT}/$file"
+            ;;
+        rr) eval rm -rf "${DEBOOT}/$file"
+            ;;
+        *)  echo Unknown action $action in files list for $package
+            exit 2
+            ;;
+        esac
+    done
+
+}
+
+do_package() {
+    local package=$1
+
+    do_files_list $package
+    S=$?
+    if [ $S -gt 1 ]; then
+        exit $S
+    fi
 
     if [ ! -x $PACKAGEDIR/$package ]; then
         NO_SCRIPT+="$package "
@@ -55,11 +100,21 @@ if [ -n "$VERBOSE" ]; then
 fi
 
 for package in $PACKAGES; do
-    run_script $package
+    do_package $package
+    S=$?
+    if [ $S -gt 1 ]; then
+        exit $S
+    fi
 done
 
 if [ -n "$VERBOSE" ]; then
     echo
+    echo
+fi
+
+echo "No files: `echo $NO_FILES |wc -w`"
+if [ -n "$VERBOSE" ]; then
+    echo -e "\t$NO_FILES"
     echo
 fi
 
