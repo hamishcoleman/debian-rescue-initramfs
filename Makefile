@@ -156,7 +156,6 @@ customise: $(DEBOOT)
 	mkdir -p $(DEBOOT)/etc/elvis/
 	echo "color normal white on black" >>$(DEBOOT)/etc/elvis/elvis.clr
 	echo "rescue" >$(DEBOOT)/etc/hostname
-	ln -sf /usr/bin/less $(DEBOOT)/bin/more
 	echo "" >>$(DEBOOT)/etc/network/interfaces
 	echo "iface eth0 inet dhcp" >>$(DEBOOT)/etc/network/interfaces
 	echo "iface wlan0 inet manual" >>$(DEBOOT)/etc/network/interfaces

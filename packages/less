@@ -22,6 +22,10 @@ if [ "$STAGE" = "minimise" ]; then
             ;;
         esac
     done
+
+    # overwrite the system more with this one
+    ln -sf /bin/less ${DEBOOT}/bin/more
+
 else
     # unsupported stage
     exit 1
