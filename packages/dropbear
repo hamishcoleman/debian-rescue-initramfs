@@ -4,6 +4,7 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
+# TODO - when the fixme below is addressed, move this to the dropbear.files
 #FILES_LIST="
 #r   /etc/dropbear/dropbear_*_host_key*
 #"
@@ -12,13 +13,6 @@ STAGE="$3"
 if [ "$STAGE" = "minimise" ]; then
     exit 1
 
-    # remove files
-    echo "$FILES_LIST" | while read action file; do
-        case "$action" in
-        r)  eval rm -f "${DEBOOT}/$file"
-            ;;
-        esac
-    done
 elif [ "$STAGE" = "fixup" ]; then
     exit 1
     # FIXME

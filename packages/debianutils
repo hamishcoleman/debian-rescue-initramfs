@@ -4,24 +4,7 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-FILES_LIST="
-r   /usr/bin/ischroot
-r   /usr/sbin/add-shell
-r   /usr/sbin/remove-shell
-r   /usr/share/debianutils/shells
-"
-
-# /usr/share/doc, /usr/share/locale and /usr/share/man
-# are all dealt with centrally
-
 if [ "$STAGE" = "minimise" ]; then
-    # remove files
-    echo "$FILES_LIST" | while read action file; do
-        case "$action" in
-        r)  eval rm -f "${DEBOOT}/$file"
-            ;;
-        esac
-    done
 
     # the add-shell script uses "chmod --reference=RFILE", which is
     # not supported by the busybox chmod, so we remove those scripts

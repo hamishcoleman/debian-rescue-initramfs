@@ -1,0 +1,29 @@
+r   /etc/alternatives/README
+r   /etc/cron.daily/dpkg
+k   /etc/dpkg/dpkg.cfg
+r   /etc/logrotate.d/dpkg
+k   /usr/bin/dpkg
+k   /usr/bin/dpkg-deb
+k   /usr/bin/dpkg-divert
+k   /usr/bin/dpkg-maintscript-helper
+k   /usr/bin/dpkg-query
+k   /usr/bin/dpkg-split
+k   /usr/bin/dpkg-statoverride
+k   /usr/bin/dpkg-trigger
+k   /usr/bin/update-alternatives
+k   /usr/sbin/dpkg-divert
+k   /usr/sbin/dpkg-statoverride
+k   /usr/sbin/update-alternatives
+r   /var/lib/dpkg/*-old
+r   /var/lib/dpkg/info/*.md5sums
+r   /var/lib/dpkg/info/*.symbols
+r   /var/lib/dpkg/info/*.templates
+r   /var/log/dpkg.log
+r   /var/log/alternatives.log
+
+# TODO
+# - /etc/dpkg/dpkg.cfg can be smaller or eliminated all together
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+

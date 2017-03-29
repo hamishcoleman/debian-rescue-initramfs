@@ -1,13 +1,12 @@
-#!/bin/bash
-
-DEBOOT="$1"
-ARCH="$2"
-STAGE="$3"
-
-FILES_LIST="
+k   /usr/sbin/debootstrap
+k   /usr/share/debootstrap/devices.tar.gz
+k   /usr/share/debootstrap/functions
+k   /usr/share/debootstrap/scripts
 r   /usr/share/debootstrap/scripts/breezy
 r   /usr/share/debootstrap/scripts/dapper
 r   /usr/share/debootstrap/scripts/edgy
+r   /usr/share/debootstrap/scripts/etch
+r   /usr/share/debootstrap/scripts/etch-m68k
 r   /usr/share/debootstrap/scripts/feisty
 r   /usr/share/debootstrap/scripts/gutsy
 r   /usr/share/debootstrap/scripts/hardy
@@ -15,8 +14,9 @@ r   /usr/share/debootstrap/scripts/hoary
 r   /usr/share/debootstrap/scripts/hoary.buildd
 r   /usr/share/debootstrap/scripts/intrepid
 r   /usr/share/debootstrap/scripts/jaunty
-r   /usr/share/debootstrap/scripts/jessie
+k   /usr/share/debootstrap/scripts/jessie
 r   /usr/share/debootstrap/scripts/karmic
+r   /usr/share/debootstrap/scripts/lenny
 r   /usr/share/debootstrap/scripts/lucid
 r   /usr/share/debootstrap/scripts/maverick
 r   /usr/share/debootstrap/scripts/natty
@@ -26,28 +26,25 @@ r   /usr/share/debootstrap/scripts/potato
 r   /usr/share/debootstrap/scripts/precise
 r   /usr/share/debootstrap/scripts/quantal
 r   /usr/share/debootstrap/scripts/raring
+r   /usr/share/debootstrap/scripts/sarge
+r   /usr/share/debootstrap/scripts/sarge.buildd
+r   /usr/share/debootstrap/scripts/sarge.fakechroot
 r   /usr/share/debootstrap/scripts/saucy
+k   /usr/share/debootstrap/scripts/sid
+r   /usr/share/debootstrap/scripts/squeeze
+k   /usr/share/debootstrap/scripts/stable
+k   /usr/share/debootstrap/scripts/stretch
+k   /usr/share/debootstrap/scripts/testing
 r   /usr/share/debootstrap/scripts/trusty
+k   /usr/share/debootstrap/scripts/unstable
 r   /usr/share/debootstrap/scripts/utopic
 r   /usr/share/debootstrap/scripts/vivid
 r   /usr/share/debootstrap/scripts/warty
 r   /usr/share/debootstrap/scripts/warty.buildd
-"
+r   /usr/share/debootstrap/scripts/wheezy
+r   /usr/share/debootstrap/scripts/woody
+r   /usr/share/debootstrap/scripts/woody.buildd
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
 # are all dealt with centrally
-
-
-if [ "$STAGE" = "minimise" ]; then
-    # remove files
-    echo "$FILES_LIST" | while read action file; do
-        case "$action" in
-        r)  eval rm -f "${DEBOOT}/$file"
-            ;;
-        esac
-    done
-else
-    # unsupported stage
-    exit 1
-fi
 

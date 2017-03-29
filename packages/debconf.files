@@ -1,0 +1,32 @@
+k   /etc/apt/apt.conf.d/70debconf
+r   /etc/bash_completion.d/debconf
+k   /etc/debconf.conf
+k   /usr/bin/debconf
+k   /usr/bin/debconf-apt-progress
+k   /usr/bin/debconf-communicate
+k   /usr/bin/debconf-copydb
+k   /usr/bin/debconf-escape
+k   /usr/bin/debconf-set-selections
+k   /usr/bin/debconf-show
+k   /usr/lib/python2.7/dist-packages/debconf.py
+k   /usr/lib/python3/dist-packages/debconf.py
+k   /usr/sbin/dpkg-preconfigure
+k   /usr/sbin/dpkg-reconfigure
+#   /usr/share/debconf/ - TODO
+#   /usr/share/perl5/Debconf - TODO
+#   /usr/share/perl5/Debian - TODO
+r   /usr/share/pixmaps/debian-logo.png
+r   /var/cache/debconf/config.dat
+r   /var/cache/debconf/config.dat-old
+r   /var/cache/debconf/passwords.dat
+r   /var/cache/debconf/templates.dat
+r   /var/cache/debconf/templates.dat-old
+
+# TODO
+# - /etc/debconf.conf could be replaced with a smaller one
+# - /var/cache/apt/
+# - /var/lib/apt/lists
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+

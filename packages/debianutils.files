@@ -1,0 +1,14 @@
+k   /bin/run-parts
+k   /bin/tempfile
+k   /bin/which
+r   /sbin/installkernel
+r   /usr/bin/ischroot
+k   /usr/bin/savelog
+k   /usr/bin/which
+r   /usr/sbin/add-shell
+r   /usr/sbin/remove-shell
+r   /usr/share/debianutils/shells
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+
