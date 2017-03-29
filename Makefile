@@ -164,7 +164,7 @@ customise: $(DEBOOT)
 	echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" >$(DEBOOT)/etc/wpa_supplicant/wpa_supplicant.conf
 	echo "update_config=1" >>$(DEBOOT)/etc/wpa_supplicant/wpa_supplicant.conf
 	echo "e scr.utf8 = true" >$(DEBOOT)/usr/share/radare2/radare2rc
-	echo "echo "root:root" >$(DEBOOT)/etc/mactelnetd.users
+	echo "root:root" >$(DEBOOT)/etc/mactelnetd.users
 
 # TODO:
 # - define a well known non-root user and use that for mactelnet instead (and
