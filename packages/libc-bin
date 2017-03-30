@@ -4,41 +4,8 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-FILES_LIST="
-r   /sbin/ldconfig.real
-r   /usr/bin/catchsegv
-r   /usr/bin/getent
-r   /usr/bin/iconv
-r   /usr/bin/locale
-r   /usr/bin/localedef
-r   /usr/bin/zdump
-r   /usr/lib/locale/C.UTF-8/LC_ADDRESS
-r   /usr/lib/locale/C.UTF-8/LC_COLLATE
-r   /usr/lib/locale/C.UTF-8/LC_CTYPE
-r   /usr/lib/locale/C.UTF-8/LC_IDENTIFICATION
-r   /usr/lib/locale/C.UTF-8/LC_MEASUREMENT
-r   /usr/lib/locale/C.UTF-8/LC_MESSAGES/SYS_LC_MESSAGES
-r   /usr/lib/locale/C.UTF-8/LC_MONETARY
-r   /usr/lib/locale/C.UTF-8/LC_NAME
-r   /usr/lib/locale/C.UTF-8/LC_NUMERIC
-r   /usr/lib/locale/C.UTF-8/LC_PAPER
-r   /usr/lib/locale/C.UTF-8/LC_TELEPHONE
-r   /usr/lib/locale/C.UTF-8/LC_TIME
-r   /usr/sbin/zic
-"
-
-# /usr/share/doc, /usr/share/locale and /usr/share/man
-# are all dealt with centrally
-
 
 if [ "$STAGE" = "minimise" ]; then
-    # remove files
-    echo "$FILES_LIST" | while read action file; do
-        case "$action" in
-        r)  eval rm -f "${DEBOOT}/$file"
-            ;;
-        esac
-    done
 
     ln -fs ../bin/true $DEBOOT/sbin/ldconfig
 

@@ -1,0 +1,14 @@
+r   /etc/init.d/lvm2
+r   /etc/lvm/lvm.conf
+r   /lib/systemd/system/lvm2-activation-early.service
+r   /lib/systemd/system/lvm2-activation.service
+r   /lib/systemd/system/lvm2-lvmetad.service
+r   /lib/systemd/system/lvm2-lvmetad.socket
+r   /lib/systemd/system/lvm2-monitor.service
+r   /lib/systemd/system/lvm2-pvscan@.service
+r   /lib/systemd/system/lvm2.service
+#   /lib/udev/rules.d/56-lvm.rules - TODO - could be made smaller
+#   /lib/udev/rules.d/69-lvm-metad.rules - TODO - could be made smaller
+r   /sbin/lvmconf
+# TODO - lots more files in /sbin
+r   /usr/lib/tmpfiles.d/lvm2.conf

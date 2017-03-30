@@ -1,0 +1,5 @@
+r   /usr/lib/$ARCH-linux-gnu/libicu*.so.52
+r   /usr/lib/$ARCH-linux-gnu/libicu*.so.52.1
+
+# this is removing every non-doc file from the package
+

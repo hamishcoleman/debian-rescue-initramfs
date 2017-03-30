@@ -1,0 +1,12 @@
+k   /etc/default/mactelnet-server
+k   /etc/init.d/mactelnet-server
+k   /etc/mactelnetd.users
+k   /usr/sbin/mactelnetd
+# TODO
+# - /etc/default/mactelnet-server can be replaced with a smaller one
+# - /etc/init.d/mactelnet-server should eventually be replaced entirely with
+#   a systemd unit file
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+

@@ -1,0 +1,34 @@
+r   /etc/bindresvport.blacklist
+r   /etc/default/nss
+#   /etc/gai.conf - TODO - could be replaced with something smaller
+k   /etc/ld.so.conf.d/libc.conf
+k   /sbin/ldconfig
+r   /sbin/ldconfig.real
+r   /usr/bin/catchsegv
+k   /usr/bin/getconf
+r   /usr/bin/getent
+r   /usr/bin/iconv
+k   /usr/bin/ldd
+r   /usr/bin/locale
+r   /usr/bin/localedef
+k   /usr/bin/pldd
+r   /usr/bin/tzselect
+r   /usr/bin/zdump
+r   /usr/lib/locale/C.UTF-8/LC_ADDRESS
+r   /usr/lib/locale/C.UTF-8/LC_COLLATE
+r   /usr/lib/locale/C.UTF-8/LC_CTYPE
+r   /usr/lib/locale/C.UTF-8/LC_IDENTIFICATION
+r   /usr/lib/locale/C.UTF-8/LC_MEASUREMENT
+r   /usr/lib/locale/C.UTF-8/LC_MESSAGES/SYS_LC_MESSAGES
+r   /usr/lib/locale/C.UTF-8/LC_MONETARY
+r   /usr/lib/locale/C.UTF-8/LC_NAME
+r   /usr/lib/locale/C.UTF-8/LC_NUMERIC
+r   /usr/lib/locale/C.UTF-8/LC_PAPER
+r   /usr/lib/locale/C.UTF-8/LC_TELEPHONE
+r   /usr/lib/locale/C.UTF-8/LC_TIME
+r   /usr/sbin/iconvconfig
+r   /usr/sbin/zic
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+

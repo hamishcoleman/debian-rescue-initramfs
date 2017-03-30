@@ -1,0 +1,10 @@
+r   /etc/security/access.conf
+r   /etc/security/group.conf
+k   /etc/security/limits.conf
+r   /etc/security/namespace.conf
+r   /etc/security/namespace.init
+r   /etc/security/pam_env.conf
+r   /etc/security/sepermit.conf
+r   /etc/security/time.conf
+r   /lib/$ARCH-linux-gnu/security/pam_userdb.so
+#   /lib/$ARCH-linux-gnu/security/ - TODO - contains lots of other modules

@@ -1,0 +1,15 @@
+k   /bin/less
+r   /bin/lessecho
+r   /bin/lessfile
+r   /bin/lesskey
+r   /bin/lesspipe
+k   /usr/bin/less
+r   /usr/bin/lessecho
+r   /usr/bin/lessfile
+r   /usr/bin/lesskey
+r   /usr/bin/lesspipe
+r   /usr/lib/mime/packages/less
+
+# /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
+# are all dealt with centrally
+

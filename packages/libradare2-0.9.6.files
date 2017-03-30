@@ -1,10 +1,3 @@
-#!/bin/bash
-
-DEBOOT="$1"
-ARCH="$2"
-STAGE="$3"
-
-FILES_LIST="
 r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_arm_winedbg.so
 r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_avr.so
 r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/asm_c55plus.so
@@ -23,19 +16,5 @@ r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/magic/darwin*
 r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/syscall/*bsd*
 r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/syscall/darwin*
 r   /usr/lib/$ARCH-linux-gnu/radare2/0.9.6/syscall/win*
-"
 
-
-if [ "$STAGE" = "minimise" ]; then
-    # remove files
-    echo "$FILES_LIST" | while read action file; do
-        case "$action" in
-        r)  eval rm -f "${DEBOOT}/$file"
-            ;;
-        esac
-    done
-else
-    # unsupported stage
-    exit 1
-fi
-
+# TODO - there is a bunch of other stuff in the lib dirs

@@ -1,0 +1,28 @@
+r   /etc/cron.d/mdadm
+r   /etc/cron.daily/mdadm
+r   /etc/default/mdadm
+r   /etc/init.d/mdadm
+r   /etc/init.d/mdadm-raid
+r   /etc/init.d/mdadm-waitidle
+r   /etc/logcheck/ignore.d.server/mdadm
+r   /etc/logcheck/violations.d/mdadm
+k   /etc/modprobe.d/mdadm.conf
+k   /lib/systemd/system-shutdown/mdadm.shutdown
+k   /lib/systemd/system/mdadm-grow-continue@.service
+k   /lib/systemd/system/mdadm-last-resort@.service
+k   /lib/systemd/system/mdadm-last-resort@.timer
+r   /lib/systemd/system/mdadm-waitidle.service
+r   /lib/systemd/system/mdadm.service
+k   /lib/systemd/system/mdmon@.service
+k   /lib/systemd/system/mdmonitor.service
+k   /lib/udev/rules.d/63-md-raid-arrays.rules
+k   /lib/udev/rules.d/64-md-raid-assembly.rules
+r   /sbin/mdmon
+r   /usr/share/bug/mdadm/presubj
+r   /usr/share/bug/mdadm/script
+r   /usr/share/initramfs-tools/hooks/mdadm
+r   /usr/share/initramfs-tools/scripts/local-top/mdadm
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+

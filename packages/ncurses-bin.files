@@ -1,0 +1,16 @@
+r   /usr/bin/captoinfo
+k   /usr/bin/clear
+r   /usr/bin/infocmp
+r   /usr/bin/infotocap
+r   /usr/bin/ncurses5-config
+r   /usr/bin/ncursesw5-config
+k   /usr/bin/reset
+r   /usr/bin/tabs
+r   /usr/bin/tic
+r   /usr/bin/toe
+k   /usr/bin/tput
+k   /usr/bin/tset
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+

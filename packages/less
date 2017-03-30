@@ -4,24 +4,8 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-FILES_LIST="
-r   /bin/lessecho
-r   /bin/lesskey
-r   /usr/bin/lessecho
-r   /usr/bin/lesskey
-"
-# /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
-# are all dealt with centrally
-
 
 if [ "$STAGE" = "minimise" ]; then
-    # remove files
-    echo "$FILES_LIST" | while read action file; do
-        case "$action" in
-        r)  eval rm -f "${DEBOOT}/$file"
-            ;;
-        esac
-    done
 
     # overwrite the system more with this one
     ln -sf /bin/less ${DEBOOT}/bin/more

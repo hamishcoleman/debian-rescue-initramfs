@@ -1,0 +1,5 @@
+k   /etc/ld.so.conf.d/${ARCH}-linux-gnu.conf
+#   /lib/${ARCH}-linux-gnu - TODO - a whole lot of stuff
+k   /usr/lib/i386-linux-gnu/audit/sotruss-lib.so
+r   /usr/lib/${ARCH}-linux-gnu/gconv/*
+

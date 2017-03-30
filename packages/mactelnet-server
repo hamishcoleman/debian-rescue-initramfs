@@ -4,27 +4,7 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-FILES_LIST="
-"
-
-# TODO
-# - /etc/default/mactelnet-server can be replaced with a smaller one
-# - /etc/init.d/mactelnet-server should eventually be replaced entirely with
-#   a systemd unit file
-
-# /usr/share/doc, /usr/share/locale and /usr/share/man
-# are all dealt with centrally
-
-
-if [ "$STAGE" = "minimise" ]; then
-    # remove files
-    echo "$FILES_LIST" | while read action file; do
-        case "$action" in
-        r)  eval rm -f "${DEBOOT}/$file"
-            ;;
-        esac
-    done
-elif [ "$STAGE" = "fixup" ]; then
+if [ "$STAGE" = "fixup" ]; then
     # the mactelenetd will exit if it finds no up interfaces with ip addreses,
     # which is often the case in the rescue environment, so we take steps to
     # ensure that the service is constantly restarted until it is working.
