@@ -1,0 +1,21 @@
+k   /bin/ip
+r   /bin/ss
+#   /etc/iproute2 - TODO - lots of stuff here
+k   /sbin/bridge
+k   /sbin/ip
+r   /sbin/rtacct
+r   /sbin/rtmon
+k   /sbin/tc
+r   /usr/bin/ctstat
+r   /usr/bin/lnstat
+r   /usr/bin/nstat
+r   /usr/bin/routef
+r   /usr/bin/routel
+r   /usr/bin/rtstat
+#   /usr/lib/tc - TODO - lots of stuff here
+r   /usr/sbin/arpd
+
+# /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
+# are all dealt with centrally
+
+

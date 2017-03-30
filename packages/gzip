@@ -4,30 +4,7 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-FILES_LIST="
-r   /bin/gzexe
-r   /bin/zcmp
-r   /bin/zdiff
-r   /bin/zegrep
-r   /bin/zfgrep
-r   /bin/zforce
-r   /bin/zgrep
-r   /bin/zless
-r   /bin/zmore
-r   /bin/znew
-"
-# /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
-# are all dealt with centrally
-
-
 if [ "$STAGE" = "minimise" ]; then
-    # remove files
-    echo "$FILES_LIST" | while read action file; do
-        case "$action" in
-        r)  eval rm -f "${DEBOOT}/$file"
-            ;;
-        esac
-    done
 
     ln -fs gunzip $DEBOOT/bin/uncompress
 else

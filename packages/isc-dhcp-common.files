@@ -1,0 +1,4 @@
+r   /usr/bin/omshell
+
+# this is pretty much the only non-doc file in this package - this package
+# is only installed to satisfy dependancies.

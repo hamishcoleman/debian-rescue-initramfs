@@ -1,0 +1,21 @@
+r   /lib/udev/rules.d/60-gnupg.rules
+r   /usr/bin/gpg
+r   /usr/bin/gpg-zip
+r   /usr/bin/gpgsplit
+r   /usr/bin/lspgpot
+k   /usr/lib/gnupg/gpgkeys_curl
+k   /usr/lib/gnupg/gpgkeys_finger
+k   /usr/lib/gnupg/gpgkeys_hkp
+r   /usr/lib/gnupg/gpgkeys_ldap
+r   /usr/lib/gnupg/gpgkeys_mailto
+r   /usr/share/bug/gnupg/presubj
+r   /usr/share/gnupg/options.skel
+
+# TODO
+# - the gpgkeys_* stuff is probably unused.
+#   in fact, I seem to remember that this package is only installed to satisfy
+#   a dependancy requirement - thus why every usr/bin is being deleted
+
+# /usr/share/doc, /usr/share/info and /usr/share/man are all dealt with
+# centrally
+

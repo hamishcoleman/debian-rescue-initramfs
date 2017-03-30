@@ -1,0 +1,11 @@
+r   /etc/default/ipmievd
+r   /etc/init.d/ipmievd
+r   /lib/systemd/system/ipmievd.service
+k   /usr/bin/ipmitool
+r   /usr/lib/modules-load.d/ipmievd.conf
+r   /usr/sbin/ipmievd
+r   /usr/share/ipmitool/oem_ibm_sel_map
+
+# /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
+# are all dealt with centrally
+

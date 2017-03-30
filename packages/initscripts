@@ -4,30 +4,8 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-FILES_LIST="
-r   /var/log/dmesg
-r   /var/log/fsck/checkroot
-r   /var/log/fsck/checkfs
-"
 
-# /usr/share/doc, /usr/share/locale and /usr/share/man
-# are all dealt with centrally
-
-# TODO:
-# - /etc/init.d/checkroot.sh does the mtab symlink handling
-#   if we remove it, we want to
-#       ln -sf /proc/mounts ${DEBOOT}/etc/mtab
-
-
-if [ "$STAGE" = "minimise" ]; then
-    # remove files
-    echo "$FILES_LIST" | while read action file; do
-        case "$action" in
-        r)  eval rm -f "${DEBOOT}/$file"
-            ;;
-        esac
-    done
-elif [ "$STAGE" = "fixup" ]; then
+if [ "$STAGE" = "fixup" ]; then
     # ifup complains if there is no fstab
     touch ${DEBOOT}/etc/fstab
 else
