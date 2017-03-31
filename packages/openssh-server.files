@@ -1,0 +1,8 @@
+
+r   /etc/ssh/ssh_host_*_key*
+
+# TODO
+# - not installed in the default build, so the package file list is not
+#   minimised (the default is to use dropbear)
+# FIXME
+# - add a script to generate new host keys on bootup..

@@ -1,0 +1,19 @@
+#   /etc/ssh/ssh_config - TODO - could be replaced with something smaller
+k   /usr/bin/scp
+k   /usr/bin/sftp
+k   /usr/bin/slogin
+k   /usr/bin/ssh
+k   /usr/bin/ssh-add
+k   /usr/bin/ssh-agent
+r   /usr/bin/ssh-argv0
+k   /usr/bin/ssh-copy-id
+k   /usr/bin/ssh-keygen
+r   /usr/bin/ssh-keyscan
+r   /usr/lib/openssh/ssh-keysign
+r   /usr/lib/openssh/ssh-pkcs11-helper
+r   /usr/share/apport/package-hooks/openssh-client.py
+r   /usr/share/upstart/sessions/ssh-agent.conf
+
+# /usr/share/doc, /usr/share/info and /usr/share/man are all dealt with
+# centrally
+
