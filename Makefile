@@ -76,7 +76,7 @@ debootstrap: $(DEBOOT) packages.txt
 	sudo /usr/sbin/qemu-debootstrap \
 		--arch=$(ARCH) --variant=minbase \
 		--include=$(subst $(SPACE),$(COMMA),$(packages)) \
-		jessie \
+		$(VERSION) \
 		$(DEBOOT)/ \
 		$(MIRROR)
 
@@ -88,7 +88,7 @@ multistrap.conf: packages.txt
 
 	echo "[DebianRescue]" >>$@
 	echo "source=$(MIRROR)" >>$@
-	echo "suite=jessie" >>$@
+	echo "suite=$(VERSION)" >>$@
 	echo "keyring=debian-archive-keyring" >>$@
 	echo packages=$(packages) >>$@
 
