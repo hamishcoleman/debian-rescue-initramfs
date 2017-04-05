@@ -5,6 +5,8 @@
 # provide the needed dependancies.
 #
 
+apt
+
 # networking
 ifupdown
 udhcpc
