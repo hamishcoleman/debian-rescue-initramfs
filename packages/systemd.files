@@ -1,0 +1,94 @@
+k   /bin/journalctl
+r   /bin/loginctl
+r   /bin/machinectl
+k   /bin/systemctl
+k   /bin/systemd
+k   /bin/systemd-ask-password
+k   /bin/systemd-escape
+r   /bin/systemd-inhibit
+k   /bin/systemd-machine-id-setup
+k   /bin/systemd-notify
+k   /bin/systemd-tmpfiles
+k   /bin/systemd-tty-ask-password-agent
+k   /etc/dbus-1/system.d/org.freedesktop.hostname1.conf
+k   /etc/dbus-1/system.d/org.freedesktop.locale1.conf
+k   /etc/dbus-1/system.d/org.freedesktop.login1.conf
+k   /etc/dbus-1/system.d/org.freedesktop.machine1.conf
+k   /etc/dbus-1/system.d/org.freedesktop.systemd1.conf
+k   /etc/dbus-1/system.d/org.freedesktop.timedate1.conf
+# k   /etc/modules-load.d/modules.conf - FIXME - missing, but in dpkg list
+k   /etc/pam.d/systemd-user
+k   /etc/sysctl.d/99-sysctl.conf
+k   /etc/systemd/bootchart.conf
+k   /etc/systemd/journald.conf
+k   /etc/systemd/logind.conf
+k   /etc/systemd/ntp-units.d
+k   /etc/systemd/resolved.conf
+k   /etc/systemd/system.conf
+k   /etc/systemd/timesyncd.conf
+k   /etc/systemd/user.conf
+k   /lib/lsb/init-functions.d/40-systemd
+r   /lib/systemd/system/systemd-modules-load.service
+r   /lib/systemd/systemd-hostnamed
+r   /lib/systemd/systemd-localed
+r   /lib/systemd/systemd-networkd
+r   /lib/systemd/systemd-timedated
+# TODO /lib/systemd has lots of files not mentioned here
+k   /lib/udev/rules.d/70-uaccess.rules
+k   /lib/udev/rules.d/71-seat.rules
+k   /lib/udev/rules.d/73-seat-late.rules
+k   /lib/udev/rules.d/99-systemd.rules
+r   /usr/bin/busctl
+r   /usr/bin/hostnamectl
+r   /usr/bin/localectl
+k   /usr/bin/systemd-analyze
+k   /usr/bin/systemd-cat
+r   /usr/bin/systemd-cgls
+k   /usr/bin/systemd-cgtop
+k   /usr/bin/systemd-delta
+k   /usr/bin/systemd-detect-virt
+k   /usr/bin/systemd-nspawn
+k   /usr/bin/systemd-path
+k   /usr/bin/systemd-run
+# k   /usr/bin/systemd-stdio-bridge - FIXME - missing, but in dpkg list
+r   /usr/bin/timedatectl
+r   /usr/lib/systemd/catalog/systemd.catalog
+r   /usr/lib/systemd/catalog/systemd.*.catalog
+k   /usr/lib/systemd/ntp-units.d/90-systemd.list
+# TODO /usr/lib/systemd/ has lots of files not mentioned here
+r   /usr/share/bash-completion/completions/busctl
+r   /usr/share/bash-completion/completions/hostnamectl
+k   /usr/share/bash-completion/completions/journalctl
+r   /usr/share/bash-completion/completions/localectl
+r   /usr/share/bash-completion/completions/loginctl
+r   /usr/share/bash-completion/completions/machinectl
+k   /usr/share/bash-completion/completions/systemctl
+k   /usr/share/bash-completion/completions/systemd-analyze
+k   /usr/share/bash-completion/completions/systemd-cat
+r   /usr/share/bash-completion/completions/systemd-cgls
+k   /usr/share/bash-completion/completions/systemd-cgtop
+k   /usr/share/bash-completion/completions/systemd-delta
+k   /usr/share/bash-completion/completions/systemd-detect-virt
+k   /usr/share/bash-completion/completions/systemd-nspawn
+k   /usr/share/bash-completion/completions/systemd-run
+r   /usr/share/bash-completion/completions/timedatectl
+k   /usr/share/dbus-1/services/org.freedesktop.systemd1.service
+k   /usr/share/dbus-1/system-services/org.freedesktop.hostname1.service
+k   /usr/share/dbus-1/system-services/org.freedesktop.locale1.service
+k   /usr/share/dbus-1/system-services/org.freedesktop.login1.service
+k   /usr/share/dbus-1/system-services/org.freedesktop.machine1.service
+k   /usr/share/dbus-1/system-services/org.freedesktop.systemd1.service
+k   /usr/share/dbus-1/system-services/org.freedesktop.timedate1.service
+r   /usr/share/pkgconfig/systemd.pc
+k   /usr/share/polkit-1/actions/org.freedesktop.hostname1.policy
+k   /usr/share/polkit-1/actions/org.freedesktop.locale1.policy
+k   /usr/share/polkit-1/actions/org.freedesktop.login1.policy
+k   /usr/share/polkit-1/actions/org.freedesktop.systemd1.policy
+k   /usr/share/polkit-1/actions/org.freedesktop.timedate1.policy
+r   /usr/share/systemd/kbd-model-map
+rr  /usr/share/zsh/vendor-completions
+
+# TODO
+# - most of the kept files have not actually been vetted to see if they are
+#   actually needed
+

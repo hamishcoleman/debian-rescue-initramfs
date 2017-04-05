@@ -1,0 +1,5 @@
+k   /usr/bin/zip
+r   /usr/bin/zipcloak
+r   /usr/bin/zipnote
+r   /usr/bin/zipsplit
+

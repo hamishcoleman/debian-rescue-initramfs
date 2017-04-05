@@ -4,35 +4,12 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-FILES_LIST="
-r   /bin/loginctl
-r   /bin/machinectl
-r   /bin/systemd-inhibit
-r   /usr/bin/busctl
-r   /usr/bin/hostnamectl
-r   /usr/bin/localectl
-r   /usr/bin/systemd-cgls
-r   /usr/bin/timedatectl
-r   /lib/systemd/systemd-networkd
-r   /lib/systemd/systemd-timedated
-r   /lib/systemd/systemd-localed
-r   /lib/systemd/systemd-hostnamed
-r   /lib/systemd/system/systemd-modules-load.service
-"
 
-
-if [ "$STAGE" = "minimise" ]; then
-    # remove files
-    echo "$FILES_LIST" | while read action file; do
-        case "$action" in
-        r)  eval rm -f "${DEBOOT}/$file"
-            ;;
-        esac
-    done
-elif [ "$STAGE" = "fixup" ]; then
+if [ "$STAGE" = "fixup" ]; then
     # the initrd looks for a different file to start as init than
     # a normal bootup.  # so, we need to specifically create a link
     # for it.
+    # TODO - when we use a script as /init remove this
     ln -fs sbin/init $DEBOOT/init
 else
     # unsupported stage

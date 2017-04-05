@@ -1,0 +1,8 @@
+r   /usr/bin/lzmainfo
+
+# This package is not installed in the current rescue system, so no effort has
+# been made to make it list all files
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+

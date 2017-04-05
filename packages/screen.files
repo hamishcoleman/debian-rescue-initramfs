@@ -1,0 +1,10 @@
+r   /etc/init.d/screen-cleanup
+#   /etc/screenrc - TODO - can be replaced with a smaller file
+r   /lib/systemd/system/screen-cleanup.service
+k   /usr/bin/screen
+r   /usr/lib/tmpfiles.d/screen-cleanup.conf
+r   /usr/share/screen/utf8encodings/*
+
+# /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
+# are all dealt with centrally
+

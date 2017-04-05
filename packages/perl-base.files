@@ -1,0 +1,9 @@
+k   /usr/bin/perl
+k   /usr/bin/perl5.20.2
+rr  /usr/share/perl/5.20.2/unicore/*
+
+# /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
+# are all dealt with centrally
+
+# TODO
+# - there a whole lot more files in this package that are not mentioned here

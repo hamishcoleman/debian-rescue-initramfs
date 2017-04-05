@@ -1,0 +1,21 @@
+k   /bin/udevadm
+k   /etc/init.d/udev
+k   /etc/init.d/udev-finish
+r   /etc/init/udev-fallback-graphics.conf
+r   /etc/init/udev-finish.conf
+r   /etc/init/udev.conf
+r   /etc/init/udevmonitor.conf
+r   /etc/init/udevtrigger.conf
+k   /etc/modprobe.d/fbdev-blacklist.conf
+#   /etc/udev/udev.conf - TODO - is this even needed?
+# TODO - a bunch of files in /lib/systemd/system
+# TODO - a bunch of files in /lib/udev
+r   /lib/udev/hwdb.bin
+k   /sbin/udevadm
+k   /sbin/udevd
+r   /usr/share/bug/udev
+r   /usr/share/initramfs-tools/hooks/udev
+r   /usr/share/initramfs-tools/scripts/init-bottom/udev
+r   /usr/share/initramfs-tools/scripts/init-top/udev
+r   /usr/share/pkgconfig/udev.pc
+

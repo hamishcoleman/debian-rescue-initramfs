@@ -1,0 +1,14 @@
+k   /usr/bin/lsusb
+r   /usr/bin/usb-devices
+
+# This package is not installed in the current system, so not much effort has
+# been made to reduce or document the files
+
+# TODO
+# - /usr/share/misc/usb.ids
+# - /usr/share/pkgconfig/usbutils.pc
+# - /var/lib/usbutils
+
+# /usr/share/doc, /usr/share/info and /usr/share/man are all dealt with
+# centrally
+

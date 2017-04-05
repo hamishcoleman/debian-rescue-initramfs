@@ -1,0 +1,38 @@
+r   /etc/cron.daily/passwd
+#   /etc/default/useradd - TODO - could be replaced with a smaller file
+r   /etc/pam.d/chfn
+k   /etc/pam.d/chpasswd
+r   /etc/pam.d/chsh
+k   /etc/pam.d/newusers
+k   /etc/pam.d/passwd
+r   /sbin/shadowconfig
+r   /usr/bin/chage
+r   /usr/bin/chfn
+r   /usr/bin/chsh
+r   /usr/bin/expiry
+r   /usr/bin/gpasswd
+k   /usr/bin/passwd
+r   /usr/sbin/chgpasswd
+k   /usr/sbin/chpasswd
+r   /usr/sbin/cpgr
+r   /usr/sbin/cppw
+r   /usr/sbin/groupadd
+r   /usr/sbin/groupdel
+r   /usr/sbin/groupmod
+r   /usr/sbin/grpck
+r   /usr/sbin/grpconv
+r   /usr/sbin/grpunconv
+r   /usr/sbin/newusers
+r   /usr/sbin/pwck
+r   /usr/sbin/pwconv
+r   /usr/sbin/pwunconv
+r   /usr/sbin/useradd
+r   /usr/sbin/userdel
+r   /usr/sbin/usermod
+k   /usr/sbin/vigr
+k   /usr/sbin/vipw
+
+
+# /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
+# are all dealt with centrally
+

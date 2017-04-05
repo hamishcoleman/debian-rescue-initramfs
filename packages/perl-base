@@ -4,24 +4,8 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-FILES_LIST="
-rr  /usr/share/perl/5.20.2/unicore/*
-"
-
-# /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
-# are all dealt with centrally
-
 
 if [ "$STAGE" = "minimise" ]; then
-    # remove files
-    echo "$FILES_LIST" | while read action file; do
-        case "$action" in
-        r)  eval rm -f "${DEBOOT}/$file"
-            ;;
-        rr) eval rm -rf "${DEBOOT}/$file"
-            ;;
-        esac
-    done
 
     ln -sf perl5.20.2 $DEBOOT/usr/bin/perl
 else

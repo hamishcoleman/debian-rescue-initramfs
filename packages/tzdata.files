@@ -1,0 +1,9 @@
+r   /usr/sbin/tzconfig
+rr  /usr/share/zoneinfo/*
+
+# TODO
+# - maybe keep one or two of the zone files, based on build location?
+
+# /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
+# are all dealt with centrally
+

@@ -4,41 +4,8 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-FILES_LIST="
-r   /sbin/fsck.cramfs
-r   /sbin/fsck.minix
-r   /sbin/isosize
-r   /sbin/mkfs.bfs
-r   /sbin/mkfs.cramfs
-r   /sbin/mkfs.minix
-r   /sbin/raw
-r   /sbin/wipefs
-r   /usr/bin/addpart
-r   /usr/bin/ipcmk
-r   /usr/bin/ipcrm
-r   /usr/bin/ipcs
-r   /usr/bin/line
-r   /usr/bin/mcookie
-r   /usr/bin/mesg
-r   /usr/bin/pg
-r   /usr/bin/rename.ul
-r   /usr/bin/rev
-r   /usr/bin/setsid
-r   /usr/bin/taskset
-r   /usr/bin/whereis
-"
-# /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
-# are all dealt with centrally
-
 
 if [ "$STAGE" = "minimise" ]; then
-    # remove files
-    echo "$FILES_LIST" | while read action file; do
-        case "$action" in
-        r)  eval rm -f "${DEBOOT}/$file"
-            ;;
-        esac
-    done
 
     # A zero byte exe returns a success errorcode
     touch $DEBOOT/usr/bin/mesg

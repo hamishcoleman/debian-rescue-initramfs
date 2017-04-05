@@ -4,20 +4,7 @@ DEBOOT="$1"
 ARCH="$2"
 STAGE="$3"
 
-FILES_LIST="
-r   /lib/udev/hwdb.bin
-"
-
-
-if [ "$STAGE" = "minimise" ]; then
-    # remove files
-    echo "$FILES_LIST" | while read action file; do
-        case "$action" in
-        r)  eval rm -f "${DEBOOT}/$file"
-            ;;
-        esac
-    done
-elif [ "$STAGE" = "fixup" ]; then
+if [ "$STAGE" = "fixup" ]; then
     # If using the busybox ps command, this check cannot use the params
     # it is trying to use.
     # TODO - perhaps this should be in a fixup-for-busybox phase?

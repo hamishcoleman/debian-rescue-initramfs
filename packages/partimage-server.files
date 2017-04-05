@@ -1,0 +1,12 @@
+k   /etc/default/partimaged
+k   /etc/init.d/partimaged
+k   /etc/pam.d/partimaged
+k   /etc/partimaged/partimage-certs.cnf
+k   /etc/partimaged/partimagedusers
+k   /usr/sbin/partimaged
+k   /usr/sbin/partimaged-passwd
+r   /var/log/partimage/partimaged.log
+
+# /usr/share/doc, /usr/share/locale and /usr/share/man
+# are all dealt with centrally
+
