@@ -120,7 +120,7 @@ multistrap: multistrap_pre multistrap_fixup multistrap_post
 
 # Extract the permissions from the actual filesystem into the fakeroot
 # database.  Which allows us to chown/chmod the whole dir tree to the
-# unprivileged user
+# unprivileged user (otherwise the chown will remove any [SG]UID bits)
 #
 save_perms:
 	sudo find $(DEBOOT) -printf "%y %m %u %g %p\n" >tmp.perms
@@ -185,6 +185,7 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/usr/share/lintian/* \
 		$(DEBOOT)/usr/share/locale/* \
 		$(DEBOOT)/usr/share/man/* \
+		$(DEBOOT)/usr/share/info/* \
 
 bootstrap: multistrap save_perms minimise busybox fixup customise
 
