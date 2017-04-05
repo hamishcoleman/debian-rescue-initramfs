@@ -49,6 +49,9 @@ do_files_list() {
         '#') true
             # skip comment lines
             ;;
+        false)
+            ln -sf /bin/false "${DEBOOT}/$file"
+            ;;
         k)  eval file="$file"
             if [ ! -e "${DEBOOT}/$file" ]; then
                 echo "MISSING $package $file"
@@ -58,6 +61,15 @@ do_files_list() {
         r)  eval rm -f "${DEBOOT}/$file"
             ;;
         rr) eval rm -rf "${DEBOOT}/$file"
+            ;;
+        touch)
+            rm -f "${DEBOOT}/$file"
+            touch "${DEBOOT}/$file"
+            ;;
+        true)
+            rm -f "${DEBOOT}/$file"
+            touch "${DEBOOT}/$file"
+            chmod a+x "${DEBOOT}/$file"
             ;;
         *)  echo "ERROR: action $action in files list for $package"
             RESULT=2

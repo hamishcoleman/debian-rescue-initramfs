@@ -2,13 +2,19 @@ k   /bin/run-parts
 k   /bin/tempfile
 k   /bin/which
 r   /sbin/installkernel
-r   /usr/bin/ischroot
 k   /usr/bin/savelog
 k   /usr/bin/which
-r   /usr/sbin/add-shell
-r   /usr/sbin/remove-shell
 r   /usr/share/debianutils/shells
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
 # are all dealt with centrally
+
+# Just always pretend we are not in a chroot
+false /usr/bin/ischroot
+
+# the add-shell script uses "chmod --reference=RFILE", which is
+# not supported by the busybox chmod, so we remove those scripts
+# (adding and removing shells is not likely to be a common operation)
+true  /usr/sbin/add-shell
+true  /usr/sbin/remove-shell
 

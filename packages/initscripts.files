@@ -3,6 +3,7 @@ r   /etc/default/devpts
 r   /etc/default/halt
 r   /etc/default/rcS
 r   /etc/default/tmpfs
+touch /etc/fstab
 k   /etc/init.d/bootlogs
 k   /etc/init.d/bootmisc.sh
 k   /etc/init.d/checkfs.sh

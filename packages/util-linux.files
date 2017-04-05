@@ -58,7 +58,7 @@ k   /usr/bin/linux64
 k   /usr/bin/lscpu
 k   /usr/bin/lslocks
 r   /usr/bin/mcookie
-r   /usr/bin/mesg
+true /usr/bin/mesg
 k   /usr/bin/namei
 k   /usr/bin/nsenter
 k   /usr/bin/partx

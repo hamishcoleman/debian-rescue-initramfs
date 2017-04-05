@@ -48,10 +48,13 @@ the list is structured as a tagged list, with one line for each file.
 Each line is a tag followed by a filename, with the following defined
 tags:
 
-    k   - keep this file, mark it as known when comparing package lists
-          (it is an error for a "k" file to not exist)
-    r   - remove this file
-    rr  - recursively remove this directory
+    false - replace this file with a symlink to /bin/false
+    k     - keep this file, mark it as known when comparing package lists
+            (it is an error for a "k" file to not exist)
+    r     - remove this file
+    rr    - recursively remove this directory
+    touch - replace this file with a zero byte file
+    true  - replace this file with an exe that always has exitcode 0
 
 The list of "keep" files can also serve as a hit-list of files that that
 it might be possible to delete.

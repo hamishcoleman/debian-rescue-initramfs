@@ -23,7 +23,7 @@ k   /bin/sleep
 k   /bin/stty
 k   /bin/sync
 k   /bin/touch
-r   /bin/true
+true /bin/true
 k   /bin/uname
 r   /bin/vdir
 k   /usr/bin/[

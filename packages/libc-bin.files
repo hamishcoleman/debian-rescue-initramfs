@@ -2,14 +2,14 @@ r   /etc/bindresvport.blacklist
 r   /etc/default/nss
 #   /etc/gai.conf - TODO - could be replaced with something smaller
 k   /etc/ld.so.conf.d/libc.conf
-k   /sbin/ldconfig
+true /sbin/ldconfig
 r   /sbin/ldconfig.real
 r   /usr/bin/catchsegv
 k   /usr/bin/getconf
 r   /usr/bin/getent
 r   /usr/bin/iconv
 k   /usr/bin/ldd
-r   /usr/bin/locale
+true /usr/bin/locale
 r   /usr/bin/localedef
 k   /usr/bin/pldd
 r   /usr/bin/tzselect
