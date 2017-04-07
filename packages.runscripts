@@ -24,6 +24,27 @@ unset NO_SUPPORT
 unset DO_FILES
 unset DO_SCRIPT
 
+check_file() {
+    local file="$1"
+    local origfile="$1"
+
+    # this check just gets more fun
+    file="${DEBOOT}/$file"
+
+    if [ -L "$file" ]; then
+        # if it is a symlink, we need to check if it is an absolute and fix it
+        local dest=$(readlink "$file")
+        case "$dest" in
+        /*) file="${DEBOOT}$dest" ;;
+        esac
+    fi
+
+    if [ ! -e "$file" ]; then
+        echo "MISSING $package $origfile"
+        RESULT=2
+    fi
+}
+
 do_files_list() {
     local package=$1
 
@@ -52,15 +73,15 @@ do_files_list() {
         false)
             ln -sf /bin/false "${DEBOOT}/$file"
             ;;
-        k)  eval file="$file"
-            if [ ! -e "${DEBOOT}/$file" ]; then
-                echo "MISSING $package $file"
-                RESULT=2
-            fi
+        keep|todo|k)
+            eval file="$file"
+            # FIXME - this doesnt work with globs
+            check_file "$file"
             ;;
-        r)  eval rm -f "${DEBOOT}/$file"
+        rm|r)
+            eval rm -f "${DEBOOT}/$file"
             ;;
-        rr) eval rm -rf "${DEBOOT}/$file"
+        rm-r|rr) eval rm -rf "${DEBOOT}/$file"
             ;;
         touch)
             rm -f "${DEBOOT}/$file"

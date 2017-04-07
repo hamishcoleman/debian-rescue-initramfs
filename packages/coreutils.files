@@ -102,6 +102,7 @@ r   /usr/bin/who
 k   /usr/bin/whoami
 k   /usr/bin/yes
 r   /usr/lib/coreutils/libstdbuf.so
+keep    /usr/sbin/chroot
 
 # /usr/share/doc, /usr/share/info and /usr/share/man are all dealt with
 # centrally

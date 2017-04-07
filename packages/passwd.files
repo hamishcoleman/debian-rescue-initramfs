@@ -1,5 +1,5 @@
 r   /etc/cron.daily/passwd
-#   /etc/default/useradd - TODO - could be replaced with a smaller file
+todo    /etc/default/useradd # TODO - could be replaced with a smaller file
 r   /etc/pam.d/chfn
 k   /etc/pam.d/chpasswd
 r   /etc/pam.d/chsh

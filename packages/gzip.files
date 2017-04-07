@@ -1,7 +1,7 @@
 k   /bin/gunzip
 r   /bin/gzexe
 k   /bin/gzip
-#   /bin/uncompress - being overwritten by a symlink in the script
+keep    /bin/uncompress # being overwritten by a symlink in the script
 k   /bin/zcat
 r   /bin/zcmp
 r   /bin/zdiff

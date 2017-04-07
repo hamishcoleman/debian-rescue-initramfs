@@ -17,11 +17,16 @@ k   /lib/systemd/system/mdmon@.service
 k   /lib/systemd/system/mdmonitor.service
 k   /lib/udev/rules.d/63-md-raid-arrays.rules
 k   /lib/udev/rules.d/64-md-raid-assembly.rules
+todo    /sbin/mdadm
 r   /sbin/mdmon
 r   /usr/share/bug/mdadm/presubj
 r   /usr/share/bug/mdadm/script
+todo    /usr/share/doc-base/mdadm-faq
+todo    /usr/share/doc-base/mdadm-readme-recipes
 r   /usr/share/initramfs-tools/hooks/mdadm
 r   /usr/share/initramfs-tools/scripts/local-top/mdadm
+todo    /usr/share/mdadm/checkarray
+todo    /usr/share/mdadm/mkconf
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
 # are all dealt with centrally

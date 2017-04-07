@@ -2,8 +2,6 @@ r   /etc/apt/apt.conf.d/01autoremove
 r   /etc/cron.daily/apt
 r   /etc/kernel/postinst.d/apt-auto-removal
 r   /etc/logrotate.d/apt
-r   /lib/systemd/system/apt-daily.service
-r   /lib/systemd/system/apt-daily.timer
 k   /usr/bin/apt
 k   /usr/bin/apt-cache
 r   /usr/bin/apt-cdrom
@@ -11,7 +9,7 @@ k   /usr/bin/apt-config
 k   /usr/bin/apt-get
 r   /usr/bin/apt-key
 r   /usr/bin/apt-mark
-r   /usr/lib/apt/apt.systemd.daily
+todo    /usr/lib/apt/apt-helper
 k   /usr/lib/apt/methods/bzip2
 r   /usr/lib/apt/methods/cdrom
 k   /usr/lib/apt/methods/copy

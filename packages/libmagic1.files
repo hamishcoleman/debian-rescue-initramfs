@@ -5,6 +5,7 @@ k   /usr/lib/${ARCH}-linux-gnu/libmagic.so.1.0.0
 r   /usr/share/bug/libmagic1/control
 r   /usr/share/bug/libmagic1/presubj
 r   /usr/share/file/magic.mgc
+todo    /usr/share/misc/magic.mgc
 
 # TODO - this removes all the data that libmagic needs to work, but if so
 # why are we installing the package?

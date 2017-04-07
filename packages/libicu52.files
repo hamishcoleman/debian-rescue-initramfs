@@ -1,5 +1,19 @@
-r   /usr/lib/$ARCH-linux-gnu/libicu*.so.52
-r   /usr/lib/$ARCH-linux-gnu/libicu*.so.52.1
+todo    /usr/lib/${ARCH}-linux-gnu/libicudata.so.52
+todo    /usr/lib/${ARCH}-linux-gnu/libicudata.so.52.1
+todo    /usr/lib/${ARCH}-linux-gnu/libicui18n.so.52
+todo    /usr/lib/${ARCH}-linux-gnu/libicui18n.so.52.1
+todo    /usr/lib/${ARCH}-linux-gnu/libicuio.so.52
+todo    /usr/lib/${ARCH}-linux-gnu/libicuio.so.52.1
+todo    /usr/lib/${ARCH}-linux-gnu/libicule.so.52
+todo    /usr/lib/${ARCH}-linux-gnu/libicule.so.52.1
+todo    /usr/lib/${ARCH}-linux-gnu/libiculx.so.52
+todo    /usr/lib/${ARCH}-linux-gnu/libiculx.so.52.1
+todo    /usr/lib/${ARCH}-linux-gnu/libicutest.so.52
+todo    /usr/lib/${ARCH}-linux-gnu/libicutest.so.52.1
+todo    /usr/lib/${ARCH}-linux-gnu/libicutu.so.52
+todo    /usr/lib/${ARCH}-linux-gnu/libicutu.so.52.1
+todo    /usr/lib/${ARCH}-linux-gnu/libicuuc.so.52
+todo    /usr/lib/${ARCH}-linux-gnu/libicuuc.so.52.1
 
 # this is removing every non-doc file from the package
 

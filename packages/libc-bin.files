@@ -1,6 +1,7 @@
 r   /etc/bindresvport.blacklist
 r   /etc/default/nss
-#   /etc/gai.conf - TODO - could be replaced with something smaller
+todo   /etc/gai.conf # TODO - could be replaced with something smaller
+todo    /etc/ld.so.conf
 k   /etc/ld.so.conf.d/libc.conf
 true /sbin/ldconfig
 r   /sbin/ldconfig.real
@@ -28,6 +29,7 @@ r   /usr/lib/locale/C.UTF-8/LC_TELEPHONE
 r   /usr/lib/locale/C.UTF-8/LC_TIME
 r   /usr/sbin/iconvconfig
 r   /usr/sbin/zic
+todo    /usr/share/libc-bin/nsswitch.conf
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
 # are all dealt with centrally

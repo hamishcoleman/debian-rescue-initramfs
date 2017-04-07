@@ -1,9 +1,25 @@
 r   /etc/init.d/screen-cleanup
-#   /etc/screenrc - TODO - can be replaced with a smaller file
+todo    /etc/screenrc # TODO - can be replaced with a smaller file
 r   /lib/systemd/system/screen-cleanup.service
 k   /usr/bin/screen
 r   /usr/lib/tmpfiles.d/screen-cleanup.conf
-r   /usr/share/screen/utf8encodings/*
+rm      /usr/share/screen/utf8encodings/01
+rm      /usr/share/screen/utf8encodings/02
+rm      /usr/share/screen/utf8encodings/03
+rm      /usr/share/screen/utf8encodings/04
+rm      /usr/share/screen/utf8encodings/18
+rm      /usr/share/screen/utf8encodings/19
+rm      /usr/share/screen/utf8encodings/a1
+rm      /usr/share/screen/utf8encodings/bf
+rm      /usr/share/screen/utf8encodings/c2
+rm      /usr/share/screen/utf8encodings/c3
+rm      /usr/share/screen/utf8encodings/c4
+rm      /usr/share/screen/utf8encodings/c6
+rm      /usr/share/screen/utf8encodings/c7
+rm      /usr/share/screen/utf8encodings/c8
+rm      /usr/share/screen/utf8encodings/cc
+rm      /usr/share/screen/utf8encodings/cd
+rm      /usr/share/screen/utf8encodings/d6
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
 # are all dealt with centrally

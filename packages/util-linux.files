@@ -35,7 +35,6 @@ k   /sbin/pivot_root
 r   /sbin/raw
 k   /sbin/runuser
 k   /sbin/sfdisk
-k   /sbin/sulogin
 k   /sbin/swaplabel
 k   /sbin/switch_root
 r   /sbin/wipefs
@@ -45,20 +44,17 @@ r   /usr/bin/delpart
 k   /usr/bin/fallocate
 k   /usr/bin/flock
 k   /usr/bin/getopt
-#   /usr/bin/i386 - TODO - will change for different arch
+todo   /usr/bin/${ARCH} # TODO - will change for different arch
 k   /usr/bin/ionice
 r   /usr/bin/ipcmk
 r   /usr/bin/ipcrm
 r   /usr/bin/ipcs
-k   /usr/bin/last
-k   /usr/bin/lastb
 r   /usr/bin/line
 k   /usr/bin/linux32
 k   /usr/bin/linux64
 k   /usr/bin/lscpu
 k   /usr/bin/lslocks
 r   /usr/bin/mcookie
-true /usr/bin/mesg
 k   /usr/bin/namei
 k   /usr/bin/nsenter
 k   /usr/bin/partx

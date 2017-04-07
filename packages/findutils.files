@@ -1,4 +1,7 @@
+todo    /usr/bin/find
 r   /usr/bin/oldfind
+todo    /usr/bin/xargs
+todo    /usr/share/doc-base/findutils
 
 # /usr/share/doc, /usr/share/info and /usr/share/man are all dealt with
 # centrally

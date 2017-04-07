@@ -7,8 +7,57 @@ r   /lib/systemd/system/lvm2-lvmetad.socket
 r   /lib/systemd/system/lvm2-monitor.service
 r   /lib/systemd/system/lvm2-pvscan@.service
 r   /lib/systemd/system/lvm2.service
-#   /lib/udev/rules.d/56-lvm.rules - TODO - could be made smaller
-#   /lib/udev/rules.d/69-lvm-metad.rules - TODO - could be made smaller
+todo    /lib/udev/rules.d/56-lvm.rules # TODO - could be made smaller
+todo    /lib/udev/rules.d/69-lvm-metad.rules # TODO - could be made smaller
+todo    /sbin/fsadm
+todo    /sbin/lvchange
+todo    /sbin/lvconvert
+todo    /sbin/lvcreate
+todo    /sbin/lvdisplay
+todo    /sbin/lvextend
+todo    /sbin/lvm
+todo    /sbin/lvmchange
 r   /sbin/lvmconf
-# TODO - lots more files in /sbin
+todo    /sbin/lvmdiskscan
+todo    /sbin/lvmdump
+todo    /sbin/lvmetad
+todo    /sbin/lvmsadc
+todo    /sbin/lvmsar
+todo    /sbin/lvreduce
+todo    /sbin/lvremove
+todo    /sbin/lvrename
+todo    /sbin/lvresize
+todo    /sbin/lvs
+todo    /sbin/lvscan
+todo    /sbin/pvchange
+todo    /sbin/pvck
+todo    /sbin/pvcreate
+todo    /sbin/pvdisplay
+todo    /sbin/pvmove
+todo    /sbin/pvremove
+todo    /sbin/pvresize
+todo    /sbin/pvs
+todo    /sbin/pvscan
+todo    /sbin/vgcfgbackup
+todo    /sbin/vgcfgrestore
+todo    /sbin/vgchange
+todo    /sbin/vgck
+todo    /sbin/vgconvert
+todo    /sbin/vgcreate
+todo    /sbin/vgdisplay
+todo    /sbin/vgexport
+todo    /sbin/vgextend
+todo    /sbin/vgimport
+todo    /sbin/vgimportclone
+todo    /sbin/vgmerge
+todo    /sbin/vgmknodes
+todo    /sbin/vgreduce
+todo    /sbin/vgremove
+todo    /sbin/vgrename
+todo    /sbin/vgs
+todo    /sbin/vgscan
+todo    /sbin/vgsplit
 r   /usr/lib/tmpfiles.d/lvm2.conf
+todo    /usr/share/initramfs-tools/hooks/lvm2
+todo    /usr/share/initramfs-tools/scripts/local-block/lvm2
+todo    /usr/share/initramfs-tools/scripts/local-top/lvm2

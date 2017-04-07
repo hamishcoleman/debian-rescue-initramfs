@@ -1,5 +1,5 @@
 r   /etc/netscsid.conf
-#   /etc/wodim.conf - TODO - replace with a smaller file
+todo    /etc/wodim.conf # TODO - replace with a smaller file
 r   /usr/bin/readom
 k   /usr/bin/wodim
 r   /usr/sbin/netscsid

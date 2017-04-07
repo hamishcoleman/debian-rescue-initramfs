@@ -1,7 +1,6 @@
 k   /usr/sbin/debootstrap
 k   /usr/share/debootstrap/devices.tar.gz
 k   /usr/share/debootstrap/functions
-k   /usr/share/debootstrap/scripts
 r   /usr/share/debootstrap/scripts/breezy
 r   /usr/share/debootstrap/scripts/dapper
 r   /usr/share/debootstrap/scripts/edgy

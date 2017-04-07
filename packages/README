@@ -49,13 +49,19 @@ Each line is a tag followed by a filename, with the following defined
 tags:
 
     false - replace this file with a symlink to /bin/false
-    k     - keep this file, mark it as known when comparing package lists
-            (it is an error for a "k" file to not exist)
-    r     - remove this file
-    rr    - recursively remove this directory
+    keep  - This file is needed, do not delete it
+    rm    - This file is not needed, delete it
+    todo  - Needs more checking, do not delete
     touch - replace this file with a zero byte file
     true  - replace this file with an exe that always has exitcode 0
 
-The list of "keep" files can also serve as a hit-list of files that that
-it might be possible to delete.
+The list of "todo" files serves as a hit-list of files that that it
+might be possible to delete.  Care should be taken before deleting a
+file on the "keep" list.
+
+Until the files are all converted, the following legacy tags are also
+accepted:
+    k     - "keep"
+    r     - "rm"
+    rr    - recursively remove this directory
 

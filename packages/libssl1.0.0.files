@@ -1,25 +1,25 @@
-r   /usr/lib/i386-linux-gnu/i586/libcrypto.so.1.0.0
-r   /usr/lib/i386-linux-gnu/i586/libssl.so.1.0.0
-r   /usr/lib/i386-linux-gnu/i686/cmov/libcrypto.so.1.0.0
-r   /usr/lib/i386-linux-gnu/i686/cmov/libssl.so.1.0.0
+r   /usr/lib/${ARCH}-linux-gnu/i586/libcrypto.so.1.0.0
+r   /usr/lib/${ARCH}-linux-gnu/i586/libssl.so.1.0.0
+r   /usr/lib/${ARCH}-linux-gnu/i686/cmov/libcrypto.so.1.0.0
+r   /usr/lib/${ARCH}-linux-gnu/i686/cmov/libssl.so.1.0.0
 
 # FIXME
 # - clearly, this is architecture specific
 
-k   /usr/lib/i386-linux-gnu/libcrypto.so.1.0.0
-k   /usr/lib/i386-linux-gnu/libssl.so.1.0.0
-k   /usr/lib/i386-linux-gnu/openssl-1.0.0/engines/lib4758cca.so
-k   /usr/lib/i386-linux-gnu/openssl-1.0.0/engines/libaep.so
-k   /usr/lib/i386-linux-gnu/openssl-1.0.0/engines/libatalla.so
-k   /usr/lib/i386-linux-gnu/openssl-1.0.0/engines/libcapi.so
-k   /usr/lib/i386-linux-gnu/openssl-1.0.0/engines/libchil.so
-k   /usr/lib/i386-linux-gnu/openssl-1.0.0/engines/libcswift.so
-k   /usr/lib/i386-linux-gnu/openssl-1.0.0/engines/libgmp.so
-k   /usr/lib/i386-linux-gnu/openssl-1.0.0/engines/libgost.so
-k   /usr/lib/i386-linux-gnu/openssl-1.0.0/engines/libnuron.so
-k   /usr/lib/i386-linux-gnu/openssl-1.0.0/engines/libpadlock.so
-k   /usr/lib/i386-linux-gnu/openssl-1.0.0/engines/libsureware.so
-k   /usr/lib/i386-linux-gnu/openssl-1.0.0/engines/libubsec.so
+k   /usr/lib/${ARCH}-linux-gnu/libcrypto.so.1.0.0
+k   /usr/lib/${ARCH}-linux-gnu/libssl.so.1.0.0
+k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/lib4758cca.so
+k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libaep.so
+k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libatalla.so
+k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libcapi.so
+k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libchil.so
+k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libcswift.so
+k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libgmp.so
+k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libgost.so
+k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libnuron.so
+k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libpadlock.so
+k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libsureware.so
+k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libubsec.so
 
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man

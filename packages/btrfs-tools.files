@@ -14,8 +14,25 @@ k   /sbin/btrfsck
 k   /sbin/btrfstune
 k   /sbin/fsck.btrfs
 k   /sbin/mkfs.btrfs
-r   /usr/include/btrfs/*
+rm      /usr/include/btrfs/btrfs-list.h
+rm      /usr/include/btrfs/btrfsck.h
+rm      /usr/include/btrfs/crc32c.h
+rm      /usr/include/btrfs/ctree.h
+rm      /usr/include/btrfs/extent-cache.h
+rm      /usr/include/btrfs/extent_io.h
+rm      /usr/include/btrfs/ioctl.h
+rm      /usr/include/btrfs/kerncompat.h
+rm      /usr/include/btrfs/list.h
+rm      /usr/include/btrfs/radix-tree.h
+rm      /usr/include/btrfs/rbtree.h
+rm      /usr/include/btrfs/send-stream.h
+rm      /usr/include/btrfs/send-utils.h
+rm      /usr/include/btrfs/send.h
+rm      /usr/include/btrfs/version.h
 r   /usr/lib/${ARCH}-linux-gnu/libbtrfs.a
+rm      /usr/lib/${ARCH}-linux-gnu/libbtrfs.so
+rm      /usr/lib/${ARCH}-linux-gnu/libbtrfs.so.0
+rm      /usr/lib/${ARCH}-linux-gnu/libbtrfs.so.0.1
 r   /usr/share/initramfs-tools/hooks/btrfs
 r   /usr/share/initramfs-tools/scripts/local-premount/btrfs
 

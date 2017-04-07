@@ -1,6 +1,12 @@
 k   /bin/ip
 r   /bin/ss
-#   /etc/iproute2 - TODO - lots of stuff here
+todo    /etc/iproute2/ematch_map
+todo    /etc/iproute2/group
+todo    /etc/iproute2/rt_dsfield
+todo    /etc/iproute2/rt_protos
+todo    /etc/iproute2/rt_realms
+todo    /etc/iproute2/rt_scopes
+todo    /etc/iproute2/rt_tables
 k   /sbin/bridge
 k   /sbin/ip
 r   /sbin/rtacct
@@ -12,7 +18,13 @@ r   /usr/bin/nstat
 r   /usr/bin/routef
 r   /usr/bin/routel
 r   /usr/bin/rtstat
-#   /usr/lib/tc - TODO - lots of stuff here
+todo    /usr/lib/tc/experimental.dist
+todo    /usr/lib/tc/m_ipt.so
+todo    /usr/lib/tc/m_xt.so
+todo    /usr/lib/tc/normal.dist
+todo    /usr/lib/tc/pareto.dist
+todo    /usr/lib/tc/paretonormal.dist
+todo    /usr/lib/tc/q_atm.so
 r   /usr/sbin/arpd
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian

@@ -1,4 +1,5 @@
-#   /etc/ssh/ssh_config - TODO - could be replaced with something smaller
+keep    /etc/ssh/moduli
+todo    /etc/ssh/ssh_config # TODO - could be replaced with something smaller
 k   /usr/bin/scp
 k   /usr/bin/sftp
 k   /usr/bin/slogin
