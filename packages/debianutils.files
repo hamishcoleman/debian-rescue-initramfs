@@ -1,10 +1,10 @@
 k   /bin/run-parts
 k   /bin/tempfile
 k   /bin/which
-r   /sbin/installkernel
+rm  /sbin/installkernel
 k   /usr/bin/savelog
 k   /usr/bin/which
-r   /usr/share/debianutils/shells
+rm  /usr/share/debianutils/shells
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
 # are all dealt with centrally

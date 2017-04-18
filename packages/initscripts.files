@@ -1,8 +1,8 @@
 k   /bin/mountpoint
-r   /etc/default/devpts
-r   /etc/default/halt
-r   /etc/default/rcS
-r   /etc/default/tmpfs
+rm  /etc/default/devpts
+rm  /etc/default/halt
+rm  /etc/default/rcS
+rm  /etc/default/tmpfs
 touch /etc/fstab
 k   /etc/init.d/bootlogs
 k   /etc/init.d/bootmisc.sh
@@ -29,16 +29,16 @@ k   /etc/init.d/umountfs
 k   /etc/init.d/umountnfs.sh
 k   /etc/init.d/umountroot
 k   /etc/init.d/urandom
-r   /etc/network/if-up.d/mountnfs
+rm  /etc/network/if-up.d/mountnfs
 k   /lib/init/bootclean.sh
 k   /lib/init/mount-functions.sh
 k   /lib/init/swap-functions.sh
 k   /lib/init/tmpfs.sh
 k   /lib/init/vars.sh
 k   /sbin/fsck.nfs
-r   /var/log/dmesg
-r   /var/log/fsck/checkroot
-r   /var/log/fsck/checkfs
+rm  /var/log/dmesg
+rm  /var/log/fsck/checkroot
+rm  /var/log/fsck/checkfs
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
 # are all dealt with centrally

@@ -1,11 +1,11 @@
 # we dont have kernel modules inside the initramfs, so trying to load
 # the modules with /etc/init.d/loadcpufreq just causes system errors
 
-r   /etc/init.d/cpufrequtils
-r   /etc/init.d/loadcpufreq
-r   /etc/rc*.d/*cpufrequtils
-r   /etc/rc*.d/*loadcpufreq
-r   /usr/bin/cpufreq-aperf
+rm  /etc/init.d/cpufrequtils
+rm  /etc/init.d/loadcpufreq
+rm  /etc/rc*.d/*cpufrequtils
+rm  /etc/rc*.d/*loadcpufreq
+rm  /usr/bin/cpufreq-aperf
 k   /usr/bin/cpufreq-info
 k   /usr/bin/cpufreq-set
 

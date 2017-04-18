@@ -1,7 +1,7 @@
-r   /etc/alternatives/README
-r   /etc/cron.daily/dpkg
+rm  /etc/alternatives/README
+rm  /etc/cron.daily/dpkg
 k   /etc/dpkg/dpkg.cfg
-r   /etc/logrotate.d/dpkg
+rm  /etc/logrotate.d/dpkg
 todo    /sbin/start-stop-daemon
 k   /usr/bin/dpkg
 k   /usr/bin/dpkg-deb
@@ -19,12 +19,12 @@ todo    /usr/share/dpkg/abitable
 todo    /usr/share/dpkg/cputable
 todo    /usr/share/dpkg/ostable
 todo    /usr/share/dpkg/triplettable
-r   /var/lib/dpkg/*-old
-# r   /var/lib/dpkg/info/*.md5sums # useful to keep so we can check conffiles
-r   /var/lib/dpkg/info/*.symbols
-r   /var/lib/dpkg/info/*.templates
-r   /var/log/dpkg.log
-r   /var/log/alternatives.log
+rm  /var/lib/dpkg/*-old
+# rm   /var/lib/dpkg/info/*.md5sums # useful to keep so we can check conffiles
+rm  /var/lib/dpkg/info/*.symbols
+rm  /var/lib/dpkg/info/*.templates
+rm  /var/log/dpkg.log
+rm  /var/log/alternatives.log
 
 # TODO
 # - /etc/dpkg/dpkg.cfg can be smaller or eliminated all together

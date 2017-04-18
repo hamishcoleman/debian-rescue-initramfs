@@ -1,5 +1,5 @@
 k   /bin/ip
-r   /bin/ss
+rm  /bin/ss
 todo    /etc/iproute2/ematch_map
 todo    /etc/iproute2/group
 todo    /etc/iproute2/rt_dsfield
@@ -9,15 +9,15 @@ todo    /etc/iproute2/rt_scopes
 todo    /etc/iproute2/rt_tables
 k   /sbin/bridge
 k   /sbin/ip
-r   /sbin/rtacct
-r   /sbin/rtmon
+rm  /sbin/rtacct
+rm  /sbin/rtmon
 k   /sbin/tc
-r   /usr/bin/ctstat
-r   /usr/bin/lnstat
-r   /usr/bin/nstat
-r   /usr/bin/routef
-r   /usr/bin/routel
-r   /usr/bin/rtstat
+rm  /usr/bin/ctstat
+rm  /usr/bin/lnstat
+rm  /usr/bin/nstat
+rm  /usr/bin/routef
+rm  /usr/bin/routel
+rm  /usr/bin/rtstat
 todo    /usr/lib/tc/experimental.dist
 todo    /usr/lib/tc/m_ipt.so
 todo    /usr/lib/tc/m_xt.so
@@ -25,7 +25,7 @@ todo    /usr/lib/tc/normal.dist
 todo    /usr/lib/tc/pareto.dist
 todo    /usr/lib/tc/paretonormal.dist
 todo    /usr/lib/tc/q_atm.so
-r   /usr/sbin/arpd
+rm  /usr/sbin/arpd
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
 # are all dealt with centrally

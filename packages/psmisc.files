@@ -1,12 +1,12 @@
 k   /bin/fuser
 k   /usr/bin/killall
 k   /usr/bin/peekfd
-r   /usr/bin/prtstat
+rm  /usr/bin/prtstat
 k   /usr/bin/pstree
-r   /usr/bin/pstree.x11
-r   /usr/share/menu/psmisc
-r   /usr/share/pixmaps/pstree16.xpm
-r   /usr/share/pixmaps/pstree32.xpm
+rm  /usr/bin/pstree.x11
+rm  /usr/share/menu/psmisc
+rm  /usr/share/pixmaps/pstree16.xpm
+rm  /usr/share/pixmaps/pstree32.xpm
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
 # are all dealt with centrally

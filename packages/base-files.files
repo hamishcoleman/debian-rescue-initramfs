@@ -1,5 +1,5 @@
 k   /etc/debian_version
-r   /etc/dpkg/origins/debian
+rm  /etc/dpkg/origins/debian
 k   /etc/host.conf
 k   /etc/issue
 k   /etc/issue.net

@@ -1,11 +1,11 @@
-r   /etc/security/access.conf
-r   /etc/security/group.conf
+rm  /etc/security/access.conf
+rm  /etc/security/group.conf
 k   /etc/security/limits.conf
-r   /etc/security/namespace.conf
-r   /etc/security/namespace.init
-r   /etc/security/pam_env.conf
-r   /etc/security/sepermit.conf
-r   /etc/security/time.conf
+rm  /etc/security/namespace.conf
+rm  /etc/security/namespace.init
+rm  /etc/security/pam_env.conf
+rm  /etc/security/sepermit.conf
+rm  /etc/security/time.conf
 todo    /lib/${ARCH}-linux-gnu/security/pam_access.so
 todo    /lib/${ARCH}-linux-gnu/security/pam_debug.so
 todo    /lib/${ARCH}-linux-gnu/security/pam_deny.so
@@ -45,7 +45,7 @@ todo    /lib/${ARCH}-linux-gnu/security/pam_timestamp.so
 todo    /lib/${ARCH}-linux-gnu/security/pam_tty_audit.so
 todo    /lib/${ARCH}-linux-gnu/security/pam_umask.so
 todo    /lib/${ARCH}-linux-gnu/security/pam_unix.so
-r   /lib/${ARCH}-linux-gnu/security/pam_userdb.so
+rm  /lib/${ARCH}-linux-gnu/security/pam_userdb.so
 todo    /lib/${ARCH}-linux-gnu/security/pam_warn.so
 todo    /lib/${ARCH}-linux-gnu/security/pam_wheel.so
 todo    /lib/${ARCH}-linux-gnu/security/pam_xauth.so

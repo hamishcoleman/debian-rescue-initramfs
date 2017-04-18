@@ -4,9 +4,9 @@ k   /etc/bash.bashrc
 k   /etc/skel/.bash_logout
 k   /etc/skel/.bashrc
 k   /etc/skel/.profile
-r   /usr/bin/bashbug
-r   /usr/bin/clear_console
-r   /usr/share/menu/bash
+rm  /usr/bin/bashbug
+rm  /usr/bin/clear_console
+rm  /usr/share/menu/bash
 
 # TODO
 # - the following could be made smaller by replacing them with a version

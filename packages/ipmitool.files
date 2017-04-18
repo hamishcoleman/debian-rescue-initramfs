@@ -1,10 +1,10 @@
-r   /etc/default/ipmievd
-r   /etc/init.d/ipmievd
-r   /lib/systemd/system/ipmievd.service
+rm  /etc/default/ipmievd
+rm  /etc/init.d/ipmievd
+rm  /lib/systemd/system/ipmievd.service
 k   /usr/bin/ipmitool
-r   /usr/lib/modules-load.d/ipmievd.conf
-r   /usr/sbin/ipmievd
-r   /usr/share/ipmitool/oem_ibm_sel_map
+rm  /usr/lib/modules-load.d/ipmievd.conf
+rm  /usr/sbin/ipmievd
+rm  /usr/share/ipmitool/oem_ibm_sel_map
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
 # are all dealt with centrally

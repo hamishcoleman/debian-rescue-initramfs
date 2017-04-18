@@ -1,18 +1,18 @@
-r   /usr/share/doc-base/elvis
+rm  /usr/share/doc-base/elvis
 k   /usr/share/elvis/elvis.bro
-r   /usr/share/elvis/elvis.glade
-r   /usr/share/elvis/elvis.gnome
+rm  /usr/share/elvis/elvis.glade
+rm  /usr/share/elvis/elvis.gnome
 k   /usr/share/elvis/elvis.lat
 k   /usr/share/elvis/elvis.pc8
-r   /usr/share/elvis/icons/*
-r   /usr/share/elvis/manual/*
+rm  /usr/share/elvis/icons/*
+rm  /usr/share/elvis/manual/*
 #   /usr/share/elvis/scripts - TODO - lots of stuff here
-r   /usr/share/elvis/stubs/*
-r   /usr/share/elvis/tags
-r   /usr/share/elvis/themes/sand.ex
-r   /usr/share/elvis/themes/sand.xpm
-r   /usr/share/menu/elvis-common
-r   /usr/share/pixmaps/elvis_32x32.xpm
+rm  /usr/share/elvis/stubs/*
+rm  /usr/share/elvis/tags
+rm  /usr/share/elvis/themes/sand.ex
+rm  /usr/share/elvis/themes/sand.xpm
+rm  /usr/share/menu/elvis-common
+rm  /usr/share/pixmaps/elvis_32x32.xpm
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
 # are all dealt with centrally

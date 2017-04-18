@@ -1,5 +1,5 @@
 k   /etc/apt/apt.conf.d/70debconf
-r   /etc/bash_completion.d/debconf
+rm  /etc/bash_completion.d/debconf
 k   /etc/debconf.conf
 k   /usr/bin/debconf
 k   /usr/bin/debconf-apt-progress
@@ -132,12 +132,12 @@ todo    /usr/share/perl5/Debconf/Template.pm
 todo    /usr/share/perl5/Debconf/Template/Transient.pm
 todo    /usr/share/perl5/Debconf/TmpFile.pm
 todo    /usr/share/perl5/Debian/DebConf/Client/ConfModule.pm
-r   /usr/share/pixmaps/debian-logo.png
-r   /var/cache/debconf/config.dat
-r   /var/cache/debconf/config.dat-old
-r   /var/cache/debconf/passwords.dat
-r   /var/cache/debconf/templates.dat
-r   /var/cache/debconf/templates.dat-old
+rm  /usr/share/pixmaps/debian-logo.png
+rm  /var/cache/debconf/config.dat
+rm  /var/cache/debconf/config.dat-old
+rm  /var/cache/debconf/passwords.dat
+rm  /var/cache/debconf/templates.dat
+rm  /var/cache/debconf/templates.dat-old
 
 # TODO
 # - /etc/debconf.conf could be replaced with a smaller one

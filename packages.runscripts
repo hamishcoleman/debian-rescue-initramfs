@@ -78,7 +78,7 @@ do_files_list() {
             # FIXME - this doesnt work with globs
             check_file "$file"
             ;;
-        rm|r)
+        rm)
             eval rm -f "${DEBOOT}/$file"
             ;;
         rm-r|rr) eval rm -rf "${DEBOOT}/$file"

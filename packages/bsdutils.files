@@ -1,12 +1,12 @@
 k   /usr/bin/logger
 k   /usr/bin/renice
 k   /usr/bin/script
-r   /usr/bin/scriptreplay
-r   /usr/bin/wall
+rm  /usr/bin/scriptreplay
+rm  /usr/bin/wall
 k   /usr/share/bash-completion/completions/logger
 k   /usr/share/bash-completion/completions/script
-r   /usr/share/bash-completion/completions/scriptreplay
-r   /usr/share/bash-completion/completions/wall
+rm  /usr/share/bash-completion/completions/scriptreplay
+rm  /usr/share/bash-completion/completions/wall
 
 # TODO
 # - surely there is a journald replacement for logger that we can use

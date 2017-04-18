@@ -1,13 +1,13 @@
-r   /usr/bin/captoinfo
+rm  /usr/bin/captoinfo
 k   /usr/bin/clear
-r   /usr/bin/infocmp
-r   /usr/bin/infotocap
-r   /usr/bin/ncurses5-config
-r   /usr/bin/ncursesw5-config
+rm  /usr/bin/infocmp
+rm  /usr/bin/infotocap
+rm  /usr/bin/ncurses5-config
+rm  /usr/bin/ncursesw5-config
 k   /usr/bin/reset
-r   /usr/bin/tabs
-r   /usr/bin/tic
-r   /usr/bin/toe
+rm  /usr/bin/tabs
+rm  /usr/bin/tic
+rm  /usr/bin/toe
 k   /usr/bin/tput
 k   /usr/bin/tset
 

@@ -1,12 +1,12 @@
-r   /etc/init.d/lvm2
-r   /etc/lvm/lvm.conf
-r   /lib/systemd/system/lvm2-activation-early.service
-r   /lib/systemd/system/lvm2-activation.service
-r   /lib/systemd/system/lvm2-lvmetad.service
-r   /lib/systemd/system/lvm2-lvmetad.socket
-r   /lib/systemd/system/lvm2-monitor.service
-r   /lib/systemd/system/lvm2-pvscan@.service
-r   /lib/systemd/system/lvm2.service
+rm  /etc/init.d/lvm2
+rm  /etc/lvm/lvm.conf
+rm  /lib/systemd/system/lvm2-activation-early.service
+rm  /lib/systemd/system/lvm2-activation.service
+rm  /lib/systemd/system/lvm2-lvmetad.service
+rm  /lib/systemd/system/lvm2-lvmetad.socket
+rm  /lib/systemd/system/lvm2-monitor.service
+rm  /lib/systemd/system/lvm2-pvscan@.service
+rm  /lib/systemd/system/lvm2.service
 todo    /lib/udev/rules.d/56-lvm.rules # TODO - could be made smaller
 todo    /lib/udev/rules.d/69-lvm-metad.rules # TODO - could be made smaller
 todo    /sbin/fsadm
@@ -17,7 +17,7 @@ todo    /sbin/lvdisplay
 todo    /sbin/lvextend
 todo    /sbin/lvm
 todo    /sbin/lvmchange
-r   /sbin/lvmconf
+rm  /sbin/lvmconf
 todo    /sbin/lvmdiskscan
 todo    /sbin/lvmdump
 todo    /sbin/lvmetad
@@ -57,7 +57,7 @@ todo    /sbin/vgrename
 todo    /sbin/vgs
 todo    /sbin/vgscan
 todo    /sbin/vgsplit
-r   /usr/lib/tmpfiles.d/lvm2.conf
+rm  /usr/lib/tmpfiles.d/lvm2.conf
 todo    /usr/share/initramfs-tools/hooks/lvm2
 todo    /usr/share/initramfs-tools/scripts/local-block/lvm2
 todo    /usr/share/initramfs-tools/scripts/local-top/lvm2

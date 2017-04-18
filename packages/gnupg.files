@@ -1,15 +1,15 @@
-r   /lib/udev/rules.d/60-gnupg.rules
-r   /usr/bin/gpg
-r   /usr/bin/gpg-zip
-r   /usr/bin/gpgsplit
-r   /usr/bin/lspgpot
+rm  /lib/udev/rules.d/60-gnupg.rules
+rm  /usr/bin/gpg
+rm  /usr/bin/gpg-zip
+rm  /usr/bin/gpgsplit
+rm  /usr/bin/lspgpot
 k   /usr/lib/gnupg/gpgkeys_curl
 k   /usr/lib/gnupg/gpgkeys_finger
 k   /usr/lib/gnupg/gpgkeys_hkp
-r   /usr/lib/gnupg/gpgkeys_ldap
-r   /usr/lib/gnupg/gpgkeys_mailto
-r   /usr/share/bug/gnupg/presubj
-r   /usr/share/gnupg/options.skel
+rm  /usr/lib/gnupg/gpgkeys_ldap
+rm  /usr/lib/gnupg/gpgkeys_mailto
+rm  /usr/share/bug/gnupg/presubj
+rm  /usr/share/gnupg/options.skel
 
 # TODO
 # - the gpgkeys_* stuff is probably unused.

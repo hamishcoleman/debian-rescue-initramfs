@@ -1,12 +1,12 @@
-r   /lib/udev/rules.d/70-btrfs.rules
-r   /lib/udev/rules.d/80-btrfs-lvm.rules
+rm  /lib/udev/rules.d/70-btrfs.rules
+rm  /lib/udev/rules.d/80-btrfs-lvm.rules
 k   /sbin/btrfs
 k   /sbin/btrfs-calc-size
 k   /sbin/btrfs-convert
-r   /sbin/btrfs-debug-tree
+rm  /sbin/btrfs-debug-tree
 k   /sbin/btrfs-find-root
-r   /sbin/btrfs-image
-r   /sbin/btrfs-map-logical
+rm  /sbin/btrfs-image
+rm  /sbin/btrfs-map-logical
 k   /sbin/btrfs-select-super
 k   /sbin/btrfs-show-super
 k   /sbin/btrfs-zero-log
@@ -29,12 +29,12 @@ rm      /usr/include/btrfs/send-stream.h
 rm      /usr/include/btrfs/send-utils.h
 rm      /usr/include/btrfs/send.h
 rm      /usr/include/btrfs/version.h
-r   /usr/lib/${ARCH}-linux-gnu/libbtrfs.a
+rm  /usr/lib/${ARCH}-linux-gnu/libbtrfs.a
 rm      /usr/lib/${ARCH}-linux-gnu/libbtrfs.so
 rm      /usr/lib/${ARCH}-linux-gnu/libbtrfs.so.0
 rm      /usr/lib/${ARCH}-linux-gnu/libbtrfs.so.0.1
-r   /usr/share/initramfs-tools/hooks/btrfs
-r   /usr/share/initramfs-tools/scripts/local-premount/btrfs
+rm  /usr/share/initramfs-tools/hooks/btrfs
+rm  /usr/share/initramfs-tools/scripts/local-premount/btrfs
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
 # are all dealt with centrally

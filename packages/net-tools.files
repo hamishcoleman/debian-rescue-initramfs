@@ -1,6 +1,6 @@
-r   /sbin/plipconfig
-r   /sbin/rarp
-r   /sbin/slattach
+rm  /sbin/plipconfig
+rm  /sbin/rarp
+rm  /sbin/slattach
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
 # are all dealt with centrally

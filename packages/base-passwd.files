@@ -1,4 +1,4 @@
-r   /usr/sbin/update-passwd
-r   /usr/share/base-passwd/group.master
-r   /usr/share/base-passwd/passwd.master
+rm  /usr/sbin/update-passwd
+rm  /usr/share/base-passwd/group.master
+rm  /usr/share/base-passwd/passwd.master
 todo    /usr/share/doc-base/users-and-groups

@@ -1,10 +1,10 @@
-r   /etc/magic
-r   /etc/magic.mime
+rm  /etc/magic
+rm  /etc/magic.mime
 k   /usr/lib/${ARCH}-linux-gnu/libmagic.so.1
 k   /usr/lib/${ARCH}-linux-gnu/libmagic.so.1.0.0
-r   /usr/share/bug/libmagic1/control
-r   /usr/share/bug/libmagic1/presubj
-r   /usr/share/file/magic.mgc
+rm  /usr/share/bug/libmagic1/control
+rm  /usr/share/bug/libmagic1/presubj
+rm  /usr/share/file/magic.mgc
 todo    /usr/share/misc/magic.mgc
 
 # TODO - this removes all the data that libmagic needs to work, but if so

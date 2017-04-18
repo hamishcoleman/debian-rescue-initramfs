@@ -1,9 +1,9 @@
-r   /sbin/mkhomedir_helper
-r   /sbin/pam_tally
-r   /sbin/pam_tally2
-r   /sbin/unix_chkpwd
-r   /sbin/unix_update
-r   /usr/sbin/pam_timestamp_check
+rm  /sbin/mkhomedir_helper
+rm  /sbin/pam_tally
+rm  /sbin/pam_tally2
+rm  /sbin/unix_chkpwd
+rm  /sbin/unix_update
+rm  /usr/sbin/pam_timestamp_check
 
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian

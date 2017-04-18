@@ -1,7 +1,7 @@
-r   /usr/bin/filan
-r   /usr/bin/procan
+rm  /usr/bin/filan
+rm  /usr/bin/procan
 keep    /usr/bin/socat
-r   /usr/share/doc-base/socat
+rm  /usr/share/doc-base/socat
 
 # /usr/share/doc, /usr/share/info and /usr/share/man are all dealt with
 # centrally

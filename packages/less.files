@@ -1,14 +1,14 @@
 k   /bin/less
-r   /bin/lessecho
-r   /bin/lessfile
-r   /bin/lesskey
-r   /bin/lesspipe
+rm  /bin/lessecho
+rm  /bin/lessfile
+rm  /bin/lesskey
+rm  /bin/lesspipe
 k   /usr/bin/less
-r   /usr/bin/lessecho
-r   /usr/bin/lessfile
-r   /usr/bin/lesskey
-r   /usr/bin/lesspipe
-r   /usr/lib/mime/packages/less
+rm  /usr/bin/lessecho
+rm  /usr/bin/lessfile
+rm  /usr/bin/lesskey
+rm  /usr/bin/lesspipe
+rm  /usr/lib/mime/packages/less
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
 # are all dealt with centrally

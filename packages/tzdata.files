@@ -1,4 +1,4 @@
-r   /usr/sbin/tzconfig
+rm  /usr/sbin/tzconfig
 rm      /usr/share/zoneinfo/Africa/Abidjan
 rm      /usr/share/zoneinfo/Africa/Accra
 rm      /usr/share/zoneinfo/Africa/Addis_Ababa

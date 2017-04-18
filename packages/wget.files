@@ -3,6 +3,6 @@
 # looks strange that we are deleting the only real files from this package
 # it is not a mistake.
 
-r   /etc/wgetrc
-r   /usr/bin/wget
+rm  /etc/wgetrc
+rm  /usr/bin/wget
 

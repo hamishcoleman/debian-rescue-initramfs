@@ -1,5 +1,5 @@
 
-r   /etc/ssh/ssh_host_*_key*
+rm  /etc/ssh/ssh_host_*_key*
 
 # TODO
 # - not installed in the default build, so the package file list is not

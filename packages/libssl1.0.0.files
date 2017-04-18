@@ -1,7 +1,7 @@
-r   /usr/lib/${ARCH}-linux-gnu/i586/libcrypto.so.1.0.0
-r   /usr/lib/${ARCH}-linux-gnu/i586/libssl.so.1.0.0
-r   /usr/lib/${ARCH}-linux-gnu/i686/cmov/libcrypto.so.1.0.0
-r   /usr/lib/${ARCH}-linux-gnu/i686/cmov/libssl.so.1.0.0
+rm  /usr/lib/${ARCH}-linux-gnu/i586/libcrypto.so.1.0.0
+rm  /usr/lib/${ARCH}-linux-gnu/i586/libssl.so.1.0.0
+rm  /usr/lib/${ARCH}-linux-gnu/i686/cmov/libcrypto.so.1.0.0
+rm  /usr/lib/${ARCH}-linux-gnu/i686/cmov/libssl.so.1.0.0
 
 # FIXME
 # - clearly, this is architecture specific

@@ -1,17 +1,17 @@
 k   /bin/gunzip
-r   /bin/gzexe
+rm  /bin/gzexe
 k   /bin/gzip
 keep    /bin/uncompress # being overwritten by a symlink in the script
 k   /bin/zcat
-r   /bin/zcmp
-r   /bin/zdiff
-r   /bin/zegrep
-r   /bin/zfgrep
-r   /bin/zforce
-r   /bin/zgrep
-r   /bin/zless
-r   /bin/zmore
-r   /bin/znew
+rm  /bin/zcmp
+rm  /bin/zdiff
+rm  /bin/zegrep
+rm  /bin/zfgrep
+rm  /bin/zforce
+rm  /bin/zgrep
+rm  /bin/zless
+rm  /bin/zmore
+rm  /bin/znew
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
 # are all dealt with centrally

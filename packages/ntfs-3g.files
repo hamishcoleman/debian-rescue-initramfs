@@ -4,8 +4,8 @@ k   /bin/ntfs-3g.probe
 k   /bin/ntfs-3g.secaudit
 k   /bin/ntfs-3g.usermap
 k   /bin/ntfscat
-r   /bin/ntfscluster
-r   /bin/ntfscmp
+rm  /bin/ntfscluster
+rm  /bin/ntfscmp
 k   /bin/ntfsfallocate
 k   /bin/ntfsfix
 k   /bin/ntfsinfo
@@ -26,10 +26,10 @@ k   /sbin/ntfslabel
 k   /sbin/ntfsresize
 k   /sbin/ntfsundelete
 k   /usr/bin/ntfsdecrypt
-r   /usr/share/hal/fdi/policy/10osvendor/25-ntfs-3g-policy.fdi
-r   /usr/share/initramfs-tools/hooks/ntfs_3g
-r   /usr/share/initramfs-tools/scripts/local-bottom/ntfs_3g
-r   /usr/share/initramfs-tools/scripts/local-premount/ntfs_3g
+rm  /usr/share/hal/fdi/policy/10osvendor/25-ntfs-3g-policy.fdi
+rm  /usr/share/initramfs-tools/hooks/ntfs_3g
+rm  /usr/share/initramfs-tools/scripts/local-bottom/ntfs_3g
+rm  /usr/share/initramfs-tools/scripts/local-premount/ntfs_3g
 
 # TODO - there looks to be a lot of files here that would not be needed in a
 # minimal rescue system

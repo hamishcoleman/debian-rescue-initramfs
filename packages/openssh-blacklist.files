@@ -1,2 +1,2 @@
-r   /usr/bin/ssh-vulnkey
+rm  /usr/bin/ssh-vulnkey
 
