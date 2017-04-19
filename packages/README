@@ -58,8 +58,3 @@ tags:
 The list of "todo" files serves as a hit-list of files that that it
 might be possible to delete.  Care should be taken before deleting a
 file on the "keep" list.
-
-Until the files are all converted, the following legacy tags are also
-accepted:
-    rr    - recursively remove this directory
-

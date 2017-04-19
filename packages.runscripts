@@ -81,8 +81,6 @@ do_files_list() {
         rm)
             eval rm -f "${DEBOOT}/$file"
             ;;
-        rm-r|rr) eval rm -rf "${DEBOOT}/$file"
-            ;;
         touch)
             rm -f "${DEBOOT}/$file"
             touch "${DEBOOT}/$file"
