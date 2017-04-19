@@ -1,15 +1,15 @@
 rm  /usr/bin/captoinfo
-k   /usr/bin/clear
+keep    /usr/bin/clear
 rm  /usr/bin/infocmp
 rm  /usr/bin/infotocap
 rm  /usr/bin/ncurses5-config
 rm  /usr/bin/ncursesw5-config
-k   /usr/bin/reset
+keep    /usr/bin/reset
 rm  /usr/bin/tabs
 rm  /usr/bin/tic
 rm  /usr/bin/toe
-k   /usr/bin/tput
-k   /usr/bin/tset
+keep    /usr/bin/tput
+keep    /usr/bin/tset
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
 # are all dealt with centrally

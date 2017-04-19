@@ -1,9 +1,9 @@
-k   /bin/run-parts
-k   /bin/tempfile
-k   /bin/which
+keep    /bin/run-parts
+keep    /bin/tempfile
+keep    /bin/which
 rm  /sbin/installkernel
-k   /usr/bin/savelog
-k   /usr/bin/which
+keep    /usr/bin/savelog
+keep    /usr/bin/which
 rm  /usr/share/debianutils/shells
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man

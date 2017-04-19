@@ -1,12 +1,12 @@
-k   /bin/udevadm
-k   /etc/init.d/udev
-k   /etc/init.d/udev-finish
+keep    /bin/udevadm
+keep    /etc/init.d/udev
+keep    /etc/init.d/udev-finish
 rm  /etc/init/udev-fallback-graphics.conf
 rm  /etc/init/udev-finish.conf
 rm  /etc/init/udev.conf
 rm  /etc/init/udevmonitor.conf
 rm  /etc/init/udevtrigger.conf
-k   /etc/modprobe.d/fbdev-blacklist.conf
+keep    /etc/modprobe.d/fbdev-blacklist.conf
 todo    /etc/udev/udev.conf # TODO - is this even needed?
 todo    /lib/systemd/system/sockets.target.wants/systemd-udevd-control.socket
 todo    /lib/systemd/system/sockets.target.wants/systemd-udevd-kernel.socket
@@ -72,8 +72,8 @@ todo    /lib/udev/scsi_id
 todo    /lib/udev/udev-finish
 todo    /lib/udev/v4l_id
 todo    /lib/udev/write_net_rules
-k   /sbin/udevadm
-k   /sbin/udevd
+keep    /sbin/udevadm
+keep    /sbin/udevd
 rm  /usr/share/bug/udev
 rm  /usr/share/initramfs-tools/hooks/udev
 rm  /usr/share/initramfs-tools/scripts/init-bottom/udev

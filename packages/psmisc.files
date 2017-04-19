@@ -1,8 +1,8 @@
-k   /bin/fuser
-k   /usr/bin/killall
-k   /usr/bin/peekfd
+keep    /bin/fuser
+keep    /usr/bin/killall
+keep    /usr/bin/peekfd
 rm  /usr/bin/prtstat
-k   /usr/bin/pstree
+keep    /usr/bin/pstree
 rm  /usr/bin/pstree.x11
 rm  /usr/share/menu/psmisc
 rm  /usr/share/pixmaps/pstree16.xpm

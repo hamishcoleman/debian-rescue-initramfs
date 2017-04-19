@@ -1,6 +1,6 @@
-k   /usr/sbin/debootstrap
-k   /usr/share/debootstrap/devices.tar.gz
-k   /usr/share/debootstrap/functions
+keep    /usr/sbin/debootstrap
+keep    /usr/share/debootstrap/devices.tar.gz
+keep    /usr/share/debootstrap/functions
 rm  /usr/share/debootstrap/scripts/breezy
 rm  /usr/share/debootstrap/scripts/dapper
 rm  /usr/share/debootstrap/scripts/edgy
@@ -13,7 +13,7 @@ rm  /usr/share/debootstrap/scripts/hoary
 rm  /usr/share/debootstrap/scripts/hoary.buildd
 rm  /usr/share/debootstrap/scripts/intrepid
 rm  /usr/share/debootstrap/scripts/jaunty
-k   /usr/share/debootstrap/scripts/jessie
+keep    /usr/share/debootstrap/scripts/jessie
 rm  /usr/share/debootstrap/scripts/karmic
 rm  /usr/share/debootstrap/scripts/lenny
 rm  /usr/share/debootstrap/scripts/lucid
@@ -29,13 +29,13 @@ rm  /usr/share/debootstrap/scripts/sarge
 rm  /usr/share/debootstrap/scripts/sarge.buildd
 rm  /usr/share/debootstrap/scripts/sarge.fakechroot
 rm  /usr/share/debootstrap/scripts/saucy
-k   /usr/share/debootstrap/scripts/sid
+keep    /usr/share/debootstrap/scripts/sid
 rm  /usr/share/debootstrap/scripts/squeeze
-k   /usr/share/debootstrap/scripts/stable
-k   /usr/share/debootstrap/scripts/stretch
-k   /usr/share/debootstrap/scripts/testing
+keep    /usr/share/debootstrap/scripts/stable
+keep    /usr/share/debootstrap/scripts/stretch
+keep    /usr/share/debootstrap/scripts/testing
 rm  /usr/share/debootstrap/scripts/trusty
-k   /usr/share/debootstrap/scripts/unstable
+keep    /usr/share/debootstrap/scripts/unstable
 rm  /usr/share/debootstrap/scripts/utopic
 rm  /usr/share/debootstrap/scripts/vivid
 rm  /usr/share/debootstrap/scripts/warty

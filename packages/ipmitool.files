@@ -1,7 +1,7 @@
 rm  /etc/default/ipmievd
 rm  /etc/init.d/ipmievd
 rm  /lib/systemd/system/ipmievd.service
-k   /usr/bin/ipmitool
+keep    /usr/bin/ipmitool
 rm  /usr/lib/modules-load.d/ipmievd.conf
 rm  /usr/sbin/ipmievd
 rm  /usr/share/ipmitool/oem_ibm_sel_map

@@ -1,14 +1,14 @@
 keep    /etc/ssh/moduli
 todo    /etc/ssh/ssh_config # TODO - could be replaced with something smaller
-k   /usr/bin/scp
-k   /usr/bin/sftp
-k   /usr/bin/slogin
-k   /usr/bin/ssh
-k   /usr/bin/ssh-add
-k   /usr/bin/ssh-agent
+keep    /usr/bin/scp
+keep    /usr/bin/sftp
+keep    /usr/bin/slogin
+keep    /usr/bin/ssh
+keep    /usr/bin/ssh-add
+keep    /usr/bin/ssh-agent
 rm  /usr/bin/ssh-argv0
-k   /usr/bin/ssh-copy-id
-k   /usr/bin/ssh-keygen
+keep    /usr/bin/ssh-copy-id
+keep    /usr/bin/ssh-keygen
 rm  /usr/bin/ssh-keyscan
 rm  /usr/lib/openssh/ssh-keysign
 rm  /usr/lib/openssh/ssh-pkcs11-helper

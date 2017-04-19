@@ -6,20 +6,20 @@ rm  /usr/lib/${ARCH}-linux-gnu/i686/cmov/libssl.so.1.0.0
 # FIXME
 # - clearly, this is architecture specific
 
-k   /usr/lib/${ARCH}-linux-gnu/libcrypto.so.1.0.0
-k   /usr/lib/${ARCH}-linux-gnu/libssl.so.1.0.0
-k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/lib4758cca.so
-k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libaep.so
-k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libatalla.so
-k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libcapi.so
-k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libchil.so
-k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libcswift.so
-k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libgmp.so
-k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libgost.so
-k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libnuron.so
-k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libpadlock.so
-k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libsureware.so
-k   /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libubsec.so
+keep    /usr/lib/${ARCH}-linux-gnu/libcrypto.so.1.0.0
+keep    /usr/lib/${ARCH}-linux-gnu/libssl.so.1.0.0
+keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/lib4758cca.so
+keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libaep.so
+keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libatalla.so
+keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libcapi.so
+keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libchil.so
+keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libcswift.so
+keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libgmp.so
+keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libgost.so
+keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libnuron.so
+keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libpadlock.so
+keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libsureware.so
+keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libubsec.so
 
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man

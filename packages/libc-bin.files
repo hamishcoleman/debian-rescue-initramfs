@@ -2,17 +2,17 @@ rm  /etc/bindresvport.blacklist
 rm  /etc/default/nss
 todo   /etc/gai.conf # TODO - could be replaced with something smaller
 todo    /etc/ld.so.conf
-k   /etc/ld.so.conf.d/libc.conf
+keep    /etc/ld.so.conf.d/libc.conf
 true /sbin/ldconfig
 rm  /sbin/ldconfig.real
 rm  /usr/bin/catchsegv
-k   /usr/bin/getconf
+keep    /usr/bin/getconf
 rm  /usr/bin/getent
 rm  /usr/bin/iconv
-k   /usr/bin/ldd
+keep    /usr/bin/ldd
 true /usr/bin/locale
 rm  /usr/bin/localedef
-k   /usr/bin/pldd
+keep    /usr/bin/pldd
 rm  /usr/bin/tzselect
 rm  /usr/bin/zdump
 rm  /usr/lib/locale/C.UTF-8/LC_ADDRESS

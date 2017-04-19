@@ -1,5 +1,5 @@
-k   /usr/bin/perl
-k   /usr/bin/perl5.20.2
+keep    /usr/bin/perl
+keep    /usr/bin/perl5.20.2
 todo    /usr/lib/${ARCH}-linux-gnu/perl/5.20.2/Config.pm
 todo    /usr/lib/${ARCH}-linux-gnu/perl/5.20.2/Config_git.pl
 todo    /usr/lib/${ARCH}-linux-gnu/perl/5.20.2/Config_heavy.pl

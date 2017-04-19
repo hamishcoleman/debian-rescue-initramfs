@@ -1,10 +1,10 @@
-k   /etc/default/partimaged
-k   /etc/init.d/partimaged
-k   /etc/pam.d/partimaged
-k   /etc/partimaged/partimage-certs.cnf
-k   /etc/partimaged/partimagedusers
-k   /usr/sbin/partimaged
-k   /usr/sbin/partimaged-passwd
+keep    /etc/default/partimaged
+keep    /etc/init.d/partimaged
+keep    /etc/pam.d/partimaged
+keep    /etc/partimaged/partimage-certs.cnf
+keep    /etc/partimaged/partimagedusers
+keep    /usr/sbin/partimaged
+keep    /usr/sbin/partimaged-passwd
 rm  /var/log/partimage/partimaged.log
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man

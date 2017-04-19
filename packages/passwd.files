@@ -1,19 +1,19 @@
 rm  /etc/cron.daily/passwd
 todo    /etc/default/useradd # TODO - could be replaced with a smaller file
 rm  /etc/pam.d/chfn
-k   /etc/pam.d/chpasswd
+keep    /etc/pam.d/chpasswd
 rm  /etc/pam.d/chsh
-k   /etc/pam.d/newusers
-k   /etc/pam.d/passwd
+keep    /etc/pam.d/newusers
+keep    /etc/pam.d/passwd
 rm  /sbin/shadowconfig
 rm  /usr/bin/chage
 rm  /usr/bin/chfn
 rm  /usr/bin/chsh
 rm  /usr/bin/expiry
 rm  /usr/bin/gpasswd
-k   /usr/bin/passwd
+keep    /usr/bin/passwd
 rm  /usr/sbin/chgpasswd
-k   /usr/sbin/chpasswd
+keep    /usr/sbin/chpasswd
 rm  /usr/sbin/cpgr
 rm  /usr/sbin/cppw
 rm  /usr/sbin/groupadd
@@ -29,8 +29,8 @@ rm  /usr/sbin/pwunconv
 rm  /usr/sbin/useradd
 rm  /usr/sbin/userdel
 rm  /usr/sbin/usermod
-k   /usr/sbin/vigr
-k   /usr/sbin/vipw
+keep    /usr/sbin/vigr
+keep    /usr/sbin/vipw
 
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian

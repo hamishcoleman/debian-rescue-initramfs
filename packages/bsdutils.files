@@ -1,10 +1,10 @@
-k   /usr/bin/logger
-k   /usr/bin/renice
-k   /usr/bin/script
+keep    /usr/bin/logger
+keep    /usr/bin/renice
+keep    /usr/bin/script
 rm  /usr/bin/scriptreplay
 rm  /usr/bin/wall
-k   /usr/share/bash-completion/completions/logger
-k   /usr/share/bash-completion/completions/script
+keep    /usr/share/bash-completion/completions/logger
+keep    /usr/share/bash-completion/completions/script
 rm  /usr/share/bash-completion/completions/scriptreplay
 rm  /usr/share/bash-completion/completions/wall
 

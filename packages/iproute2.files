@@ -1,4 +1,4 @@
-k   /bin/ip
+keep    /bin/ip
 rm  /bin/ss
 todo    /etc/iproute2/ematch_map
 todo    /etc/iproute2/group
@@ -7,11 +7,11 @@ todo    /etc/iproute2/rt_protos
 todo    /etc/iproute2/rt_realms
 todo    /etc/iproute2/rt_scopes
 todo    /etc/iproute2/rt_tables
-k   /sbin/bridge
-k   /sbin/ip
+keep    /sbin/bridge
+keep    /sbin/ip
 rm  /sbin/rtacct
 rm  /sbin/rtmon
-k   /sbin/tc
+keep    /sbin/tc
 rm  /usr/bin/ctstat
 rm  /usr/bin/lnstat
 rm  /usr/bin/nstat

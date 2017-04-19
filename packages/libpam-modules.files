@@ -1,6 +1,6 @@
 rm  /etc/security/access.conf
 rm  /etc/security/group.conf
-k   /etc/security/limits.conf
+keep    /etc/security/limits.conf
 rm  /etc/security/namespace.conf
 rm  /etc/security/namespace.init
 rm  /etc/security/pam_env.conf

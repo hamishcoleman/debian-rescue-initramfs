@@ -1,25 +1,25 @@
-k   /bin/kill
-k   /bin/ps
-k   /etc/init.d/procps
-k   /etc/sysctl.conf
+keep    /bin/kill
+keep    /bin/ps
+keep    /etc/init.d/procps
+keep    /etc/sysctl.conf
 # sysctl.conf is used by systemd as a symlink /etc/sysctl.d/99-sysctl.conf
 # TODO - it could be replaced with a smaller file
 rm  /etc/sysctl.d/README.sysctl
-k   /sbin/sysctl
-k   /usr/bin/free
-k   /usr/bin/pgrep
-k   /usr/bin/pkill
+keep    /sbin/sysctl
+keep    /usr/bin/free
+keep    /usr/bin/pgrep
+keep    /usr/bin/pkill
 rm  /usr/bin/pmap
 rm  /usr/bin/pwdx
 rm  /usr/bin/skill
 rm  /usr/bin/slabtop
 rm  /usr/bin/snice
-k   /usr/bin/tload
+keep    /usr/bin/tload
 rm  /usr/bin/top
-k   /usr/bin/uptime
-k   /usr/bin/vmstat
+keep    /usr/bin/uptime
+keep    /usr/bin/vmstat
 rm  /usr/bin/w.procps
-k   /usr/bin/watch
+keep    /usr/bin/watch
 rm  /usr/share/bug/procps/presubj
 rm  /usr/share/menu/procps
 

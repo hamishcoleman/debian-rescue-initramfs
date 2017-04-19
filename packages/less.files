@@ -1,9 +1,9 @@
-k   /bin/less
+keep    /bin/less
 rm  /bin/lessecho
 rm  /bin/lessfile
 rm  /bin/lesskey
 rm  /bin/lesspipe
-k   /usr/bin/less
+keep    /usr/bin/less
 rm  /usr/bin/lessecho
 rm  /usr/bin/lessfile
 rm  /usr/bin/lesskey

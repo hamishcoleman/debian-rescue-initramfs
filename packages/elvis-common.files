@@ -1,9 +1,9 @@
 rm  /usr/share/doc-base/elvis
-k   /usr/share/elvis/elvis.bro
+keep    /usr/share/elvis/elvis.bro
 rm  /usr/share/elvis/elvis.glade
 rm  /usr/share/elvis/elvis.gnome
-k   /usr/share/elvis/elvis.lat
-k   /usr/share/elvis/elvis.pc8
+keep    /usr/share/elvis/elvis.lat
+keep    /usr/share/elvis/elvis.pc8
 rm  /usr/share/elvis/icons/*
 rm  /usr/share/elvis/manual/*
 #   /usr/share/elvis/scripts - TODO - lots of stuff here

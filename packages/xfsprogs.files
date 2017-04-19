@@ -1,25 +1,25 @@
-k   /lib/libhandle.so.1
-k   /lib/libhandle.so.1.0.3
-k   /sbin/fsck.xfs
-k   /sbin/mkfs.xfs
+keep    /lib/libhandle.so.1
+keep    /lib/libhandle.so.1.0.3
+keep    /sbin/fsck.xfs
+keep    /sbin/mkfs.xfs
 rm  /sbin/xfs_repair
-k   /usr/sbin/xfs_admin
-k   /usr/sbin/xfs_bmap
-k   /usr/sbin/xfs_copy
+keep    /usr/sbin/xfs_admin
+keep    /usr/sbin/xfs_bmap
+keep    /usr/sbin/xfs_copy
 rm  /usr/sbin/xfs_db
 rm  /usr/sbin/xfs_estimate
 rm  /usr/sbin/xfs_freeze
 rm  /usr/sbin/xfs_fsr
-k   /usr/sbin/xfs_growfs
-k   /usr/sbin/xfs_info
+keep    /usr/sbin/xfs_growfs
+keep    /usr/sbin/xfs_info
 rm  /usr/sbin/xfs_io
 rm  /usr/sbin/xfs_logprint
 rm  /usr/sbin/xfs_mdrestore
-k   /usr/sbin/xfs_metadump
+keep    /usr/sbin/xfs_metadump
 rm  /usr/sbin/xfs_mkfile
 rm  /usr/sbin/xfs_ncheck
 rm  /usr/sbin/xfs_quota
-k   /usr/sbin/xfs_rtcp
+keep    /usr/sbin/xfs_rtcp
 
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man

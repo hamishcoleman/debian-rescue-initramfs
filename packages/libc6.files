@@ -1,4 +1,4 @@
-k   /etc/ld.so.conf.d/${ARCH}-linux-gnu.conf
+keep    /etc/ld.so.conf.d/${ARCH}-linux-gnu.conf
 todo    /lib/${ARCH}-linux-gnu/ld-2.19.so
 todo    /lib/${ARCH}-linux-gnu/ld-linux.so.2
 todo    /lib/${ARCH}-linux-gnu/libBrokenLocale-2.19.so
@@ -43,7 +43,7 @@ todo    /lib/${ARCH}-linux-gnu/libthread_db.so.1
 todo    /lib/${ARCH}-linux-gnu/libutil-2.19.so
 todo    /lib/${ARCH}-linux-gnu/libutil.so.1
 todo    /lib/ld-linux.so.2
-k   /usr/lib/${ARCH}-linux-gnu/audit/sotruss-lib.so
+keep    /usr/lib/${ARCH}-linux-gnu/audit/sotruss-lib.so
 todo    /usr/lib/${ARCH}-linux-gnu/gconv/ANSI_X3.110.so
 todo    /usr/lib/${ARCH}-linux-gnu/gconv/ARMSCII-8.so
 todo    /usr/lib/${ARCH}-linux-gnu/gconv/ASMO_449.so

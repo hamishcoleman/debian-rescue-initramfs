@@ -3,9 +3,9 @@ rm  /usr/bin/gpg
 rm  /usr/bin/gpg-zip
 rm  /usr/bin/gpgsplit
 rm  /usr/bin/lspgpot
-k   /usr/lib/gnupg/gpgkeys_curl
-k   /usr/lib/gnupg/gpgkeys_finger
-k   /usr/lib/gnupg/gpgkeys_hkp
+keep    /usr/lib/gnupg/gpgkeys_curl
+keep    /usr/lib/gnupg/gpgkeys_finger
+keep    /usr/lib/gnupg/gpgkeys_hkp
 rm  /usr/lib/gnupg/gpgkeys_ldap
 rm  /usr/lib/gnupg/gpgkeys_mailto
 rm  /usr/share/bug/gnupg/presubj

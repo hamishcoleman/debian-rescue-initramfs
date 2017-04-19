@@ -73,7 +73,7 @@ do_files_list() {
         false)
             ln -sf /bin/false "${DEBOOT}/$file"
             ;;
-        keep|todo|k)
+        keep|todo)
             eval file="$file"
             # FIXME - this doesnt work with globs
             check_file "$file"

@@ -1,8 +1,8 @@
-k   /bin/gunzip
+keep    /bin/gunzip
 rm  /bin/gzexe
-k   /bin/gzip
+keep    /bin/gzip
 keep    /bin/uncompress # being overwritten by a symlink in the script
-k   /bin/zcat
+keep    /bin/zcat
 rm  /bin/zcmp
 rm  /bin/zdiff
 rm  /bin/zegrep

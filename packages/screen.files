@@ -1,7 +1,7 @@
 rm  /etc/init.d/screen-cleanup
 todo    /etc/screenrc # TODO - can be replaced with a smaller file
 rm  /lib/systemd/system/screen-cleanup.service
-k   /usr/bin/screen
+keep    /usr/bin/screen
 rm  /usr/lib/tmpfiles.d/screen-cleanup.conf
 rm      /usr/share/screen/utf8encodings/01
 rm      /usr/share/screen/utf8encodings/02

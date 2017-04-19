@@ -6,8 +6,8 @@ rm  /etc/init.d/loadcpufreq
 rm  /etc/rc*.d/*cpufrequtils
 rm  /etc/rc*.d/*loadcpufreq
 rm  /usr/bin/cpufreq-aperf
-k   /usr/bin/cpufreq-info
-k   /usr/bin/cpufreq-set
+keep    /usr/bin/cpufreq-info
+keep    /usr/bin/cpufreq-set
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
 # are all dealt with centrally

@@ -1,4 +1,4 @@
-k   /usr/bin/lsusb
+keep    /usr/bin/lsusb
 rm  /usr/bin/usb-devices
 
 # This package is not installed in the current system, so not much effort has

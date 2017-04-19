@@ -1,4 +1,4 @@
-k   /usr/bin/zip
+keep    /usr/bin/zip
 rm  /usr/bin/zipcloak
 rm  /usr/bin/zipnote
 rm  /usr/bin/zipsplit

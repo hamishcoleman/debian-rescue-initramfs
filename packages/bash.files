@@ -1,9 +1,9 @@
-k   /bin/bash
-k   /bin/rbash
-k   /etc/bash.bashrc
-k   /etc/skel/.bash_logout
-k   /etc/skel/.bashrc
-k   /etc/skel/.profile
+keep    /bin/bash
+keep    /bin/rbash
+keep    /etc/bash.bashrc
+keep    /etc/skel/.bash_logout
+keep    /etc/skel/.bashrc
+keep    /etc/skel/.profile
 rm  /usr/bin/bashbug
 rm  /usr/bin/clear_console
 rm  /usr/share/menu/bash

@@ -1,5 +1,5 @@
-k   /bin/login
-k   /bin/su
+keep    /bin/login
+keep    /bin/su
 todo    /etc/login.defs # TODO - can be replaced with a smaller file
 todo    /etc/pam.d/login # TODO - can be replaced with a smaller file
 todo    /etc/pam.d/su # TODO - can be replaced with a smaller file

@@ -61,6 +61,5 @@ file on the "keep" list.
 
 Until the files are all converted, the following legacy tags are also
 accepted:
-    k     - "keep"
     rr    - recursively remove this directory
 
