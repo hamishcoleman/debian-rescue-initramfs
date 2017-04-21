@@ -3,7 +3,7 @@ rm  /etc/default/devpts
 rm  /etc/default/halt
 rm  /etc/default/rcS
 rm  /etc/default/tmpfs
-touch /etc/fstab
+touch,nopkg /etc/fstab
 keep    /etc/init.d/bootlogs
 keep    /etc/init.d/bootmisc.sh
 keep    /etc/init.d/checkfs.sh
@@ -36,9 +36,9 @@ keep    /lib/init/swap-functions.sh
 keep    /lib/init/tmpfs.sh
 keep    /lib/init/vars.sh
 keep    /sbin/fsck.nfs
-rm  /var/log/dmesg
-rm  /var/log/fsck/checkroot
-rm  /var/log/fsck/checkfs
+rm,nopkg /var/log/dmesg
+rm,nopkg /var/log/fsck/checkroot
+rm,nopkg /var/log/fsck/checkfs
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
 # are all dealt with centrally

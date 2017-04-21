@@ -9,8 +9,8 @@ rm  /usr/bin/lastlog
 rm  /usr/bin/newgrp
 rm  /usr/bin/sg
 rm  /usr/sbin/nologin
-rm  /var/log/faillog
-rm  /var/log/lastlog
+rm,nopkg /var/log/faillog
+rm,nopkg /var/log/lastlog
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
 # are all dealt with centrally

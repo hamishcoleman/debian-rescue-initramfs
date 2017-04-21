@@ -5,7 +5,7 @@ keep    /etc/partimaged/partimage-certs.cnf
 keep    /etc/partimaged/partimagedusers
 keep    /usr/sbin/partimaged
 keep    /usr/sbin/partimaged-passwd
-rm  /var/log/partimage/partimaged.log
+rm,nopkg /var/log/partimage/partimaged.log
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man
 # are all dealt with centrally

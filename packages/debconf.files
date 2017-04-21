@@ -133,11 +133,11 @@ todo    /usr/share/perl5/Debconf/Template/Transient.pm
 todo    /usr/share/perl5/Debconf/TmpFile.pm
 todo    /usr/share/perl5/Debian/DebConf/Client/ConfModule.pm
 rm  /usr/share/pixmaps/debian-logo.png
-rm  /var/cache/debconf/config.dat
-rm  /var/cache/debconf/config.dat-old
-rm  /var/cache/debconf/passwords.dat
-rm  /var/cache/debconf/templates.dat
-rm  /var/cache/debconf/templates.dat-old
+rm,nopkg /var/cache/debconf/config.dat
+rm,nopkg /var/cache/debconf/config.dat-old
+rm,nopkg /var/cache/debconf/passwords.dat
+rm,nopkg /var/cache/debconf/templates.dat
+rm,nopkg /var/cache/debconf/templates.dat-old
 
 # TODO
 # - /etc/debconf.conf could be replaced with a smaller one

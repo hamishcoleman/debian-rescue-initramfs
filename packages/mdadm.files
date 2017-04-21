@@ -1,6 +1,6 @@
 rm  /etc/cron.d/mdadm
 rm  /etc/cron.daily/mdadm
-rm  /etc/default/mdadm
+rm,nopkg /etc/default/mdadm
 rm  /etc/init.d/mdadm
 rm  /etc/init.d/mdadm-raid
 rm  /etc/init.d/mdadm-waitidle

@@ -78,10 +78,10 @@ do_files_list() {
             # FIXME - this doesnt work with globs
             check_file "$file"
             ;;
-        rm)
+        rm|rm,nopkg)
             eval rm -f "${DEBOOT}/$file"
             ;;
-        touch)
+        touch|touch,nopkg)
             rm -f "${DEBOOT}/$file"
             touch "${DEBOOT}/$file"
             ;;

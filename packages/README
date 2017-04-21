@@ -48,13 +48,18 @@ the list is structured as a tagged list, with one line for each file.
 Each line is a tag followed by a filename, with the following defined
 tags:
 
-    false - replace this file with a symlink to /bin/false
-    keep  - This file is needed, do not delete it
-    rm    - This file is not needed, delete it
-    todo  - Needs more checking, do not delete
-    touch - replace this file with a zero byte file
-    true  - replace this file with an exe that always has exitcode 0
+    false    - replace this file with a symlink to /bin/false
+    keep     - This file is needed, do not delete it
+    rm       - Delete this unneeded file
+    todo     - Needs more checking, do not delete
+    touch    - replace this file with a zero byte file
+    true     - replace this file with an exe that always has exitcode 0
+
+By default, any file specified must be owned by the correct package.
+Any action can also have the suffix ",nopkg" appended to specify instead
+that the file must not be owned by any package.
 
 The list of "todo" files serves as a hit-list of files that that it
 might be possible to delete.  Care should be taken before deleting a
 file on the "keep" list.
+

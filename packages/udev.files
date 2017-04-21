@@ -27,7 +27,7 @@ todo    /lib/udev/cdrom_id
 todo    /lib/udev/collect
 todo    /lib/udev/dsl-modem.agent
 todo    /lib/udev/hotplug.functions
-rm  /lib/udev/hwdb.bin
+rm,nopkg /lib/udev/hwdb.bin
 todo    /lib/udev/hwdb.d/20-OUI.hwdb
 todo    /lib/udev/hwdb.d/20-acpi-vendor.hwdb
 todo    /lib/udev/hwdb.d/20-bluetooth-vendor-product.hwdb

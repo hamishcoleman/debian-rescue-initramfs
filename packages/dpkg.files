@@ -19,12 +19,12 @@ todo    /usr/share/dpkg/abitable
 todo    /usr/share/dpkg/cputable
 todo    /usr/share/dpkg/ostable
 todo    /usr/share/dpkg/triplettable
-rm  /var/lib/dpkg/*-old
+rm,nopkg /var/lib/dpkg/*-old
 # rm   /var/lib/dpkg/info/*.md5sums # useful to keep so we can check conffiles
-rm  /var/lib/dpkg/info/*.symbols
-rm  /var/lib/dpkg/info/*.templates
-rm  /var/log/dpkg.log
-rm  /var/log/alternatives.log
+rm,nopkg /var/lib/dpkg/info/*.symbols
+rm,nopkg /var/lib/dpkg/info/*.templates
+rm,nopkg /var/log/dpkg.log
+rm,nopkg /var/log/alternatives.log
 
 # TODO
 # - /etc/dpkg/dpkg.cfg can be smaller or eliminated all together

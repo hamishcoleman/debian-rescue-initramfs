@@ -3,8 +3,8 @@
 
 rm  /etc/init.d/cpufrequtils
 rm  /etc/init.d/loadcpufreq
-rm  /etc/rc*.d/*cpufrequtils
-rm  /etc/rc*.d/*loadcpufreq
+rm,nopkg /etc/rc*.d/*cpufrequtils
+rm,nopkg /etc/rc*.d/*loadcpufreq
 rm  /usr/bin/cpufreq-aperf
 keep    /usr/bin/cpufreq-info
 keep    /usr/bin/cpufreq-set
