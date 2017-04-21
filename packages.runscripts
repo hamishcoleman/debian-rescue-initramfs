@@ -39,7 +39,10 @@ check_file() {
         esac
     fi
 
-    if [ ! -e "$file" ]; then
+    # it must be existing, unless it is a symlink - where it could be
+    # a dangling pointer and exist, but fail the "-e"..  Ungh.. I need
+    # to replace this stuff
+    if [ ! -e "$file" -a ! -L "$file" ]; then
         echo "MISSING $package $origfile"
         RESULT=2
     fi
