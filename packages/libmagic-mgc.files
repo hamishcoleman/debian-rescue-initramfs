@@ -1,0 +1,3 @@
+rm      /usr/lib/file/magic.mgc
+rm      /usr/share/file/magic.mgc
+rm      /usr/share/misc/magic.mgc

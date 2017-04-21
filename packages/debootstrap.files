@@ -1,8 +1,13 @@
 keep    /usr/sbin/debootstrap
-keep    /usr/share/debootstrap/devices.tar.gz
 keep    /usr/share/debootstrap/functions
+rm      /usr/share/debootstrap/scripts/aequorea
+rm      /usr/share/debootstrap/scripts/bartholomea
 rm  /usr/share/debootstrap/scripts/breezy
+rm      /usr/share/debootstrap/scripts/bullseye
+rm      /usr/share/debootstrap/scripts/buster
+rm      /usr/share/debootstrap/scripts/chromodoris
 rm  /usr/share/debootstrap/scripts/dapper
+rm      /usr/share/debootstrap/scripts/dasyatis
 rm  /usr/share/debootstrap/scripts/edgy
 rm  /usr/share/debootstrap/scripts/etch
 rm  /usr/share/debootstrap/scripts/etch-m68k
@@ -14,12 +19,14 @@ rm  /usr/share/debootstrap/scripts/hoary.buildd
 rm  /usr/share/debootstrap/scripts/intrepid
 rm  /usr/share/debootstrap/scripts/jaunty
 keep    /usr/share/debootstrap/scripts/jessie
+rm      /usr/share/debootstrap/scripts/jessie-kfreebsd
 rm  /usr/share/debootstrap/scripts/karmic
 rm  /usr/share/debootstrap/scripts/lenny
 rm  /usr/share/debootstrap/scripts/lucid
 rm  /usr/share/debootstrap/scripts/maverick
 rm  /usr/share/debootstrap/scripts/natty
 rm  /usr/share/debootstrap/scripts/oldstable
+rm      /usr/share/debootstrap/scripts/oldoldstable
 rm  /usr/share/debootstrap/scripts/oneiric
 rm  /usr/share/debootstrap/scripts/potato
 rm  /usr/share/debootstrap/scripts/precise
@@ -40,9 +47,13 @@ rm  /usr/share/debootstrap/scripts/utopic
 rm  /usr/share/debootstrap/scripts/vivid
 rm  /usr/share/debootstrap/scripts/warty
 rm  /usr/share/debootstrap/scripts/warty.buildd
+rm      /usr/share/debootstrap/scripts/wily
 rm  /usr/share/debootstrap/scripts/wheezy
 rm  /usr/share/debootstrap/scripts/woody
 rm  /usr/share/debootstrap/scripts/woody.buildd
+rm      /usr/share/debootstrap/scripts/xenial
+rm      /usr/share/debootstrap/scripts/yakkety
+rm      /usr/share/debootstrap/scripts/zesty
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
 # are all dealt with centrally

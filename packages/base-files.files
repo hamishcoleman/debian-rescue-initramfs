@@ -4,13 +4,13 @@ keep    /etc/host.conf
 keep    /etc/issue
 keep    /etc/issue.net
 keep    /etc/os-release
+todo    /etc/update-motd.d/10-uname
 keep    /usr/lib/os-release
 keep    /usr/share/base-files/dot.bashrc
 keep    /usr/share/base-files/dot.profile
+todo    /usr/share/base-files/dot.profile.md5sums
 keep    /usr/share/base-files/info.dir
 keep    /usr/share/base-files/motd
-keep    /usr/share/base-files/nsswitch.conf
-keep    /usr/share/base-files/nsswitch.conf.md5sums
 keep    /usr/share/base-files/profile
 keep    /usr/share/base-files/profile.md5sums
 keep    /usr/share/base-files/staff-group-for-usr-local
@@ -28,7 +28,10 @@ rm      /usr/share/common-licenses/LGPL
 rm      /usr/share/common-licenses/LGPL-2
 rm      /usr/share/common-licenses/LGPL-2.1
 rm      /usr/share/common-licenses/LGPL-3
+rm      /usr/share/common-licenses/MPL-1.1
+rm      /usr/share/common-licenses/MPL-2.0
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
 # are all dealt with centrally
+
 

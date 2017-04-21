@@ -2,7 +2,6 @@ rm  /etc/cron.d/mdadm
 rm  /etc/cron.daily/mdadm
 rm,nopkg /etc/default/mdadm
 rm  /etc/init.d/mdadm
-rm  /etc/init.d/mdadm-raid
 rm  /etc/init.d/mdadm-waitidle
 rm  /etc/logcheck/ignore.d.server/mdadm
 rm  /etc/logcheck/violations.d/mdadm
@@ -19,12 +18,12 @@ keep    /lib/udev/rules.d/63-md-raid-arrays.rules
 keep    /lib/udev/rules.d/64-md-raid-assembly.rules
 todo    /sbin/mdadm
 rm  /sbin/mdmon
-rm  /usr/share/bug/mdadm/presubj
 rm  /usr/share/bug/mdadm/script
 todo    /usr/share/doc-base/mdadm-faq
 todo    /usr/share/doc-base/mdadm-readme-recipes
 rm  /usr/share/initramfs-tools/hooks/mdadm
-rm  /usr/share/initramfs-tools/scripts/local-top/mdadm
+rm      /usr/share/initramfs-tools/scripts/local-block/mdadm
+rm      /usr/share/initramfs-tools/scripts/local-bottom/mdadm
 todo    /usr/share/mdadm/checkarray
 todo    /usr/share/mdadm/mkconf
 

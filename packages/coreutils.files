@@ -28,6 +28,8 @@ keep    /bin/uname
 rm  /bin/vdir
 keep    /usr/bin/[
 keep    /usr/bin/arch
+rm      /usr/bin/b2sum
+rm      /usr/bin/base32
 keep    /usr/bin/base64
 keep    /usr/bin/basename
 rm  /usr/bin/chcon
@@ -88,7 +90,6 @@ keep    /usr/bin/tail
 keep    /usr/bin/tee
 keep    /usr/bin/test
 keep    /usr/bin/timeout
-keep    /usr/bin/touch
 keep    /usr/bin/tr
 keep    /usr/bin/truncate
 rm  /usr/bin/tsort
@@ -101,7 +102,7 @@ keep    /usr/bin/wc
 rm  /usr/bin/who
 keep    /usr/bin/whoami
 keep    /usr/bin/yes
-rm  /usr/lib/coreutils/libstdbuf.so
+rm      /usr/lib/${ARCH}-linux-gnu/coreutils/libstdbuf.so
 keep    /usr/sbin/chroot
 
 # /usr/share/doc, /usr/share/info and /usr/share/man are all dealt with

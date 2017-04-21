@@ -1,5 +1,5 @@
 rm  /etc/apt/apt.conf.d/01autoremove
-rm  /etc/cron.daily/apt
+rm  /etc/cron.daily/apt-compat
 rm  /etc/kernel/postinst.d/apt-auto-removal
 rm  /etc/logrotate.d/apt
 keep    /usr/bin/apt
@@ -37,8 +37,15 @@ rm,nopkg /var/cache/apt/archives/*.deb
 rm,nopkg /var/cache/apt/pkgcache.bin
 rm,nopkg /var/cache/apt/srcpkgcache.bin
 rm,nopkg /var/lib/apt/lists/lock
+rm,nopkg /var/lib/apt/lists/*_InRelease
 rm,nopkg /var/lib/apt/lists/*_Packages
-rm,nopkg /var/lib/apt/lists/*_Release
-rm,nopkg /var/lib/apt/lists/*_Release.gpg
 rm,nopkg /var/lib/apt/lists/*_Sources
 rm,nopkg /var/lib/apt/lists/*_Translation-*
+
+todo /lib/systemd/system/apt-daily.service
+todo /lib/systemd/system/apt-daily.timer
+todo /usr/lib/apt/apt.systemd.daily
+todo /usr/lib/apt/methods/store
+todo /usr/lib/apt/planners/dump
+todo /usr/lib/apt/solvers/dump
+todo /usr/share/bash-completion/completions/apt

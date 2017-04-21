@@ -1,0 +1,5 @@
+todo    /bin/pidof
+todo    /lib/init/init-d-script
+todo    /sbin/fstab-decode
+todo    /sbin/killall5
+todo    /lib/init/vars.sh

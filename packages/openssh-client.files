@@ -10,10 +10,14 @@ rm  /usr/bin/ssh-argv0
 keep    /usr/bin/ssh-copy-id
 keep    /usr/bin/ssh-keygen
 rm  /usr/bin/ssh-keyscan
+rm      /usr/lib/openssh/agent-launch
 rm  /usr/lib/openssh/ssh-keysign
 rm  /usr/lib/openssh/ssh-pkcs11-helper
+rm      /usr/lib/systemd/user/graphical-session-pre.target.wants/ssh-agent.service
+rm      /usr/lib/systemd/user/ssh-agent.service
 rm  /usr/share/apport/package-hooks/openssh-client.py
 rm  /usr/share/upstart/sessions/ssh-agent.conf
+rm      /usr/share/upstart/systemd-session/upstart/ssh-agent.override
 
 # /usr/share/doc, /usr/share/info and /usr/share/man are all dealt with
 # centrally

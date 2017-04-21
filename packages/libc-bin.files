@@ -4,7 +4,6 @@ todo   /etc/gai.conf # TODO - could be replaced with something smaller
 todo    /etc/ld.so.conf
 keep    /etc/ld.so.conf.d/libc.conf
 true /sbin/ldconfig
-rm  /sbin/ldconfig.real
 rm  /usr/bin/catchsegv
 keep    /usr/bin/getconf
 rm  /usr/bin/getent

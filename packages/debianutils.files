@@ -3,7 +3,6 @@ keep    /bin/tempfile
 keep    /bin/which
 rm  /sbin/installkernel
 keep    /usr/bin/savelog
-keep    /usr/bin/which
 rm  /usr/share/debianutils/shells
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man

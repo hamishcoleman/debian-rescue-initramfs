@@ -12,12 +12,14 @@ rm  /usr/bin/chsh
 rm  /usr/bin/expiry
 rm  /usr/bin/gpasswd
 keep    /usr/bin/passwd
+rm      /usr/lib/tmpfiles.d/passwd.conf
 rm  /usr/sbin/chgpasswd
 keep    /usr/sbin/chpasswd
 rm  /usr/sbin/cpgr
 rm  /usr/sbin/cppw
 rm  /usr/sbin/groupadd
 rm  /usr/sbin/groupdel
+rm      /usr/sbin/groupmems
 rm  /usr/sbin/groupmod
 rm  /usr/sbin/grpck
 rm  /usr/sbin/grpconv

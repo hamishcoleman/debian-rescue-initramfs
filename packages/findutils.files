@@ -1,5 +1,4 @@
 todo    /usr/bin/find
-rm  /usr/bin/oldfind
 todo    /usr/bin/xargs
 todo    /usr/share/doc-base/findutils
 

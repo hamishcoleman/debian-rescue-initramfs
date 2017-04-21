@@ -6,6 +6,7 @@
 #
 
 apt
+systemd
 
 # networking
 ifupdown
@@ -27,7 +28,7 @@ wpasupplicant
 mactelnet-server
 
 # filesystem
-btrfs-tools
+btrfs-progs
 dmraid
 mdadm
 xfsprogs

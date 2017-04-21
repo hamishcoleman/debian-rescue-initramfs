@@ -3,11 +3,6 @@ rm  /bin/lessecho
 rm  /bin/lessfile
 rm  /bin/lesskey
 rm  /bin/lesspipe
-keep    /usr/bin/less
-rm  /usr/bin/lessecho
-rm  /usr/bin/lessfile
-rm  /usr/bin/lesskey
-rm  /usr/bin/lesspipe
 rm  /usr/lib/mime/packages/less
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian

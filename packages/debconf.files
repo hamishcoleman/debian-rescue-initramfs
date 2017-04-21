@@ -1,5 +1,4 @@
 keep    /etc/apt/apt.conf.d/70debconf
-rm  /etc/bash_completion.d/debconf
 keep    /etc/debconf.conf
 keep    /usr/bin/debconf
 keep    /usr/bin/debconf-apt-progress
@@ -12,6 +11,8 @@ keep    /usr/lib/python2.7/dist-packages/debconf.py
 keep    /usr/lib/python3/dist-packages/debconf.py
 keep    /usr/sbin/dpkg-preconfigure
 keep    /usr/sbin/dpkg-reconfigure
+rm      /usr/share/bash-completion/completions/debconf
+rm      /usr/share/bash-completion/completions/debconf-show
 todo    /usr/share/debconf/confmodule
 todo    /usr/share/debconf/confmodule.sh
 todo    /usr/share/debconf/debconf.conf

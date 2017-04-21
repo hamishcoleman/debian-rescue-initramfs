@@ -1,11 +1,12 @@
 keep    /bin/lowntfs-3g
 keep    /bin/ntfs-3g
 keep    /bin/ntfs-3g.probe
-keep    /bin/ntfs-3g.secaudit
-keep    /bin/ntfs-3g.usermap
 keep    /bin/ntfscat
 rm  /bin/ntfscluster
 rm  /bin/ntfscmp
+todo    /bin/ntfsrecover
+todo    /bin/ntfssecaudit
+todo    /bin/ntfsusermap
 keep    /bin/ntfsfallocate
 keep    /bin/ntfsfix
 keep    /bin/ntfsinfo
@@ -13,8 +14,6 @@ keep    /bin/ntfsls
 keep    /bin/ntfsmove
 keep    /bin/ntfstruncate
 keep    /bin/ntfswipe
-keep    /lib/${ARCH}-linux-gnu/libntfs-3g.so.852
-keep    /lib/${ARCH}-linux-gnu/libntfs-3g.so.852.0.0
 keep    /sbin/mkfs.ntfs
 keep    /sbin/mkntfs
 keep    /sbin/mount.lowntfs-3g

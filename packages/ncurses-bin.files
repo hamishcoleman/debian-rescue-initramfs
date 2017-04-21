@@ -2,8 +2,6 @@ rm  /usr/bin/captoinfo
 keep    /usr/bin/clear
 rm  /usr/bin/infocmp
 rm  /usr/bin/infotocap
-rm  /usr/bin/ncurses5-config
-rm  /usr/bin/ncursesw5-config
 keep    /usr/bin/reset
 rm  /usr/bin/tabs
 rm  /usr/bin/tic

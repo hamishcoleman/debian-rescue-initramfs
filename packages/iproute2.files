@@ -1,12 +1,15 @@
 keep    /bin/ip
 rm  /bin/ss
+todo    /etc/iproute2/bpf_pinning
 todo    /etc/iproute2/ematch_map
 todo    /etc/iproute2/group
+todo    /etc/iproute2/nl_protos
 todo    /etc/iproute2/rt_dsfield
 todo    /etc/iproute2/rt_protos
 todo    /etc/iproute2/rt_realms
 todo    /etc/iproute2/rt_scopes
 todo    /etc/iproute2/rt_tables
+todo    /etc/iproute2/rt_tables.d/README
 keep    /sbin/bridge
 keep    /sbin/ip
 rm  /sbin/rtacct
@@ -26,8 +29,12 @@ todo    /usr/lib/tc/pareto.dist
 todo    /usr/lib/tc/paretonormal.dist
 todo    /usr/lib/tc/q_atm.so
 rm  /usr/sbin/arpd
+rm      /usr/share/bash-completion/completions/tc
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian
 # are all dealt with centrally
 
+todo    /sbin/devlink
+todo    /sbin/tipc
+todo    /usr/sbin/genl
 

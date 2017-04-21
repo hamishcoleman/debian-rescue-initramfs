@@ -12,13 +12,10 @@ keep    /usr/bin/dpkg-split
 keep    /usr/bin/dpkg-statoverride
 keep    /usr/bin/dpkg-trigger
 keep    /usr/bin/update-alternatives
-keep    /usr/sbin/dpkg-divert
-keep    /usr/sbin/dpkg-statoverride
-keep    /usr/sbin/update-alternatives
 todo    /usr/share/dpkg/abitable
 todo    /usr/share/dpkg/cputable
 todo    /usr/share/dpkg/ostable
-todo    /usr/share/dpkg/triplettable
+todo    /usr/share/dpkg/tupletable
 rm,nopkg /var/lib/dpkg/*-old
 # rm   /var/lib/dpkg/info/*.md5sums # useful to keep so we can check conffiles
 rm,nopkg /var/lib/dpkg/info/*.symbols

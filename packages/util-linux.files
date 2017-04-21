@@ -1,6 +1,7 @@
 keep    /bin/dmesg
 keep    /bin/lsblk
 keep    /bin/more
+todo    /bin/mountpoint
 rm  /bin/tailf
 rm  /bin/wdctl
 rm  /etc/default/hwclock
@@ -35,9 +36,11 @@ keep    /sbin/pivot_root
 rm  /sbin/raw
 keep    /sbin/runuser
 keep    /sbin/sfdisk
+todo    /sbin/sulogin
 keep    /sbin/swaplabel
 keep    /sbin/switch_root
 rm  /sbin/wipefs
+todo    /sbin/zramctl
 rm  /usr/bin/addpart
 rm  /usr/bin/chrt
 rm  /usr/bin/delpart
@@ -49,12 +52,18 @@ keep    /usr/bin/ionice
 rm  /usr/bin/ipcmk
 rm  /usr/bin/ipcrm
 rm  /usr/bin/ipcs
+todo    /usr/bin/last
+todo    /usr/bin/lastb
 rm  /usr/bin/line
+todo    /usr/bin/lsipc
+todo    /usr/bin/lslogins
+todo    /usr/bin/lsns
 keep    /usr/bin/linux32
 keep    /usr/bin/linux64
 keep    /usr/bin/lscpu
 keep    /usr/bin/lslocks
 rm  /usr/bin/mcookie
+todo    /usr/bin/mesg
 keep    /usr/bin/namei
 keep    /usr/bin/nsenter
 keep    /usr/bin/partx
@@ -86,6 +95,7 @@ rm  /usr/share/bash-completion/completions/chcpu
 rm  /usr/share/bash-completion/completions/chrt
 rm  /usr/share/bash-completion/completions/ctrlaltdel
 rm  /usr/share/bash-completion/completions/delpart
+rm      /usr/share/bash-completion/completions/dmesg
 keep    /usr/share/bash-completion/completions/fallocate
 keep    /usr/share/bash-completion/completions/fdformat
 keep    /usr/share/bash-completion/completions/fdisk
@@ -98,20 +108,27 @@ keep    /usr/share/bash-completion/completions/fstrim
 keep    /usr/share/bash-completion/completions/getopt
 keep    /usr/share/bash-completion/completions/hwclock
 keep    /usr/share/bash-completion/completions/ionice
+rm      /usr/share/bash-completion/completions/ipcmk
 rm  /usr/share/bash-completion/completions/ipcrm
 rm  /usr/share/bash-completion/completions/ipcs
 rm  /usr/share/bash-completion/completions/isosize
+rm      /usr/share/bash-completion/completions/last
 keep    /usr/share/bash-completion/completions/ldattach
 keep    /usr/share/bash-completion/completions/lsblk
 keep    /usr/share/bash-completion/completions/lscpu
+rm      /usr/share/bash-completion/completions/lsipc
 keep    /usr/share/bash-completion/completions/lslocks
+rm      /usr/share/bash-completion/completions/lslogins
+rm      /usr/share/bash-completion/completions/lsns
 rm  /usr/share/bash-completion/completions/mcookie
 keep    /usr/share/bash-completion/completions/mkfs
 keep    /usr/share/bash-completion/completions/mkfs.bfs
 rm  /usr/share/bash-completion/completions/mkfs.cramfs
 rm  /usr/share/bash-completion/completions/mkfs.minix
 keep    /usr/share/bash-completion/completions/mkswap
+rm      /usr/share/bash-completion/completions/mesg
 keep    /usr/share/bash-completion/completions/more
+rm      /usr/share/bash-completion/completions/mountpoint
 keep    /usr/share/bash-completion/completions/namei
 keep    /usr/share/bash-completion/completions/nsenter
 keep    /usr/share/bash-completion/completions/partx
@@ -123,6 +140,7 @@ rm  /usr/share/bash-completion/completions/readprofile
 rm  /usr/share/bash-completion/completions/resizepart
 rm  /usr/share/bash-completion/completions/rev
 rm  /usr/share/bash-completion/completions/rtcwake
+rm      /usr/share/bash-completion/completions/runuser
 keep    /usr/share/bash-completion/completions/setarch
 rm  /usr/share/bash-completion/completions/setsid
 keep    /usr/share/bash-completion/completions/setterm
@@ -136,6 +154,7 @@ keep    /usr/share/bash-completion/completions/utmpdump
 rm  /usr/share/bash-completion/completions/wdctl
 keep    /usr/share/bash-completion/completions/whereis
 keep    /usr/share/bash-completion/completions/wipefs
+rm      /usr/share/bash-completion/completions/zramctl
 
 
 # /usr/share/doc, /usr/share/info, /usr/share/man and /usr/share/lintian

@@ -18,7 +18,7 @@ TESTKERN=kernel/4.6-15
 
 # Not simply user changable - the minimisation process will break differently
 # for other debian versions, so the fixup process will need adjustments
-VERSION=jessie
+VERSION=stretch
 
 fakeroot=fakeroot -i $(SAVEPERM) -s $(SAVEPERM)
 

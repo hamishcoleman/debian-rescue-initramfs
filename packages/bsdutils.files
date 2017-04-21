@@ -4,6 +4,7 @@ keep    /usr/bin/script
 rm  /usr/bin/scriptreplay
 rm  /usr/bin/wall
 keep    /usr/share/bash-completion/completions/logger
+rm      /usr/share/bash-completion/completions/renice
 keep    /usr/share/bash-completion/completions/script
 rm  /usr/share/bash-completion/completions/scriptreplay
 rm  /usr/share/bash-completion/completions/wall

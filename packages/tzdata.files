@@ -184,6 +184,7 @@ rm      /usr/share/zoneinfo/America/Port_of_Spain
 rm      /usr/share/zoneinfo/America/Porto_Acre
 rm      /usr/share/zoneinfo/America/Porto_Velho
 rm      /usr/share/zoneinfo/America/Puerto_Rico
+rm      /usr/share/zoneinfo/America/Punta_Arenas
 rm      /usr/share/zoneinfo/America/Rainy_River
 rm      /usr/share/zoneinfo/America/Rankin_Inlet
 rm      /usr/share/zoneinfo/America/Recife
@@ -793,6 +794,7 @@ rm      /usr/share/zoneinfo/posix/America/Port_of_Spain
 rm      /usr/share/zoneinfo/posix/America/Porto_Acre
 rm      /usr/share/zoneinfo/posix/America/Porto_Velho
 rm      /usr/share/zoneinfo/posix/America/Puerto_Rico
+rm      /usr/share/zoneinfo/posix/America/Punta_Arenas
 rm      /usr/share/zoneinfo/posix/America/Rainy_River
 rm      /usr/share/zoneinfo/posix/America/Rankin_Inlet
 rm      /usr/share/zoneinfo/posix/America/Recife
@@ -1400,6 +1402,7 @@ rm      /usr/share/zoneinfo/right/America/Port_of_Spain
 rm      /usr/share/zoneinfo/right/America/Porto_Acre
 rm      /usr/share/zoneinfo/right/America/Porto_Velho
 rm      /usr/share/zoneinfo/right/America/Puerto_Rico
+rm      /usr/share/zoneinfo/right/America/Punta_Arenas
 rm      /usr/share/zoneinfo/right/America/Rainy_River
 rm      /usr/share/zoneinfo/right/America/Rankin_Inlet
 rm      /usr/share/zoneinfo/right/America/Recife
@@ -1822,6 +1825,7 @@ rm      /usr/share/zoneinfo/right/W-SU
 rm      /usr/share/zoneinfo/right/WET
 rm      /usr/share/zoneinfo/right/Zulu
 rm      /usr/share/zoneinfo/zone.tab
+rm      /usr/share/zoneinfo/zone1970.tab
 
 # TODO
 # - maybe keep one or two of the zone files, based on build location?
