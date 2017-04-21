@@ -1,0 +1,17 @@
+#!/bin/bash
+
+DEBOOT="$1"
+ARCH="$2"
+
+# TODO - when the fixme below is addressed, move this to the dropbear.files
+#FILES_LIST="
+#r   /etc/dropbear/dropbear_*_host_key*
+#"
+
+exit 1
+# FIXME
+# - add a script to generate new host keys on bootup..
+#   dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key
+#   dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key
+# then re-enable the key deletion above
+

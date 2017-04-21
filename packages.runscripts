@@ -108,7 +108,7 @@ do_package() {
         exit $S
     fi
 
-    if [ ! -x "$PACKAGEDIR/$package" ]; then
+    if [ ! -x "$PACKAGEDIR/$package.${STAGE}" ]; then
         NO_SCRIPT+="$package "
         return
     fi
@@ -116,7 +116,7 @@ do_package() {
     if [ -n "$VERBOSE" ]; then
         echo -n "$package "
     fi
-    "$PACKAGEDIR/$package" "${DEBOOT}" "${ARCH}" "${STAGE}"
+    "$PACKAGEDIR/$package.${STAGE}" "${DEBOOT}" "${ARCH}"
     S=$?
 
     if [ $S -eq 1 ]; then

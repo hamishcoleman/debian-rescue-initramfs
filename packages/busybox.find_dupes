@@ -1,0 +1,21 @@
+#!/bin/bash
+
+DEBOOT="$1"
+ARCH="$2"
+
+# A non standard stage, used to locate files in the buildroot that could
+# be replaced with their busybox versions
+
+# TODO:
+# - make the data clearer
+# - add size for each file
+# - add potential size savings
+
+cd ${DEBOOT}
+FILES=$( (
+    ls --indicator-style=none busybox/
+    find bin/ sbin/ usr/bin/ usr/sbin/ -type f -printf "%f\n"
+) |sort |uniq -d )
+for i in $FILES; do
+    echo $(find busybox bin sbin usr/bin usr/sbin |grep /$i$)
+done 

@@ -1,0 +1,7 @@
+#!/bin/bash
+
+DEBOOT="$1"
+ARCH="$2"
+
+
+ln -fs gunzip $DEBOOT/bin/uncompress

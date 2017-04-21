@@ -1,12 +1,16 @@
 This directory contains files named after debian packages.  There are
-two types of files - "${package}.files" and "${package}".  The ".files"
-contain lists of files to check or remove from each package and the
-"package" files are scripts that are responsible for any more complex
-customisations that need to be applied to that package.
+two types of files - "${package}.files" and "${package}.${stage}"
+scripts.
 
-These customisations are applied in several phases, and each package that is
-found installed in the rescue system will attempt to run its matching script
-during each phase.
+The ".files" contain simple lists of files to check or remove from
+each package - these lists are machine readable and can be used to do
+consistancy checking on the package and file ownership.  This files
+are read during the "minimise" phase, before any scripts are run.
+
+The "package.stage" scripts are responsible for any more complex
+customisations.  These customisations are applied in several phases,
+and each package that is found installed in the rescue system will
+attempt to run its matching script during each phase.
 
 Curently the phases are:
 
