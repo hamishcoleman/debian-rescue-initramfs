@@ -23,7 +23,7 @@ batmand
 ethtool
 iptraf
 tcpdump
-dropbear
+dropbear-run
 wpasupplicant
 mactelnet-server
 
