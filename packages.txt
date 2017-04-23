@@ -31,8 +31,8 @@ mactelnet-server
 btrfs-progs
 dmraid
 mdadm
-xfsprogs
-xfsdump
+#xfsprogs - I have no XFS in production any more
+#xfsdump
 lvm2
 wodim
 testdisk
@@ -41,7 +41,7 @@ kpartx
 # monitoring
 cpufrequtils
 htop
-ipmitool
+#ipmitool - quite large (6.5M) and rarely used
 lshw
 pv
 strace
@@ -59,7 +59,7 @@ whiptail
 zip
 chntpw
 debootstrap
-partimage
-partimage-server
+#partimage - never used
+#partimage-server - never used
 vim-tiny
 radare2
