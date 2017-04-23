@@ -156,11 +156,6 @@ customise: $(DEBOOT)
 	mkdir -p $(DEBOOT)/etc/elvis/
 	echo "color normal white on black" >>$(DEBOOT)/etc/elvis/elvis.clr
 	echo "rescue" >$(DEBOOT)/etc/hostname
-	echo "" >>$(DEBOOT)/etc/network/interfaces
-	echo "iface eth0 inet dhcp" >>$(DEBOOT)/etc/network/interfaces
-	echo "iface wlan0 inet manual" >>$(DEBOOT)/etc/network/interfaces
-	echo "    wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf" >>$(DEBOOT)/etc/network/interfaces
-	echo "iface default inet dhcp" >>$(DEBOOT)/etc/network/interfaces
 	echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" >$(DEBOOT)/etc/wpa_supplicant/wpa_supplicant.conf
 	echo "update_config=1" >>$(DEBOOT)/etc/wpa_supplicant/wpa_supplicant.conf
 	echo "e scr.utf8 = true" >$(DEBOOT)/usr/share/radare2/radare2rc

@@ -9,8 +9,8 @@ apt
 systemd
 
 # networking
-ifupdown
-udhcpc
+#ifupdown - handled by networkd
+#udhcpc - handled by networkd
 iproute
 netcat-openbsd
 iputils-ping
