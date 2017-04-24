@@ -1,0 +1,114 @@
+#!/bin/bash
+#
+# Process the packages/*.files lists for each package installed in the deboot
+#
+
+if [ $# -lt 3 ]; then
+    echo "Usage: $0 DEBOOT ARCH"
+    exit 1
+fi
+
+DEBOOT="$1"
+ARCH="$2"
+
+if [ "$3" = "verbose" ]; then
+    VERBOSE=1
+else
+    unset VERBOSE
+fi
+
+PACKAGEDIR=packages
+PACKAGES=$(dpkg-query --admindir="${DEBOOT}/var/lib/dpkg" --show --showformat='${Package}\n')
+
+check_file() {
+    local file="$1"
+    local origfile="$1"
+
+    # this check just gets more fun
+    file="${DEBOOT}/$file"
+
+    if [ -L "$file" ]; then
+        # if it is a symlink, we need to check if it is an absolute and fix it
+        local dest=$(readlink "$file")
+        case "$dest" in
+        /*) file="${DEBOOT}$dest" ;;
+        esac
+    fi
+
+    # it must be existing, unless it is a symlink - where it could be
+    # a dangling pointer and exist, but fail the "-e"..  Ungh.. I need
+    # to replace this stuff
+    if [ ! -e "$file" -a ! -L "$file" ]; then
+        echo "MISSING $package $origfile"
+        RESULT=2
+    fi
+}
+
+do_files_list() {
+    local package=$1
+
+    if [ ! -e "$PACKAGEDIR/${package}.files" ]; then
+        NO_FILES+="${package} "
+        return
+    fi
+
+    if [ -n "$VERBOSE" ]; then
+        echo -n "${package}.files "
+    fi
+
+    RESULT=0
+    while read action file; do
+        case "$action" in
+        '') true
+            # skip blank lines
+            ;;
+        '#') true
+            # skip comment lines
+            ;;
+        false)
+            ln -sf /bin/false "${DEBOOT}/$file"
+            ;;
+        keep|todo)
+            eval file="$file"
+            # FIXME - this doesnt work with globs
+            check_file "$file"
+            ;;
+        rm|rm,nopkg)
+            eval rm -f "${DEBOOT}/$file"
+            ;;
+        touch|touch,nopkg)
+            rm -f "${DEBOOT}/$file"
+            touch "${DEBOOT}/$file"
+            ;;
+        true)
+            rm -f "${DEBOOT}/$file"
+            touch "${DEBOOT}/$file"
+            chmod a+x "${DEBOOT}/$file"
+            ;;
+        *)  echo "ERROR: action $action in files list for $package"
+            RESULT=2
+            ;;
+        esac
+    done <"$PACKAGEDIR/${package}.files"
+    DO_FILES+="${package} "
+    return $RESULT
+}
+
+if [ -n "$VERBOSE" ]; then
+    echo 
+    echo "Processing:"
+    echo -e -n "\t"
+fi
+
+for package in $PACKAGES; do
+    do_files_list "$package"
+    S=$?
+    if [ $S -gt 1 ]; then
+        exit $S
+    fi
+done
+
+if [ -n "$VERBOSE" ]; then
+    echo 
+fi
+

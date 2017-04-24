@@ -173,6 +173,7 @@ busybox: $(DEBOOT)
 
 # TODO - automatic dependancies for the runscripts
 minimise: $(DEBOOT) debcache_save
+	./packages.runfiles $(DEBOOT) $(ARCH) verbose
 	./packages.runscripts $(DEBOOT) $(ARCH) minimise
 	rm -rf \
 		$(DEBOOT)/usr/share/doc/* \

@@ -17,99 +17,13 @@ VERBOSE="$4"
 PACKAGEDIR=packages
 PACKAGES=$(dpkg-query --admindir="${DEBOOT}/var/lib/dpkg" --show --showformat='${Package}\n')
 
-unset NO_FILES
 unset NO_SCRIPT
 unset NO_SUPPORT
 
-unset DO_FILES
 unset DO_SCRIPT
-
-check_file() {
-    local file="$1"
-    local origfile="$1"
-
-    # this check just gets more fun
-    file="${DEBOOT}/$file"
-
-    if [ -L "$file" ]; then
-        # if it is a symlink, we need to check if it is an absolute and fix it
-        local dest=$(readlink "$file")
-        case "$dest" in
-        /*) file="${DEBOOT}$dest" ;;
-        esac
-    fi
-
-    # it must be existing, unless it is a symlink - where it could be
-    # a dangling pointer and exist, but fail the "-e"..  Ungh.. I need
-    # to replace this stuff
-    if [ ! -e "$file" -a ! -L "$file" ]; then
-        echo "MISSING $package $origfile"
-        RESULT=2
-    fi
-}
-
-do_files_list() {
-    local package=$1
-
-    if [ "${STAGE}" != "minimise" ]; then
-        return
-    fi
-
-    if [ ! -e "$PACKAGEDIR/${package}.files" ]; then
-        NO_FILES+="${package} "
-        return
-    fi
-
-    if [ -n "$VERBOSE" ]; then
-        echo -n "${package}.files "
-    fi
-
-    RESULT=0
-    while read action file; do
-        case "$action" in
-        '') true
-            # skip blank lines
-            ;;
-        '#') true
-            # skip comment lines
-            ;;
-        false)
-            ln -sf /bin/false "${DEBOOT}/$file"
-            ;;
-        keep|todo)
-            eval file="$file"
-            # FIXME - this doesnt work with globs
-            check_file "$file"
-            ;;
-        rm|rm,nopkg)
-            eval rm -f "${DEBOOT}/$file"
-            ;;
-        touch|touch,nopkg)
-            rm -f "${DEBOOT}/$file"
-            touch "${DEBOOT}/$file"
-            ;;
-        true)
-            rm -f "${DEBOOT}/$file"
-            touch "${DEBOOT}/$file"
-            chmod a+x "${DEBOOT}/$file"
-            ;;
-        *)  echo "ERROR: action $action in files list for $package"
-            RESULT=2
-            ;;
-        esac
-    done <"$PACKAGEDIR/${package}.files"
-    DO_FILES+="${package} "
-    return $RESULT
-}
 
 do_package() {
     local package=$1
-
-    do_files_list "$package"
-    S=$?
-    if [ $S -gt 1 ]; then
-        exit $S
-    fi
 
     if [ ! -x "$PACKAGEDIR/$package.${STAGE}" ]; then
         NO_SCRIPT+="$package "
@@ -155,13 +69,6 @@ if [ -n "$VERBOSE" ]; then
 fi
 
 NR_PACKAGES=$(echo "$PACKAGES" |wc -w)
-
-echo "Packages with files list: $(echo "$DO_FILES" |wc -w)/$NR_PACKAGES"
-if [ -n "$VERBOSE" ]; then
-    echo "Missing files list:"
-    echo -e "\t$NO_FILES"
-    echo
-fi
 
 echo "Packages with all-in-one script: $(echo "$DO_SCRIPT" |wc -w)/$NR_PACKAGES"
 if [ -n "$VERBOSE" ]; then
