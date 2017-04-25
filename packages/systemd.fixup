@@ -4,20 +4,48 @@ DEBOOT="$1"
 ARCH="$2"
 
 
+# TODO
+# - figure out where to put common fragments like this
+wants() {
+    local WANTS="$1"
+    local THIS="$2"
+
+    local WANTSDIR="${DEBOOT}/etc/systemd/system/${WANTS}.wants"
+    mkdir -p "${WANTSDIR}"
+    ln -sf "${THIS}" "${WANTSDIR}"
+}
+
+
 # the initrd looks for a different file to start as init than
 # a normal bootup.  # so, we need to specifically create a link
 # for it.
 # TODO - when we use a script as /init remove this
 ln -fs /lib/systemd/systemd $DEBOOT/init
 
-# manually install the network unit to run on startup
-mkdir -p ${DEBOOT}/etc/systemd/system/multi-user.target.wants
-ln -sf /lib/systemd/system/systemd-networkd.service ${DEBOOT}/etc/systemd/system/multi-user.target.wants
-ln -sf /lib/systemd/system/systemd-networkd.socket ${DEBOOT}/etc/systemd/system/multi-user.target.wants
+# Set the correct systemd components to run automatically
+wants multi-user.target /lib/systemd/system/systemd-networkd.service
+wants multi-user.target /lib/systemd/system/systemd-networkd.socket
+wants multi-user.target /lib/systemd/system/systemd-resolved.service
+
+# point our default resolver at systemd-resolved
+cat <<EOF >${DEBOOT}/etc/resolv.conf
+nameserver 127.0.0.53
+EOF
+
+# install link configuration config
+cat <<EOF >${DEBOOT}/etc/systemd/network/95-oldnames.link
+# just use the simple old kernel names for all interfaces
+[Link]
+NamePolicy=kernel database
+MACAddressPolicy=persistent
+EOF
 
 # install IP configuration config
-cat <<EOF >${DEBOOT}/etc/systemd/network/95-rescue.network
-# ensure that all network devices are captured by systemd-networkd
+cat <<EOF >${DEBOOT}/etc/systemd/network/95-defaulteth.network
+# By default, all ethernet ports are clients trying to become our upstream
+[Match]
+Name=eth* en*
+
 [Network]
 DHCP=yes
 IPv4LLRoute=yes
@@ -25,23 +53,5 @@ LLMNR=true
 MulticastDNS=true
 LLDP=true
 EmitLLDP=true
-
-EOF
-
-# install link configuration config
-cat <<EOF >${DEBOOT}/etc/systemd/network/95-rescue.link
-# just use the simple old kernel names for all interfaces
-[Link]
-NamePolicy=kernel database
-MACAddressPolicy=persistent
-EOF
-
-# manually install the resolver unit to run on startup
-mkdir -p ${DEBOOT}/etc/systemd/system/multi-user.target.wants
-ln -sf /lib/systemd/system/systemd-resolved.service ${DEBOOT}/etc/systemd/system/multi-user.target.wants
-
-# point our default resolver at systemd-resolved
-cat <<EOF >${DEBOOT}/etc/resolv.conf
-nameserver 127.0.0.53
 EOF
 
