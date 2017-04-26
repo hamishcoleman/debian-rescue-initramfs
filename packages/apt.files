@@ -31,8 +31,8 @@ keep    /usr/lib/dpkg/methods/apt/install
 keep    /usr/lib/dpkg/methods/apt/names
 keep    /usr/lib/dpkg/methods/apt/setup
 keep    /usr/lib/dpkg/methods/apt/update
-keep    /usr/lib/${ARCH}-linux-gnu/libapt-private.so.0.0
-keep    /usr/lib/${ARCH}-linux-gnu/libapt-private.so.0.0.0
+keep    /usr/lib/${ARCH}/libapt-private.so.0.0
+keep    /usr/lib/${ARCH}/libapt-private.so.0.0.0
 rm  /usr/share/bug/apt/script
 rm,nopkg /var/cache/apt/archives/lock
 rm,nopkg /var/cache/apt/archives/*.deb

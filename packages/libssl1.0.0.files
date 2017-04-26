@@ -1,27 +1,27 @@
 # Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
 
-rm  /usr/lib/${ARCH}-linux-gnu/i586/libcrypto.so.1.0.0
-rm  /usr/lib/${ARCH}-linux-gnu/i586/libssl.so.1.0.0
-rm  /usr/lib/${ARCH}-linux-gnu/i686/cmov/libcrypto.so.1.0.0
-rm  /usr/lib/${ARCH}-linux-gnu/i686/cmov/libssl.so.1.0.0
+rm      /usr/lib/${ARCH}/i586/libcrypto.so.1.0.0
+rm      /usr/lib/${ARCH}/i586/libssl.so.1.0.0
+rm      /usr/lib/${ARCH}/i686/cmov/libcrypto.so.1.0.0
+rm      /usr/lib/${ARCH}/i686/cmov/libssl.so.1.0.0
 
 # FIXME
 # - clearly, this is architecture specific
 
-keep    /usr/lib/${ARCH}-linux-gnu/libcrypto.so.1.0.0
-keep    /usr/lib/${ARCH}-linux-gnu/libssl.so.1.0.0
-keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/lib4758cca.so
-keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libaep.so
-keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libatalla.so
-keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libcapi.so
-keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libchil.so
-keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libcswift.so
-keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libgmp.so
-keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libgost.so
-keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libnuron.so
-keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libpadlock.so
-keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libsureware.so
-keep    /usr/lib/${ARCH}-linux-gnu/openssl-1.0.0/engines/libubsec.so
+keep    /usr/lib/${ARCH}/libcrypto.so.1.0.0
+keep    /usr/lib/${ARCH}/libssl.so.1.0.0
+keep    /usr/lib/${ARCH}/openssl-1.0.0/engines/lib4758cca.so
+keep    /usr/lib/${ARCH}/openssl-1.0.0/engines/libaep.so
+keep    /usr/lib/${ARCH}/openssl-1.0.0/engines/libatalla.so
+keep    /usr/lib/${ARCH}/openssl-1.0.0/engines/libcapi.so
+keep    /usr/lib/${ARCH}/openssl-1.0.0/engines/libchil.so
+keep    /usr/lib/${ARCH}/openssl-1.0.0/engines/libcswift.so
+keep    /usr/lib/${ARCH}/openssl-1.0.0/engines/libgmp.so
+keep    /usr/lib/${ARCH}/openssl-1.0.0/engines/libgost.so
+keep    /usr/lib/${ARCH}/openssl-1.0.0/engines/libnuron.so
+keep    /usr/lib/${ARCH}/openssl-1.0.0/engines/libpadlock.so
+keep    /usr/lib/${ARCH}/openssl-1.0.0/engines/libsureware.so
+keep    /usr/lib/${ARCH}/openssl-1.0.0/engines/libubsec.so
 
 
 # /usr/share/doc, /usr/share/locale and /usr/share/man

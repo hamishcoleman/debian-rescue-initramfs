@@ -392,8 +392,8 @@ todo    /usr/bin/systemd-socket-activate
 todo    /usr/lib/kernel/install.d/50-depmod.install
 todo    /usr/lib/kernel/install.d/85-initrd.install
 todo    /usr/lib/kernel/install.d/90-loaderentry.install
-todo    /usr/lib/systemd/boot/efi/linuxia32.efi.stub
-todo    /usr/lib/systemd/boot/efi/systemd-bootia32.efi
+# todo    /usr/lib/systemd/boot/efi/linuxia32.efi.stub
+# todo    /usr/lib/systemd/boot/efi/systemd-bootia32.efi
 todo    /usr/lib/systemd/catalog/systemd.be.catalog
 todo    /usr/lib/systemd/catalog/systemd.be@latin.catalog
 todo    /usr/lib/systemd/catalog/systemd.bg.catalog

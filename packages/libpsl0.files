@@ -1,6 +1,6 @@
 # Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
 
-rm  /usr/lib/${ARCH}-linux-gnu/libpsl.so.0
-rm  /usr/lib/${ARCH}-linux-gnu/libpsl.so.0.2.2
+rm  /usr/lib/${ARCH}/libpsl.so.0
+rm  /usr/lib/${ARCH}/libpsl.so.0.2.2
 
 # this removes all the non-doc files from this package

@@ -1,21 +1,21 @@
 # Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
 
-todo    /usr/lib/${ARCH}-linux-gnu/libicudata.so.52
-todo    /usr/lib/${ARCH}-linux-gnu/libicudata.so.52.1
-todo    /usr/lib/${ARCH}-linux-gnu/libicui18n.so.52
-todo    /usr/lib/${ARCH}-linux-gnu/libicui18n.so.52.1
-todo    /usr/lib/${ARCH}-linux-gnu/libicuio.so.52
-todo    /usr/lib/${ARCH}-linux-gnu/libicuio.so.52.1
-todo    /usr/lib/${ARCH}-linux-gnu/libicule.so.52
-todo    /usr/lib/${ARCH}-linux-gnu/libicule.so.52.1
-todo    /usr/lib/${ARCH}-linux-gnu/libiculx.so.52
-todo    /usr/lib/${ARCH}-linux-gnu/libiculx.so.52.1
-todo    /usr/lib/${ARCH}-linux-gnu/libicutest.so.52
-todo    /usr/lib/${ARCH}-linux-gnu/libicutest.so.52.1
-todo    /usr/lib/${ARCH}-linux-gnu/libicutu.so.52
-todo    /usr/lib/${ARCH}-linux-gnu/libicutu.so.52.1
-todo    /usr/lib/${ARCH}-linux-gnu/libicuuc.so.52
-todo    /usr/lib/${ARCH}-linux-gnu/libicuuc.so.52.1
+todo    /usr/lib/${ARCH}/libicudata.so.52
+todo    /usr/lib/${ARCH}/libicudata.so.52.1
+todo    /usr/lib/${ARCH}/libicui18n.so.52
+todo    /usr/lib/${ARCH}/libicui18n.so.52.1
+todo    /usr/lib/${ARCH}/libicuio.so.52
+todo    /usr/lib/${ARCH}/libicuio.so.52.1
+todo    /usr/lib/${ARCH}/libicule.so.52
+todo    /usr/lib/${ARCH}/libicule.so.52.1
+todo    /usr/lib/${ARCH}/libiculx.so.52
+todo    /usr/lib/${ARCH}/libiculx.so.52.1
+todo    /usr/lib/${ARCH}/libicutest.so.52
+todo    /usr/lib/${ARCH}/libicutest.so.52.1
+todo    /usr/lib/${ARCH}/libicutu.so.52
+todo    /usr/lib/${ARCH}/libicutu.so.52.1
+todo    /usr/lib/${ARCH}/libicuuc.so.52
+todo    /usr/lib/${ARCH}/libicuuc.so.52.1
 
 # this is removing every non-doc file from the package
 

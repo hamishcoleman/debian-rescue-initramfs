@@ -26,7 +26,6 @@ check_file() {
     local origfile="$1"
 
     # this check just gets more fun
-    file="${DEBOOT}/$file"
 
     if [ -L "$file" ]; then
         # if it is a symlink, we need to check if it is an absolute and fix it
@@ -70,9 +69,10 @@ do_files_list() {
             ln -sf /bin/false "${DEBOOT}/$file"
             ;;
         keep|todo)
-            eval file="$file"
-            # FIXME - this doesnt work with globs
-            check_file "$file"
+            eval glob="$file"
+            for f in ${DEBOOT}/$glob; do
+                check_file "$f"
+            done
             ;;
         rm|rm,nopkg)
             eval rm -f "${DEBOOT}/$file"

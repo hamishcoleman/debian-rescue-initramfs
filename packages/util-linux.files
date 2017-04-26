@@ -1,5 +1,7 @@
 # Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
 
+# todo   /usr/bin/${ARCH}
+
 keep    /bin/dmesg
 keep    /bin/lsblk
 keep    /bin/more
@@ -49,7 +51,6 @@ rm  /usr/bin/delpart
 keep    /usr/bin/fallocate
 keep    /usr/bin/flock
 keep    /usr/bin/getopt
-todo   /usr/bin/${ARCH} # TODO - will change for different arch
 keep    /usr/bin/ionice
 rm  /usr/bin/ipcmk
 rm  /usr/bin/ipcrm

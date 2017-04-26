@@ -104,7 +104,7 @@ keep    /usr/bin/wc
 rm  /usr/bin/who
 keep    /usr/bin/whoami
 keep    /usr/bin/yes
-rm      /usr/lib/${ARCH}-linux-gnu/coreutils/libstdbuf.so
+rm      /usr/lib/${ARCH}/coreutils/libstdbuf.so
 keep    /usr/sbin/chroot
 
 # /usr/share/doc, /usr/share/info and /usr/share/man are all dealt with

@@ -2,8 +2,8 @@
 
 rm  /etc/magic
 rm  /etc/magic.mime
-keep    /usr/lib/${ARCH}-linux-gnu/libmagic.so.1
-keep    /usr/lib/${ARCH}-linux-gnu/libmagic.so.1.0.0
+keep    /usr/lib/${ARCH}/libmagic.so.1
+keep    /usr/lib/${ARCH}/libmagic.so.1.0.0
 rm  /usr/share/bug/libmagic1/control
 rm  /usr/share/bug/libmagic1/presubj
 
