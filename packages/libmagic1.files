@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /etc/magic
 rm  /etc/magic.mime
 keep    /usr/lib/${ARCH}-linux-gnu/libmagic.so.1

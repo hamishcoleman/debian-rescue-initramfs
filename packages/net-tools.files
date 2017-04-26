@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /sbin/plipconfig
 rm  /sbin/rarp
 rm  /sbin/slattach

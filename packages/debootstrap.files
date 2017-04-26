@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /usr/sbin/debootstrap
 keep    /usr/share/debootstrap/functions
 rm      /usr/share/debootstrap/scripts/aequorea

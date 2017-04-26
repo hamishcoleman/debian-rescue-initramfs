@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /bin/bash
 keep    /bin/rbash
 keep    /etc/bash.bashrc

@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /etc/default/partimaged
 keep    /etc/init.d/partimaged
 keep    /etc/pam.d/partimaged

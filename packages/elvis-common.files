@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /usr/share/doc-base/elvis
 keep    /usr/share/elvis/elvis.bro
 rm  /usr/share/elvis/elvis.glade

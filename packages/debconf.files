@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /etc/apt/apt.conf.d/70debconf
 keep    /etc/debconf.conf
 keep    /usr/bin/debconf

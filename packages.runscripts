@@ -3,6 +3,7 @@
 # Check the debian root dir and try to run the script for each installed
 # package.
 #
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
 
 if [ $# -lt 3 ]; then
     echo "Usage: $0 DEBOOT ARCH STAGE"

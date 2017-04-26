@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /lib/libhandle.so.1
 keep    /lib/libhandle.so.1.0.3
 keep    /sbin/fsck.xfs

@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 # This package is only installed due to other dependancies, which we
 # are either ignoring, or filling with the busybox wget, so while it
 # looks strange that we are deleting the only real files from this package

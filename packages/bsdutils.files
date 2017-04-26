@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /usr/bin/logger
 keep    /usr/bin/renice
 keep    /usr/bin/script

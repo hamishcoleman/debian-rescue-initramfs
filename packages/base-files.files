@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /etc/debian_version
 rm  /etc/dpkg/origins/debian
 keep    /etc/host.conf

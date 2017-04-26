@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /usr/bin/perl
 keep    /usr/bin/perl5.24.1
 todo    /usr/lib/${ARCH}-linux-gnu/perl-base/AutoLoader.pm

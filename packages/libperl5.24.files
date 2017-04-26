@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 todo    /usr/bin/cpan5.24-${ARCH}-linux-gnu
 todo    /usr/bin/perl5.24-${ARCH}-linux-gnu
 todo    /usr/lib/${ARCH}-linux-gnu/libperl.so.5.24

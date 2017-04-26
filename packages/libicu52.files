@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 todo    /usr/lib/${ARCH}-linux-gnu/libicudata.so.52
 todo    /usr/lib/${ARCH}-linux-gnu/libicudata.so.52.1
 todo    /usr/lib/${ARCH}-linux-gnu/libicui18n.so.52

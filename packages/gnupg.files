@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /lib/udev/rules.d/60-gnupg.rules
 rm  /usr/bin/gpg
 rm  /usr/bin/gpg-zip

@@ -2,6 +2,7 @@
 #
 # Process the packages/*.files lists for each package installed in the deboot
 #
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
 
 if [ $# -lt 3 ]; then
     echo "Usage: $0 DEBOOT ARCH"

@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /bin/ip
 rm  /bin/ss
 todo    /etc/iproute2/bpf_pinning

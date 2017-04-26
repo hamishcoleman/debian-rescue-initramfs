@@ -1,2 +1,4 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /usr/bin/ssh-vulnkey
 

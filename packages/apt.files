@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /etc/apt/apt.conf.d/01autoremove
 rm  /etc/cron.daily/apt-compat
 rm  /etc/kernel/postinst.d/apt-auto-removal

@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /etc/bindresvport.blacklist
 rm  /etc/default/nss
 todo   /etc/gai.conf # TODO - could be replaced with something smaller

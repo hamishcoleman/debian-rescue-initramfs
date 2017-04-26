@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /usr/lib/${ARCH}-linux-gnu/i586/libcrypto.so.1.0.0
 rm  /usr/lib/${ARCH}-linux-gnu/i586/libssl.so.1.0.0
 rm  /usr/lib/${ARCH}-linux-gnu/i686/cmov/libcrypto.so.1.0.0

@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /etc/default/mactelnet-server
 keep    /etc/init.d/mactelnet-server
 keep    /etc/mactelnetd.users

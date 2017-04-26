@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /usr/sbin/update-passwd
 rm  /usr/share/base-passwd/group.master
 rm  /usr/share/base-passwd/passwd.master

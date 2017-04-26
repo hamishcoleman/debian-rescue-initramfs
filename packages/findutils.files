@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 todo    /usr/bin/find
 todo    /usr/bin/xargs
 todo    /usr/share/doc-base/findutils

@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /etc/ld.so.conf.d/${ARCH}-linux-gnu.conf
 todo    /lib/${ARCH}-linux-gnu/ld-2.24.so
 todo    /lib/${ARCH}-linux-gnu/ld-linux.so.2

@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /bin/fuser
 keep    /usr/bin/killall
 keep    /usr/bin/peekfd

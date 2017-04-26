@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /etc/init.d/screen-cleanup
 todo    /etc/screenrc # TODO - can be replaced with a smaller file
 keep    /usr/bin/screen

@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 todo    /usr/share/perl/5.24.1/AnyDBM_File.pm
 todo    /usr/share/perl/5.24.1/App/Cpan.pm
 todo    /usr/share/perl/5.24.1/App/Prove.pm

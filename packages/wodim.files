@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /etc/netscsid.conf
 todo    /etc/wodim.conf # TODO - replace with a smaller file
 rm  /usr/bin/readom

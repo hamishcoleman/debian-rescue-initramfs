@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /usr/bin/lsusb
 rm  /usr/bin/usb-devices
 

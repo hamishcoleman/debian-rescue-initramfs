@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /usr/bin/omshell
 
 # this is pretty much the only non-doc file in this package - this package

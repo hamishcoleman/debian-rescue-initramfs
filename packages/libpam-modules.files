@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /etc/security/access.conf
 rm  /etc/security/group.conf
 keep    /etc/security/limits.conf

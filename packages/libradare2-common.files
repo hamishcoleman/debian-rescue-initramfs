@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 todo    /usr/share/radare2/1.1.0/cons/basic
 todo    /usr/share/radare2/1.1.0/cons/behelit
 todo    /usr/share/radare2/1.1.0/cons/cga

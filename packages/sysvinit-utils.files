@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 todo    /bin/pidof
 todo    /lib/init/init-d-script
 todo    /sbin/fstab-decode

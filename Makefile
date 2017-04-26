@@ -1,5 +1,6 @@
+# Build a minimised debian rescue system
 #
-#
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
 
 # Typical workflow:
 #  make clean debcache

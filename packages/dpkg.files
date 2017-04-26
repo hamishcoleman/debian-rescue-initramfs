@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /etc/alternatives/README
 rm  /etc/cron.daily/dpkg
 keep    /etc/dpkg/dpkg.cfg

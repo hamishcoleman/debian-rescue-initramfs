@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 # we dont have kernel modules inside the initramfs, so trying to load
 # the modules with /etc/init.d/loadcpufreq just causes system errors
 

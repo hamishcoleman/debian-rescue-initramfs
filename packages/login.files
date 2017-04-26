@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /bin/login
 keep    /bin/su
 todo    /etc/login.defs # TODO - can be replaced with a smaller file

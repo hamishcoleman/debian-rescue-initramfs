@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 todo    /usr/lib/${ARCH}-linux-gnu/libr_anal.so.0.9.6
 todo    /usr/lib/${ARCH}-linux-gnu/libr_asm.so.0.9.6
 todo    /usr/lib/${ARCH}-linux-gnu/libr_bin.so.0.9.6

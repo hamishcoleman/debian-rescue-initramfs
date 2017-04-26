@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /usr/bin/zip
 rm  /usr/bin/zipcloak
 rm  /usr/bin/zipnote

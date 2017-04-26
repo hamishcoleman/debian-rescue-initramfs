@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /etc/init.d/lvm2
 rm      /etc/init.d/lvm2-lvmetad
 rm      /etc/init.d/lvm2-lvmpolld

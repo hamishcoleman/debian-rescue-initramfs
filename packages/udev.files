@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 todo    /bin/systemd-hwdb
 keep    /bin/udevadm
 keep    /etc/init.d/udev

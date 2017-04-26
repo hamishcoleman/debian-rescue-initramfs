@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /bin/kill
 keep    /bin/ps
 keep    /etc/init.d/procps

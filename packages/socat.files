@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /usr/bin/filan
 rm  /usr/bin/procan
 keep    /usr/bin/socat

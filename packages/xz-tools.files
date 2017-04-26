@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /usr/bin/lzmainfo
 
 # This package is not installed in the current rescue system, so no effort has

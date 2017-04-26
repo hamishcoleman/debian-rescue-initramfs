@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /bin/lowntfs-3g
 keep    /bin/ntfs-3g
 keep    /bin/ntfs-3g.probe

@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /usr/bin/captoinfo
 keep    /usr/bin/clear
 rm  /usr/bin/infocmp

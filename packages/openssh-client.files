@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 keep    /etc/ssh/moduli
 todo    /etc/ssh/ssh_config # TODO - could be replaced with something smaller
 keep    /usr/bin/scp

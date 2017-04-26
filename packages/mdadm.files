@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /etc/cron.d/mdadm
 rm  /etc/cron.daily/mdadm
 rm,nopkg /etc/default/mdadm

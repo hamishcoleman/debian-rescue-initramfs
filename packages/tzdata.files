@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /usr/sbin/tzconfig
 rm      /usr/share/zoneinfo/Africa/Abidjan
 rm      /usr/share/zoneinfo/Africa/Accra

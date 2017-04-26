@@ -1,3 +1,5 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
 rm  /etc/mke2fs.conf
 keep    /sbin/badblocks
 keep    /sbin/debugfs
