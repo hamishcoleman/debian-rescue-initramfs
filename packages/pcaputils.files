@@ -1,0 +1,9 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
+rm      /etc/default/pcapdump
+rm      /etc/init.d/pcapdump
+keep    /usr/bin/pcapdump
+rm      /usr/bin/pcapip
+rm      /usr/bin/pcappick
+rm      /usr/bin/pcapuc
+
