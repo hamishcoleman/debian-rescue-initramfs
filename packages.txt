@@ -9,23 +9,22 @@ apt
 systemd
 
 # networking
-#ifupdown - handled by networkd
-#udhcpc - handled by networkd
 iproute
 netcat-openbsd
 iputils-ping
-vlan
 openssh-client
 socat
 iputils-tracepath
 traceroute
-batmand
+batctl
 ethtool
 iptraf
-tcpdump
+#tcpdump - just use batctl or dumppcap
 dropbear-run
 wpasupplicant
 mactelnet-server
+pcaputils
+iptables
 
 # filesystem
 btrfs-progs
@@ -57,8 +56,8 @@ rsync
 screen
 whiptail
 zip
-chntpw
-debootstrap
+#chntpw - never used
+#debootstrap - needs network access anyway, so just apt install it
 #partimage - never used
 #partimage-server - never used
 vim-tiny
