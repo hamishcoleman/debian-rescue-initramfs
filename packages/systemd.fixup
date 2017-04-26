@@ -35,7 +35,8 @@ nameserver 127.0.0.53
 EOF
 
 # install link configuration config
-cat <<EOF >${DEBOOT}/etc/systemd/network/95-oldnames.link
+# This filename is hardcoded in /lib/udev/rules.d/73-usb-net-by-mac.rules :-(
+cat <<EOF >${DEBOOT}/etc/systemd/network/99-default.link
 # just use the simple old kernel names for all interfaces
 [Link]
 NamePolicy=kernel database
