@@ -1,0 +1,10 @@
+#!/bin/bash
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
+DEBOOT="$1"
+ARCH="$2"
+
+# This is a fixup because if you dont do it, you basically cannot read the
+# text in elvis
+echo "color normal white on black" >>${DEBOOT}/etc/elvis/elvis.clr
+

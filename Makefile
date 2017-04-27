@@ -162,8 +162,7 @@ fixup: $(DEBOOT)
 # customisations are things that go beyond makeing the image work
 #
 customise: $(DEBOOT)
-	mkdir -p $(DEBOOT)/etc/elvis/
-	echo "color normal white on black" >>$(DEBOOT)/etc/elvis/elvis.clr
+	./packages.runscripts $(DEBOOT) $(CONFIG_ARCH_LIBS) customise
 	echo "rescue" >$(DEBOOT)/etc/hostname
 	echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" >$(DEBOOT)/etc/wpa_supplicant/wpa_supplicant.conf
 	echo "update_config=1" >>$(DEBOOT)/etc/wpa_supplicant/wpa_supplicant.conf
