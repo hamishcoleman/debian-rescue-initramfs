@@ -1,0 +1,62 @@
+#!/bin/bash
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
+DEBOOT="$1"
+ARCH="$2"
+
+# This filename is hardcoded in /lib/udev/rules.d/73-usb-net-by-mac.rules :-(
+cat <<EOF >${DEBOOT}/etc/systemd/network/99-default.link
+# just use the simple old kernel names for all interfaces
+[Link]
+NamePolicy=kernel database
+MACAddressPolicy=persistent
+EOF
+
+# install ethernet configuration config
+cat <<EOF >${DEBOOT}/etc/systemd/network/95-defaulteth.network
+# By default, all ethernet ports are clients trying to become our upstream
+[Match]
+Name=eth* en*
+
+[Network]
+DHCP=yes
+IPv4LLRoute=yes
+LLMNR=true
+MulticastDNS=true
+LLDP=true
+EmitLLDP=true
+EOF
+
+cat <<EOF >${DEBOOT}/etc/systemd/network/95-defaultwlan.network 
+# By default, all wlan interfaces will be access points
+# TODO - wire up hostapd
+[Match]
+Type=wlan
+
+[Network]
+DHCPServer=yes
+LLMNR=true
+MulticastDNS=true
+LLDP=true
+EmitLLDP=true
+Address=0.0.0.0/24
+IPForward=true
+IPMasquerade=true
+EOF
+
+cat <<EOF >${DEBOOT}/etc/systemd/network/85-mesh.network
+# By default, any of these type of wifi cards are used for mesh networking
+# TODO - wire up a script to set that up
+[Match]
+Type=wlan
+Driver=rt2800usb
+
+[Network]
+LinkLocalAddressing=yes
+IPv4LLRoute=yes
+LLMNR=true
+MulticastDNS=true
+LLDP=true
+EmitLLDP=true
+EOF
+
