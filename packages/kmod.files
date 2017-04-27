@@ -1,0 +1,16 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
+keep    /bin/kmod
+keep    /bin/lsmod
+rm      /etc/init.d/kmod
+todo    /lib/modprobe.d/aliases.conf
+keep    /sbin/depmod
+keep    /sbin/insmod
+keep    /sbin/lsmod
+keep    /sbin/modinfo
+keep    /sbin/modprobe
+keep    /sbin/rmmod
+keep    /usr/share/bash-completion/completions/kmod
+rm      /usr/share/initramfs-tools/hooks/kmod
+
+

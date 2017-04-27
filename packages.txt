@@ -7,6 +7,8 @@
 
 apt
 systemd
+kmod
+busybox
 
 # networking
 iproute

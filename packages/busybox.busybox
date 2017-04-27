@@ -266,7 +266,6 @@ REPLACE='
     /sbin/ifconfig
     /sbin/losetup
     /sbin/mkswap
-    /sbin/modprobe
     /sbin/nameif
     /sbin/pivot_root
     /sbin/route
