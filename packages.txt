@@ -27,6 +27,9 @@ wpasupplicant
 mactelnet-server
 pcaputils
 iptables
+iw
+hostapd
+crda
 
 # filesystem
 btrfs-progs

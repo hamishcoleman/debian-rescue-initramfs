@@ -1,0 +1,4 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
+keep    /sbin/iw
+

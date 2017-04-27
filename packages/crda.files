@@ -1,0 +1,16 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
+keep    /etc/default/crda # TODO - replace with a smaller version
+todo    /lib/crda/libreg.so
+todo    /lib/crda/pubkeys/benh@debian.org.key.pub.pem
+todo    /lib/crda/pubkeys/linville.key.pub.pem
+todo    /lib/crda/pubkeys/sforshee.key.pub.pem
+keep    /lib/crda/setregdomain
+keep    /lib/udev/rules.d/60-crda.rules
+keep    /lib/udev/rules.d/85-regulatory.rules
+keep    /sbin/crda
+todo    /sbin/regdbdump
+rm      /usr/include/reglib/nl80211.h
+rm      /usr/include/reglib/regdb.h
+rm      /usr/include/reglib/reglib.h
+
