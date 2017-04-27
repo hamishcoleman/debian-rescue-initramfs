@@ -164,9 +164,6 @@ fixup: $(DEBOOT)
 customise: $(DEBOOT)
 	./packages.runscripts $(DEBOOT) $(CONFIG_ARCH_LIBS) customise
 	echo "rescue" >$(DEBOOT)/etc/hostname
-	echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" >$(DEBOOT)/etc/wpa_supplicant/wpa_supplicant.conf
-	echo "update_config=1" >>$(DEBOOT)/etc/wpa_supplicant/wpa_supplicant.conf
-	echo "e scr.utf8 = true" >$(DEBOOT)/usr/share/radare2/radare2rc
 	echo "root:root" >$(DEBOOT)/etc/mactelnetd.users
 
 # TODO:
@@ -175,7 +172,6 @@ customise: $(DEBOOT)
 
 busybox: $(DEBOOT)
 	./packages.runscripts $(DEBOOT) $(CONFIG_ARCH_LIBS) busybox
-	perl -pi -e 's{(bin:/bin)}{$$1:/busybox}' $(DEBOOT)/etc/profile
 	echo "NOSWAP=yes" >> $(DEBOOT)/etc/default/rcS
 	echo "unset QUIET_SYSCTL" >> $(DEBOOT)/etc/default/rcS
 

@@ -1,0 +1,9 @@
+#!/bin/bash
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
+DEBOOT="$1"
+ARCH="$2"
+
+# allow the busybox symlink dir to be found on the path
+perl -pi -e 's{(bin:/bin)}{$1:/busybox}' ${DEBOOT}/etc/profile
+

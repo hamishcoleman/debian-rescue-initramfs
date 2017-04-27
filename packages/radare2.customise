@@ -1,0 +1,9 @@
+#!/bin/bash
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+
+DEBOOT="$1"
+ARCH="$2"
+
+cat <<EOF >${DEBOOT}/usr/share/radare2/radare2rc
+e scr.utf8 = true
+EOF
