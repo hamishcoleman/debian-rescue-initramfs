@@ -242,7 +242,6 @@ REPLACE='
     /bin/ln
     /bin/mkdir
     /bin/mknod
-    /bin/mktemp
     /bin/mount
     /bin/mv
     /bin/nc
