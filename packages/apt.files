@@ -9,7 +9,7 @@ keep    /usr/bin/apt-cache
 rm  /usr/bin/apt-cdrom
 keep    /usr/bin/apt-config
 keep    /usr/bin/apt-get
-rm  /usr/bin/apt-key
+keep    /usr/bin/apt-key
 rm  /usr/bin/apt-mark
 todo    /usr/lib/apt/apt-helper
 keep    /usr/lib/apt/methods/bzip2

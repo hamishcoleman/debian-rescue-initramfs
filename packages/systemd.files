@@ -306,7 +306,7 @@ keep    /usr/share/bash-completion/completions/journalctl
 rm  /usr/share/bash-completion/completions/localectl
 rm  /usr/share/bash-completion/completions/loginctl
 keep    /usr/share/bash-completion/completions/systemctl
-keep    /usr/share/bash-completion/completions/systemd-analyze
+rm      /usr/share/bash-completion/completions/systemd-analyze
 keep    /usr/share/bash-completion/completions/systemd-cat
 rm  /usr/share/bash-completion/completions/systemd-cgls
 keep    /usr/share/bash-completion/completions/systemd-cgtop
