@@ -1,8 +1,8 @@
 # Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
 
-todo    /etc/default/hostapd
+rm      /etc/default/hostapd
 rm      /etc/hostapd/ifupdown.sh
-todo    /etc/init.d/hostapd
+rm      /etc/init.d/hostapd
 rm      /etc/network/if-post-down.d/hostapd
 rm      /etc/network/if-pre-up.d/hostapd
 keep    /usr/sbin/hostapd

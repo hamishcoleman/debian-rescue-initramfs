@@ -1,0 +1,80 @@
+#!/bin/bash
+
+DEBOOT="$1"
+ARCH="$2"
+
+# TODO
+# - figure out where to put common fragments like this
+wants() {
+    local WANTS="$1"
+    local THIS="$2"
+    local INSTANCE="$3"
+
+    local WANTSDIR="${DEBOOT}/etc/systemd/system/${WANTS}.wants"
+    mkdir -p "${WANTSDIR}"
+    ln -sf "${THIS}" "${WANTSDIR}/${INSTANCE}"
+}
+
+
+cat <<EOF >${DEBOOT}/etc/hostapd/hostapd.wlan0.conf
+# FIXME - hardcoded for one wlan device and bad ssid/psk
+# - turn into a template and a script
+logger_syslog=-1
+logger_syslog_level=2
+logger_stdout=-1
+logger_stdout_level=2
+ctrl_interface=/var/run/hostapd
+ctrl_interface_group=0
+ieee80211d=1
+ieee80211h=1
+hw_mode=g
+max_num_sta=32
+rts_threshold=2347
+fragm_threshold=2346
+macaddr_acl=0
+auth_algs=3
+
+wme_enabled=1
+ieee80211n=1
+wpa=2
+wpa_key_mgmt=WPA-PSK
+wpa_pairwise=TKIP
+rsn_pairwise=CCMP
+
+country_code=GB
+interface=wlan0
+channel=1
+ssid=test
+wpa_passphrase=aaaaaaaa
+EOF
+
+cat <<EOF >${DEBOOT}/etc/systemd/system/hostapd@.service
+[Unit]
+Description=Software Wireless Access point on %I
+After=sys-subsystem-net-devices-%I.device
+BindsTo=sys-subsystem-net-devices-%I.device
+
+[Service]
+Restart=always
+RestartSec=1
+ExecStart=/usr/sbin/hostapd /etc/hostapd/hostapd.%I.conf
+ExecReload=/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target sys-subsystem-net-devices-%I.device
+DefaultInstance=wlan0
+EOF
+
+wants multi-user.target /etc/systemd/system/hostapd@.service hostapd@wlan0.service
+
+# Future work:
+#
+# - integrate with the networkd config to select hostap devices
+#   (ie: any wlan device known to be "mesh" should not have a hostapd run)
+#   (maybe using the ID_NET_LINK_FILE var and changing the *.link files?)
+# 
+# /etc/udev/rules.d/XX-hostapd.rules
+# ACTION=="add", SUBSYSTEM=="net", ENV{ID_NET_LINK_FILE}=="*hostap.link", TAG+="systemd", ENV{SYSTEMD_WANTS}="hostapd@%k.service"
+#
+# this would only work after IMPORT{net_setup_link} has been done..
+
