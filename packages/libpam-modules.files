@@ -1,11 +1,11 @@
 # Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
 
 rm  /etc/security/access.conf
-rm  /etc/security/group.conf
+touch   /etc/security/group.conf
 keep    /etc/security/limits.conf
 rm  /etc/security/namespace.conf
 rm  /etc/security/namespace.init
-rm  /etc/security/pam_env.conf
+touch   /etc/security/pam_env.conf
 rm  /etc/security/sepermit.conf
 rm  /etc/security/time.conf
 todo    /lib/${ARCH}/security/pam_access.so
