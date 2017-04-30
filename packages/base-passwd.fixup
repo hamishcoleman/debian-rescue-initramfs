@@ -10,3 +10,8 @@ ARCH="$2"
 # - use a well known password here?
 perl -pi -e 's/^root:\*:/root::/' ${DEBOOT}/etc/shadow
 
+# FIXME
+# - cannot use dropbear with an empty password.  Either need to create another
+#   user (with a password) or give root a password.  Authorised keys could be
+#   handy too, but that is less useful for a initial setup
+
