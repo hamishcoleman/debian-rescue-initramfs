@@ -31,6 +31,12 @@ Curently the phases are:
     bootable.  Any service startup warnings and errors are also addressed
     here.
 
+"customise"
+    Add, remove or edit config files in the image to configure it to be
+    useful (in contrast to fixing what is broken in the "fixup" above).
+    E.G: configuring daemons to start on bootup or setting the default
+    network configuration
+
 Output and exit codes:
 
 These scripts are expected to be silent on their output unless they encounter
