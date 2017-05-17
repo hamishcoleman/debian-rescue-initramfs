@@ -17,7 +17,7 @@ wants() {
 }
 
 
-cat <<EOF >${DEBOOT}/etc/hostapd/hostapd.wlan0.conf
+cat <<EOF >${DEBOOT}/etc/hostapd/hostapd.template.conf
 # FIXME - hardcoded for one wlan device and bad ssid/psk
 # - turn into a template and a script
 logger_syslog=-1
@@ -43,7 +43,7 @@ wpa_pairwise=TKIP
 rsn_pairwise=CCMP
 
 country_code=GB
-interface=wlan0
+interface=__INTERFACE__
 channel=1
 ssid=test
 wpa_passphrase=aaaaaaaa
@@ -66,7 +66,42 @@ WantedBy=multi-user.target sys-subsystem-net-devices-%I.device
 DefaultInstance=wlan0
 EOF
 
-wants multi-user.target /etc/systemd/system/hostapd@.service hostapd@wlan0.service
+# FIXME - this is getting crazy - I need a framework for installing files
+cat <<EOF >${DEBOOT}/usr/local/sbin/hostapd.template
+#!/bin/sh
+#
+# Called from udev with the name of a wirless interface.  Checks if
+# there is a hostap config for it already, and if not, builds one from
+# the template
+
+INT="\$1"
+CONF="hostapd.\${INT}.conf"
+TEMPLATE="hostapd.template.conf"
+
+if [ -z "\$INT" ]; then
+    echo error - need interface name
+    exit 1
+fi
+
+DIR=/etc/hostapd
+
+cd "\$DIR"
+
+if [ -e "\$CONF" ]; then
+    # nothing needs doing
+    exit 0
+fi
+
+if [ ! -e "\$TEMPLATE" ]; then
+    echo error - need a \$TEMPLATE
+    exit 1
+fi
+
+sed -e "s/__INTERFACE__/\$INT/g" <\$TEMPLATE >\$CONF
+
+EOF
+chmod a+x ${DEBOOT}/usr/local/sbin/hostapd.template
+
 
 # Future work:
 #
@@ -79,3 +114,18 @@ wants multi-user.target /etc/systemd/system/hostapd@.service hostapd@wlan0.servi
 #
 # this would only work after IMPORT{net_setup_link} has been done..
 
+cat <<EOF >${DEBOOT}/etc/udev/rules.d/50-hostapd.rules
+#
+# any wlan device with a *hostap.link file will get a hostapd running
+
+SUBSYSTEM!="net", GOTO="hostapd_end"
+ACTION!="add", GOTO="hostapd_end"
+
+IMPORT{builtin}="net_setup_link"
+
+ENV{ID_NET_LINK_FILE}=="*hostap.link", \
+    TAG+="systemd", ENV{SYSTEMD_WANTS}="hostapd@%k.service", \
+    PROGRAM="/usr/local/sbin/hostapd.template %k"
+
+LABEL="hostapd_end"
+EOF
