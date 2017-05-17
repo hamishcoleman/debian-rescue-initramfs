@@ -1,4 +1,5 @@
 #!/bin/bash
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
 
 DEBOOT="$1"
 ARCH="$2"
