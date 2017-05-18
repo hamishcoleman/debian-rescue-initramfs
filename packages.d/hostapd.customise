@@ -75,6 +75,12 @@ cat <<EOF >${DEBOOT}/usr/local/sbin/hostapd.template
 # Called from udev with the name of a wirless interface.  Checks if
 # there is a hostap config for it already, and if not, builds one from
 # the template
+#
+# TODO
+# - now that we can append config from the link file, do we want to just
+#   overwrite the conf file every time?
+# - or, perhaps, move the config file location to /run and use a per-interface
+#   template (hostapd.template.%I.conf ?) if it is found
 
 INT="\$1"
 LINK="\$2"
@@ -112,17 +118,6 @@ fi
 EOF
 chmod a+x ${DEBOOT}/usr/local/sbin/hostapd.template
 
-
-# Future work:
-#
-# - integrate with the networkd config to select hostap devices
-#   (ie: any wlan device known to be "mesh" should not have a hostapd run)
-#   (maybe using the ID_NET_LINK_FILE var and changing the *.link files?)
-# 
-# /etc/udev/rules.d/XX-hostapd.rules
-# ACTION=="add", SUBSYSTEM=="net", ENV{ID_NET_LINK_FILE}=="*hostap.link", TAG+="systemd", ENV{SYSTEMD_WANTS}="hostapd@%k.service"
-#
-# this would only work after IMPORT{net_setup_link} has been done..
 
 cat <<EOF >${DEBOOT}/etc/udev/rules.d/50-hostapd.rules
 #
