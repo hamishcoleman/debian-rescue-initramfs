@@ -72,7 +72,7 @@ EOF
 cat <<EOF >${DEBOOT}/usr/local/sbin/hostapd.template
 #!/bin/sh
 #
-# Called from udev with the name of a wirless interface.  Checks if
+# Called from udev with the name of a wireless interface.  Checks if
 # there is a hostap config for it already, and if not, builds one from
 # the template
 #
