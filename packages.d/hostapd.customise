@@ -53,8 +53,8 @@ cat <<EOF >${DEBOOT}/etc/systemd/system/hostapd@.service
 # replugging it doesnt work
 [Unit]
 Description=Software Wireless Access point on %I
-After=sys-subsystem-net-devices-%I.device
-BindsTo=sys-subsystem-net-devices-%I.device
+After=sys-subsystem-net-devices-%i.device
+BindsTo=sys-subsystem-net-devices-%i.device
 
 [Service]
 Restart=always
