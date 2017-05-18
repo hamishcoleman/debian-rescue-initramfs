@@ -65,32 +65,6 @@ ExecStart=-/sbin/ip link set eth0 up
 EOF
 wants systemd-networkd.service /etc/systemd/system/fix-eth0-linkup.service
 
-# make the wlan devices for hostap match "*hostap.link"
-cat <<EOF >${DEBOOT}/etc/systemd/network/95-wlan-hostap.link
-# By default, all wlan interfaces will be access points
-[Match]
-Type=wlan
-
-[Link]
-NamePolicy=kernel database
-MACAddressPolicy=persistent
-EOF
-
-cat <<EOF >${DEBOOT}/etc/systemd/network/95-wlan-hostap.network
-# By default, all wlan interfaces will be access points
-[Match]
-Type=wlan
-
-[Network]
-DHCPServer=yes
-LLMNR=true
-MulticastDNS=true
-LLDP=true
-EmitLLDP=true
-Address=0.0.0.0/24
-IPForward=true
-IPMasquerade=true
-EOF
 
 cat <<EOF >${DEBOOT}/etc/systemd/network/85-wlan-mesh.network
 # By default, any of these type of wifi cards are used for mesh networking
