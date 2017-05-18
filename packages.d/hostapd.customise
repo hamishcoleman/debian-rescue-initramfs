@@ -77,6 +77,8 @@ cat <<EOF >${DEBOOT}/usr/local/sbin/hostapd.template
 # the template
 
 INT="\$1"
+LINK="\$2"
+
 CONF="hostapd.\${INT}.conf"
 TEMPLATE="hostapd.template.conf"
 
@@ -100,6 +102,12 @@ if [ ! -e "\$TEMPLATE" ]; then
 fi
 
 sed -e "s/__INTERFACE__/\$INT/g" <\$TEMPLATE >\$CONF
+
+if [ -e "\$LINK" ]; then
+    # if we know the name of the *.link file, append any extra
+    # config items from there
+    confget -f \$LINK -s hostapd -l >>\$CONF
+fi
 
 EOF
 chmod a+x ${DEBOOT}/usr/local/sbin/hostapd.template
@@ -127,7 +135,7 @@ IMPORT{builtin}="net_setup_link"
 
 ENV{ID_NET_LINK_FILE}=="*hostap.link", \
     TAG+="systemd", ENV{SYSTEMD_WANTS}="hostapd@%k.service", \
-    PROGRAM="/usr/local/sbin/hostapd.template %k"
+    PROGRAM="/usr/local/sbin/hostapd.template %k %E{ID_NET_LINK_FILE}"
 
 LABEL="hostapd_end"
 EOF

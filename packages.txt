@@ -67,3 +67,4 @@ zip
 #partimage-server - never used
 vim-tiny
 radare2
+confget
