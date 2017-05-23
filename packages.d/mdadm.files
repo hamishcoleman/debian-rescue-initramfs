@@ -7,6 +7,7 @@ rm  /etc/init.d/mdadm
 rm  /etc/init.d/mdadm-waitidle
 rm  /etc/logcheck/ignore.d.server/mdadm
 rm  /etc/logcheck/violations.d/mdadm
+rm,nopkg /etc/mdadm/mdadm.conf
 keep    /etc/modprobe.d/mdadm.conf
 keep    /lib/systemd/system-shutdown/mdadm.shutdown
 keep    /lib/systemd/system/mdadm-grow-continue@.service

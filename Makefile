@@ -158,6 +158,7 @@ findlinks: $(DEBOOT)
 #
 fixup: $(DEBOOT)
 	./packages.runscripts $(DEBOOT) $(CONFIG_ARCH_LIBS) fixup
+	rm $(DEBOOT)/etc/machine-id
 
 # customisations are things that go beyond makeing the image work
 #
