@@ -1,11 +1,19 @@
 This directory contains files named after debian packages.  There are
-two types of files - "${package}.files" and "${package}.${stage}"
-scripts.
+several types of files:
+
+* "${package}.files"            - removal lists
+* "${package}.${stage}.add"     - directory with files to add
+* "${package}.${stage}"         - scripts for complex changes
 
 The ".files" contain simple lists of files to check or remove from
 each package - these lists are machine readable and can be used to do
 consistancy checking on the package and file ownership.  This files
 are read during the "minimise" phase, before any scripts are run.
+
+The ".add" directories contain a directory structure that is added
+to the build area if the named package is installed.  This is done
+before any scripts are run in that stage, allowing the scripts to
+make modifications if needed.
 
 The "package.stage" scripts are responsible for any more complex
 customisations.  These customisations are applied in several phases,

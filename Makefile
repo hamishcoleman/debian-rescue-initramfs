@@ -157,12 +157,14 @@ findlinks: $(DEBOOT)
 # fixups are things that are needed to make the image actually work
 #
 fixup: $(DEBOOT)
+	./packages.addextra $(DEBOOT) $(CONFIG_ARCH_LIBS) fixup
 	./packages.runscripts $(DEBOOT) $(CONFIG_ARCH_LIBS) fixup
 	rm $(DEBOOT)/etc/machine-id
 
 # customisations are things that go beyond makeing the image work
 #
 customise: $(DEBOOT)
+	./packages.addextra $(DEBOOT) $(CONFIG_ARCH_LIBS) customise
 	./packages.runscripts $(DEBOOT) $(CONFIG_ARCH_LIBS) customise
 	echo "rescue" >$(DEBOOT)/etc/hostname
 	echo "root:root" >$(DEBOOT)/etc/mactelnetd.users
@@ -172,6 +174,7 @@ customise: $(DEBOOT)
 #   also use that for any authorised keys, etc)
 
 busybox: $(DEBOOT)
+	./packages.addextra $(DEBOOT) $(CONFIG_ARCH_LIBS) busybox
 	./packages.runscripts $(DEBOOT) $(CONFIG_ARCH_LIBS) busybox
 	echo "NOSWAP=yes" >> $(DEBOOT)/etc/default/rcS
 	echo "unset QUIET_SYSCTL" >> $(DEBOOT)/etc/default/rcS
@@ -179,6 +182,7 @@ busybox: $(DEBOOT)
 # TODO - automatic dependancies for the runscripts
 minimise: $(DEBOOT) debcache_save
 	./packages.runfiles $(DEBOOT) $(CONFIG_ARCH_LIBS) verbose
+	./packages.addextra $(DEBOOT) $(CONFIG_ARCH_LIBS) minimise
 	./packages.runscripts $(DEBOOT) $(CONFIG_ARCH_LIBS) minimise
 	rm -rf \
 		$(DEBOOT)/usr/share/doc/* \
