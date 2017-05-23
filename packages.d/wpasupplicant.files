@@ -1,0 +1,8 @@
+
+rm      /lib/systemd/system/wpa_supplicant.service
+
+# FIXME
+# - why is systemd starting up wpa_supplicant@multi-user.service ?!?
+# - and why did it only start doing this when I migrated the hostapd
+#   config to use the package.stage.add directory?
+rm      /lib/systemd/system/wpa_supplicant@.service
