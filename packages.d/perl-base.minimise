@@ -1,8 +1,0 @@
-#!/bin/bash
-# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
-
-
-DEBOOT="$1"
-ARCH="$2"
-
-ln -sf perl5.24.1 $DEBOOT/usr/bin/perl
