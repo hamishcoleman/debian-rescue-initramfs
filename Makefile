@@ -159,7 +159,12 @@ findlinks: $(DEBOOT)
 fixup: $(DEBOOT)
 	./packages.addextra $(DEBOOT) $(CONFIG_ARCH_LIBS) fixup
 	./packages.runscripts $(DEBOOT) $(CONFIG_ARCH_LIBS) fixup
-	rm $(DEBOOT)/etc/machine-id
+	echo "00000000000000000000000000000001" > $(DEBOOT)/etc/machine-id
+
+# WTF? systemd? your man page tells me that /etc/machine-id can be safely
+# removed and a new one would be generated, but you get all sad if I remove
+# this file (since ramdisks are ephemeral, I would prefer a new one each
+# boot, but a stable one that is obviously fake is at least a start)
 
 # customisations are things that go beyond makeing the image work
 #

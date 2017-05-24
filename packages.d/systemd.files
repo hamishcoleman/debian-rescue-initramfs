@@ -369,13 +369,13 @@ todo    /lib/systemd/system/rc-local.service.d/debian.conf
 todo    /lib/systemd/system/rc.service
 todo    /lib/systemd/system/rcS.service
 todo    /lib/systemd/system/sockets.target.wants/systemd-journald-audit.socket
-todo    /lib/systemd/system/sysinit.target.wants/systemd-machine-id-commit.service
+rm      /lib/systemd/system/sysinit.target.wants/systemd-machine-id-commit.service
 todo    /lib/systemd/system/systemd-exit.service
 todo    /lib/systemd/system/systemd-fsckd.service
 todo    /lib/systemd/system/systemd-fsckd.socket
 todo    /lib/systemd/system/systemd-hibernate-resume@.service
 todo    /lib/systemd/system/systemd-journald-audit.socket
-todo    /lib/systemd/system/systemd-machine-id-commit.service
+rm      /lib/systemd/system/systemd-machine-id-commit.service
 keep    /lib/systemd/system/systemd-networkd.socket
 rm      /lib/systemd/system/systemd-resolved.service.d/resolvconf.conf
 todo    /lib/systemd/system/systemd-rfkill.service
