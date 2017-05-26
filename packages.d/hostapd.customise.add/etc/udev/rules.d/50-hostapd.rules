@@ -1,3 +1,4 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
 #
 # any wlan device with a *hostap.link file will get a hostapd running
 

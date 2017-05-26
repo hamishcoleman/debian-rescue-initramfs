@@ -1,3 +1,4 @@
+# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
 # FIXME
 # - on the orange pi zero I am testing (and armbian kernel 4.10.0-sun8i #8),
 #   if the system boots up without the ethernet plugged in, it goes into
