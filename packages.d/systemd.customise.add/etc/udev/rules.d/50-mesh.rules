@@ -12,5 +12,5 @@ IMPORT{builtin}="net_setup_link"
 ENV{ID_NET_LINK_FILE}=="*mesh.link", \
     PROGRAM="/usr/local/sbin/mesh.setup %k %E{ID_NET_LINK_FILE}"
 
-LABEL="hostapd_end"
+LABEL="mesh_end"
 
