@@ -14,4 +14,4 @@ MACAddressPolicy=persistent
 
 [mesh]
 ssid=hkmesh
-freq=5200
+freq=5200 HT20

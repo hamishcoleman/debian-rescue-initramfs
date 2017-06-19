@@ -22,14 +22,22 @@ fi
 [ -n "$conf_ssid" ] || exit 1
 [ -n "$conf_freq" ] || exit 1
 
+# TODO
+# - build a way to confirm that iw reg set $something has been done
+
 ip link set $INT down
-iw dev $INT set type mesh
+iw dev $INT set type mp
+ip link set $INT down
+
+iw dev $INT set freq $conf_freq
 ip link set $INT up
 
+iw dev $INT mesh join $conf_ssid
+
+# I noted that it occasionally did not join
+# - perhaps some earlier command was processing asynchronously?
 sleep 2
-iw dev $INT mesh join $conf_ssid freq $conf_freq
-sleep 2
-iw dev $INT mesh join $conf_ssid freq $conf_freq
+iw dev $INT mesh join $conf_ssid
 
 # TODO
 # - HT20 style options
