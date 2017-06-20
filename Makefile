@@ -166,7 +166,6 @@ fixup: $(DEBOOT)
 customise: $(DEBOOT)
 	./packages.addextra $(DEBOOT) $(CONFIG_ARCH_LIBS) customise
 	./packages.runscripts $(DEBOOT) $(CONFIG_ARCH_LIBS) customise
-	echo "rescue" >$(DEBOOT)/etc/hostname
 	echo "root:root" >$(DEBOOT)/etc/mactelnetd.users
 
 # TODO:
