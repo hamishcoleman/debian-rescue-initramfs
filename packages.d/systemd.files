@@ -16,6 +16,7 @@ keep    /etc/dbus-1/system.d/org.freedesktop.locale1.conf
 keep    /etc/dbus-1/system.d/org.freedesktop.login1.conf
 keep    /etc/dbus-1/system.d/org.freedesktop.systemd1.conf
 keep    /etc/dbus-1/system.d/org.freedesktop.timedate1.conf
+rm,nopkg        /etc/machine-id
 keep    /etc/modules-load.d/modules.conf
 keep    /etc/pam.d/systemd-user
 keep    /etc/sysctl.d/99-sysctl.conf
