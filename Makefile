@@ -106,23 +106,23 @@ multistrap_pre: $(DEBOOT) multistrap.conf
 	sudo /usr/sbin/multistrap \
 		-a $(CONFIG_ARCH_DEBIAN) -d $(DEBOOT) -f multistrap.conf
 
+$(DEBOOT)/usr/sbin/policy-rc.d: policy-rc.d
+	sudo cp $< $@
+
 # TODO:
 # - change these fixups into a package script phase?
-multistrap_fixup:
+multistrap_fixup: $(DEBOOT)/usr/sbin/policy-rc.d
 	sudo perl -pi -e 's/rmdir/rm -rf/' $(DEBOOT)/var/lib/dpkg/info/base-files.postinst
 	sudo perl -pi -e 's/ invoke-rc.d/ true/' $(DEBOOT)/var/lib/dpkg/info/dropbear.postinst
 
 multistrap_post: multistrap.configscript
 	sudo cp /usr/bin/qemu-$(CONFIG_ARCH_QEMU)-static $(DEBOOT)/usr/bin/
 	sudo chroot $(DEBOOT) ./multistrap.configscript
-	sudo kill -9 `sudo lsof -Fp $(DEBOOT) | tr -d p`
-	-sudo umount $(DEBOOT)/proc
 	sudo rm -f $(DEBOOT)/multistrap.configscript
 
 multistrap: multistrap_pre multistrap_fixup multistrap_post
 
 # TODO
-# - make multistrap.configscript smarter and remove the kill+umount here
 # - This multistrap rule does not handle foreign arch, so extract the 
 #   logic from qemu-debootstrap (basically determine QEMU_ARCH, copy the
 #   static qemu-user bin to the right place and use chroot.
@@ -157,6 +157,7 @@ findlinks: $(DEBOOT)
 # fixups are things that are needed to make the image actually work
 #
 fixup: $(DEBOOT)
+	rm -f $(DEBOOT)/usr/sbin/policy-rc.d
 	./packages.addextra $(DEBOOT) $(CONFIG_ARCH_LIBS) fixup
 	./packages.runscripts $(DEBOOT) $(CONFIG_ARCH_LIBS) fixup
 	echo "00000000000000000000000000000001" > $(DEBOOT)/etc/machine-id
