@@ -66,7 +66,7 @@ todo    /lib/systemd/system/emergency.service
 todo    /lib/systemd/system/emergency.target
 todo    /lib/systemd/system/final.target
 todo    /lib/systemd/system/fuse.service
-todo    /lib/systemd/system/getty-static.service
+rm      /lib/systemd/system/getty-static.service
 todo    /lib/systemd/system/getty.target
 todo    /lib/systemd/system/getty.target.wants/getty-static.service
 todo    /lib/systemd/system/getty@.service
