@@ -1,0 +1,28 @@
+# By default, all usb interfaces will be dhcp servers.
+# It is expected that these are USB device gadget interfaces - and thus used
+# for on-the-spot configuration or tethered-hotspot
+#
+# TODO
+# - This rule will often match both a USB device that is plugged into us
+#   as well as the usb OTG port that is configured as a USB gadget.  Ideally
+#   we would match each differently:
+#   - USB ethernet device
+#       Should be treated just like a normal ethernet device
+#   - OTG gadget
+#       - We would prefer not to advertise a default route on this
+#       interface, as that can cause the other device to lose internet access.
+#
+
+[Match]
+Name=usb*
+
+[Network]
+DHCPServer=yes
+LLMNR=true
+MulticastDNS=true
+LLDP=true
+EmitLLDP=true
+Address=0.0.0.0/24
+IPForward=true
+IPMasquerade=true
+
