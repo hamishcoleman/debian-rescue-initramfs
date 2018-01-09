@@ -32,6 +32,10 @@ fakeroot=fakeroot -i $(SAVEPERM) -s $(SAVEPERM)
 
 all: bootstrap $(TARGET)
 
+build-depends:
+	sudo apt install multistrap
+
+
 # FIXME - perl module docs with two colons confuses make
 #
 #.depfiles:
