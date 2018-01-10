@@ -25,7 +25,7 @@ SAVEPERM=$(TMPDIR)/fakeroot.save
 
 # Not simply user changable - the minimisation process will break differently
 # for other debian versions, so the fixup process will need adjustments
-VERSION=stretch
+CONFIG_DEBIAN=stretch
 
 fakeroot=fakeroot -i $(SAVEPERM) -s $(SAVEPERM)
 
@@ -87,7 +87,7 @@ debootstrap: $(DEBOOT) packages.txt
 	sudo /usr/sbin/qemu-debootstrap \
 		--arch=$(CONFIG_DEBIAN_ARCH) --variant=minbase \
 		--include=$(subst $(SPACE),$(COMMA),$(packages)) \
-		$(VERSION) \
+		$(CONFIG_DEBIAN) \
 		$(DEBOOT)/ \
 		$(DEBIAN_MIRROR)
 
@@ -99,7 +99,7 @@ multistrap.conf: packages.txt
 
 	echo "[DebianRescue]" >>$@
 	echo "source=$(DEBIAN_MIRROR)" >>$@
-	echo "suite=$(VERSION)" >>$@
+	echo "suite=$(CONFIG_DEBIAN)" >>$@
 	echo "keyring=debian-archive-keyring" >>$@
 	echo packages=$(packages) >>$@
 
@@ -211,13 +211,13 @@ $(TARGET).xz: $(TARGET)
 # Download the debian kernel and modules to use for testing or booting
 
 ifeq ($(CONFIG_DEBIAN_ARCH),i386)
-    DEBIAN_KERNEL_URL = http://httpredir.debian.org/debian/dists/$(VERSION)/main/installer-$(CONFIG_DEBIAN_ARCH)/current/images/netboot/debian-installer/$(CONFIG_DEBIAN_ARCH)/linux
-    DEBIAN_INITRD_URL = http://httpredir.debian.org/debian/dists/$(VERSION)/main/installer-$(CONFIG_DEBIAN_ARCH)/current/images/netboot/debian-installer/$(CONFIG_DEBIAN_ARCH)/initrd.gz
+    DEBIAN_KERNEL_URL = http://httpredir.debian.org/debian/dists/$(CONFIG_DEBIAN)/main/installer-$(CONFIG_DEBIAN_ARCH)/current/images/netboot/debian-installer/$(CONFIG_DEBIAN_ARCH)/linux
+    DEBIAN_INITRD_URL = http://httpredir.debian.org/debian/dists/$(CONFIG_DEBIAN)/main/installer-$(CONFIG_DEBIAN_ARCH)/current/images/netboot/debian-installer/$(CONFIG_DEBIAN_ARCH)/initrd.gz
 endif
 
-DEBIAN_KERNEL=kernel/debian.$(VERSION).$(CONFIG_DEBIAN_ARCH).kernel
-DEBIAN_INITRD=kernel/debian.$(VERSION).$(CONFIG_DEBIAN_ARCH).initrd.gz
-DEBIAN_MODULES=kernel/debian.$(VERSION).$(CONFIG_DEBIAN_ARCH).modules.cpio
+DEBIAN_KERNEL=kernel/debian.$(CONFIG_DEBIAN).$(CONFIG_DEBIAN_ARCH).kernel
+DEBIAN_INITRD=kernel/debian.$(CONFIG_DEBIAN).$(CONFIG_DEBIAN_ARCH).initrd.gz
+DEBIAN_MODULES=kernel/debian.$(CONFIG_DEBIAN).$(CONFIG_DEBIAN_ARCH).modules.cpio
 
 $(DEBIAN_KERNEL):
 	mkdir -p $(dir $@)
