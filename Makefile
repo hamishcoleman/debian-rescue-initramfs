@@ -253,7 +253,7 @@ root.$(CONFIG_KERNEL_ARCH).combined:	$(TEST_MODULES) $(TARGET)
 
 test: 	root.$(CONFIG_KERNEL_ARCH).combined $(TEST_KERNEL)
 	qemu-system-$(CONFIG_QEMU_ARCH) -enable-kvm \
-		-m 512 \
+		-m 1024 \
 		-serial stdio \
 		-append console=ttyS0 \
 		-kernel $(TEST_KERNEL) -initrd root.$(CONFIG_KERNEL_ARCH).combined
