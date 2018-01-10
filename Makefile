@@ -24,10 +24,9 @@ CONFIG_KERNEL_VERSION=stretch
 
 DEBIAN_MIRROR=http://httpredir.debian.org/debian
 
-TARGET_BASE=root.$(CONFIG_DEBIAN_ARCH)
-TARGET_RAMFS=$(TARGET_BASE).ramfs
-TARGET_KERNEL=$(TARGET_BASE).kernel
-TARGET_COMBINED=$(TARGET_BASE).combined # ramfs + modules
+TARGET_RAMFS=root.$(CONFIG_DEBIAN_ARCH).ramfs
+TARGET_KERNEL=root.$(CONFIG_KERNEL_ARCH).kernel
+TARGET_COMBINED=root.$(CONFIG_KERNEL_ARCH).combined # ramfs + modules
 
 TMPDIR=$(HOME)/tmp/boot/linuxrescue3
 DEBOOT=$(TMPDIR)/files
