@@ -13,10 +13,11 @@ CONFIG_DEBIAN_ARCH_LIBS=i386-linux-gnu
 CONFIG_QEMU_ARCH=x86_64
 CONFIG_KERNEL_ARCH=amd64
 
-CONFIG_KERNEL=debian
-CONFIG_KERNEL_VERSION=stretch
-#CONFIG_KERNEL=ubuntu
-#CONFIG_KERNEL_VERSION=4.14.0-16-generic_4.14.0-16.19
+#CONFIG_KERNEL=debian
+#CONFIG_KERNEL_VERSION=stretch
+CONFIG_KERNEL=ubuntu
+CONFIG_KERNEL_PKG=linux-image-4.14.0-16-generic_4.14.0-16.19_amd64.deb
+CONFIG_KERNEL_VERSION=4.14.0-16-generic
 
 #CONFIG_DEBIAN_ARCH=armhf
 #CONFIG_DEBIAN_ARCH_LIBS=arm-linux-gnueabihf
@@ -245,16 +246,45 @@ $(TEST_MODULES): $(TEST_INITRD)
 	    find lib -print0 | cpio -0 -H newc -R 0:0 -o \
 	) <$< >$@
 
-$(TARGET_COMBINED): $(TARGET_RAMFS) $(TEST_MODULES)
-	cat $^ >$@
-
 endif
 
 ifeq ($(CONFIG_KERNEL),ubuntu)
-    TEST_KERNEL_URL = http://archive.ubuntu.com/ubuntu/dists/$(CONFIG_KERNEL_VERSION)/main/installer-$(CONFIG_KERNEL_ARCH)/current/images/netboot/ubuntu-installer/$(CONFIG_KERNEL_ARCH)/linux
-    TEST_INITRD_URL = http://archive.ubuntu.com/ubuntu/dists/$(CONFIG_KERNEL_VERSION)/main/installer-$(CONFIG_KERNEL_ARCH)/current/images/netboot/ubuntu-installer/$(CONFIG_KERNEL_ARCH)/initrd.gz
+
+KERNEL_POOL=http://archive.ubuntu.com/ubuntu/pool/main/l/linux
+KERNEL_PKG=kernel/ubuntu.$(CONFIG_KERNEL_PKG)
+KERNEL_DATA=kernel/ubuntu-data.tar.xz
+
+TEST_MODULES=kernel/$(CONFIG_KERNEL).$(CONFIG_KERNEL_VERSION).$(CONFIG_KERNEL_ARCH).modules.cpio
+
+$(KERNEL_PKG):
+	wget -O $@ $(KERNEL_POOL)/$(CONFIG_KERNEL_PKG)
+	touch $@
+
+# FIXME - this can leave shite in the current dir
+$(KERNEL_DATA): $(KERNEL_PKG)
+	ar x $< data.tar.xz
+	mv data.tar.xz $@
+
+# FIXME - this is fragile
+$(TARGET_KERNEL): $(KERNEL_DATA)
+	tar -x -v -f $< ./boot/vmlinuz-$(CONFIG_KERNEL_VERSION)
+	mv boot/vmlinuz-$(CONFIG_KERNEL_VERSION) $@
+	touch $@
+
+$(TEST_MODULES): $(KERNEL_DATA)
+	mkdir -p $(basename $@)
+	tar -x -f $< -C $(basename $@) ./lib/modules
+	/sbin/depmod -b $(basename $@) $(CONFIG_KERNEL_VERSION)
+	( \
+	    cd $(basename $@); \
+	    find lib -print0 | cpio -0 -H newc -R 0:0 -o \
+	) >$@
+
 endif
 endif
+
+$(TARGET_COMBINED): $(TARGET_RAMFS) $(TEST_MODULES)
+	cat $^ >$@
 
 
 ###########################################################################
