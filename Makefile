@@ -11,6 +11,7 @@
 CONFIG_DEBIAN_ARCH=i386
 CONFIG_DEBIAN_ARCH_LIBS=i386-linux-gnu
 CONFIG_QEMU_ARCH=x86_64
+CONFIG_KERNEL_ARCH=amd64
 
 #CONFIG_DEBIAN_ARCH=armhf
 #CONFIG_DEBIAN_ARCH_LIBS=arm-linux-gnueabihf
@@ -210,14 +211,14 @@ $(TARGET).xz: $(TARGET)
 #
 # Download the debian kernel and modules to use for testing or booting
 
-ifeq ($(CONFIG_DEBIAN_ARCH),i386)
-    DEBIAN_KERNEL_URL = http://httpredir.debian.org/debian/dists/$(CONFIG_DEBIAN)/main/installer-$(CONFIG_DEBIAN_ARCH)/current/images/netboot/debian-installer/$(CONFIG_DEBIAN_ARCH)/linux
-    DEBIAN_INITRD_URL = http://httpredir.debian.org/debian/dists/$(CONFIG_DEBIAN)/main/installer-$(CONFIG_DEBIAN_ARCH)/current/images/netboot/debian-installer/$(CONFIG_DEBIAN_ARCH)/initrd.gz
+ifeq ($(CONFIG_KERNEL_ARCH),amd64)
+    DEBIAN_KERNEL_URL = http://httpredir.debian.org/debian/dists/$(CONFIG_DEBIAN)/main/installer-$(CONFIG_KERNEL_ARCH)/current/images/netboot/debian-installer/$(CONFIG_KERNEL_ARCH)/linux
+    DEBIAN_INITRD_URL = http://httpredir.debian.org/debian/dists/$(CONFIG_DEBIAN)/main/installer-$(CONFIG_KERNEL_ARCH)/current/images/netboot/debian-installer/$(CONFIG_KERNEL_ARCH)/initrd.gz
 endif
 
-DEBIAN_KERNEL=kernel/debian.$(CONFIG_DEBIAN).$(CONFIG_DEBIAN_ARCH).kernel
-DEBIAN_INITRD=kernel/debian.$(CONFIG_DEBIAN).$(CONFIG_DEBIAN_ARCH).initrd.gz
-DEBIAN_MODULES=kernel/debian.$(CONFIG_DEBIAN).$(CONFIG_DEBIAN_ARCH).modules.cpio
+DEBIAN_KERNEL=kernel/debian.$(CONFIG_DEBIAN).$(CONFIG_KERNEL_ARCH).kernel
+DEBIAN_INITRD=kernel/debian.$(CONFIG_DEBIAN).$(CONFIG_KERNEL_ARCH).initrd.gz
+DEBIAN_MODULES=kernel/debian.$(CONFIG_DEBIAN).$(CONFIG_KERNEL_ARCH).modules.cpio
 
 $(DEBIAN_KERNEL):
 	mkdir -p $(dir $@)
@@ -237,19 +238,19 @@ $(addsuffix .cpio,$(basename $(DEBIAN_MODULES))): $(DEBIAN_INITRD)
 	    find lib -print0 | cpio -0 -H newc -R 0:0 -o \
 	) <$< >$@
 
-root.$(CONFIG_DEBIAN_ARCH).combined:	$(DEBIAN_MODULES) $(TARGET)
+root.$(CONFIG_KERNEL_ARCH).combined:	$(DEBIAN_MODULES) $(TARGET)
 	cat $^ >$@
 
 
 ###########################################################################
 #
 
-test: 	root.$(CONFIG_DEBIAN_ARCH).combined $(DEBIAN_KERNEL)
+test: 	root.$(CONFIG_KERNEL_ARCH).combined $(DEBIAN_KERNEL)
 	qemu-system-$(CONFIG_QEMU_ARCH) -enable-kvm \
 		-m 512 \
 		-serial stdio \
 		-append console=ttyS0 \
-		-kernel $(DEBIAN_KERNEL) -initrd root.$(CONFIG_DEBIAN_ARCH).combined
+		-kernel $(DEBIAN_KERNEL) -initrd root.$(CONFIG_KERNEL_ARCH).combined
 
 #test.iso: $(TARGET)
 #	mkisofs -o $@ \
