@@ -13,6 +13,7 @@ CONFIG_DEBIAN_ARCH_LIBS=i386-linux-gnu
 CONFIG_QEMU_ARCH=x86_64
 CONFIG_KERNEL_ARCH=amd64
 CONFIG_DEBIAN_KERNEL=stretch
+CONFIG_KERNEL=debian
 
 #CONFIG_DEBIAN_ARCH=armhf
 #CONFIG_DEBIAN_ARCH_LIBS=arm-linux-gnueabihf
@@ -212,6 +213,8 @@ $(TARGET).xz: $(TARGET)
 #
 # Download the debian kernel and modules to use for testing or booting
 
+ifeq ($(CONFIG_KERNEL),debian)
+
 ifeq ($(CONFIG_KERNEL_ARCH),amd64)
     TEST_KERNEL_URL = http://httpredir.debian.org/debian/dists/$(CONFIG_DEBIAN_KERNEL)/main/installer-$(CONFIG_KERNEL_ARCH)/current/images/netboot/debian-installer/$(CONFIG_KERNEL_ARCH)/linux
     TEST_INITRD_URL = http://httpredir.debian.org/debian/dists/$(CONFIG_DEBIAN_KERNEL)/main/installer-$(CONFIG_KERNEL_ARCH)/current/images/netboot/debian-installer/$(CONFIG_KERNEL_ARCH)/initrd.gz
@@ -220,6 +223,8 @@ endif
 TEST_KERNEL=kernel/debian.$(CONFIG_DEBIAN_KERNEL).$(CONFIG_KERNEL_ARCH).kernel
 TEST_INITRD=kernel/debian.$(CONFIG_DEBIAN_KERNEL).$(CONFIG_KERNEL_ARCH).initrd.gz
 TEST_MODULES=kernel/debian.$(CONFIG_DEBIAN_KERNEL).$(CONFIG_KERNEL_ARCH).modules.cpio
+
+endif
 
 $(TEST_KERNEL):
 	mkdir -p $(dir $@)
