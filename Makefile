@@ -12,15 +12,22 @@ CONFIG_DEBIAN_ARCH=i386
 CONFIG_DEBIAN_ARCH_LIBS=i386-linux-gnu
 CONFIG_QEMU_ARCH=x86_64
 CONFIG_KERNEL_ARCH=amd64
-CONFIG_DEBIAN_KERNEL=stretch
+
 CONFIG_KERNEL=debian
+CONFIG_KERNEL_VERSION=stretch
+#CONFIG_KERNEL=ubuntu
+#CONFIG_KERNEL_VERSION=4.14.0-16-generic_4.14.0-16.19
 
 #CONFIG_DEBIAN_ARCH=armhf
 #CONFIG_DEBIAN_ARCH_LIBS=arm-linux-gnueabihf
 #CONFIG_QEMU_ARCH=arm
 
 DEBIAN_MIRROR=http://httpredir.debian.org/debian
-TARGET=root.$(CONFIG_DEBIAN_ARCH).ramfs
+
+TARGET_BASE=root.$(CONFIG_DEBIAN_ARCH)
+TARGET_RAMFS=$(TARGET_BASE).ramfs
+TARGET_KERNEL=$(TARGET_BASE).kernel
+TARGET_COMBINED=$(TARGET_BASE).combined # ramfs + modules
 
 TMPDIR=$(HOME)/tmp/boot/linuxrescue3
 DEBOOT=$(TMPDIR)/files
@@ -32,7 +39,7 @@ CONFIG_DEBIAN=stretch
 
 fakeroot=fakeroot -i $(SAVEPERM) -s $(SAVEPERM)
 
-all: bootstrap $(TARGET)
+all: bootstrap $(TARGET_RAMFS)
 
 build-depends:
 	sudo apt install multistrap qemu-user-static
@@ -41,7 +48,7 @@ build-depends:
 # FIXME - perl module docs with two colons confuses make
 #
 #.depfiles:
-#	find files/ -type l -or -type f -printf "$(TARGET): %p\n" >$@
+#	find files/ -type l -or -type f -printf "$(TARGET_RAMFS): %p\n" >$@
 #
 #include .depfiles
 
@@ -200,34 +207,29 @@ minimise: $(DEBOOT) debcache_save
 
 bootstrap: multistrap save_perms minimise busybox fixup customise
 
-$(TARGET): $(DEBOOT)
+$(TARGET_RAMFS): $(DEBOOT)
 	( \
 	    cd $(DEBOOT); \
 	    find . -print0 | $(fakeroot) cpio -0 -H newc -R 0:0 -o \
 	) > $@
 
-$(TARGET).xz: $(TARGET)
+$(TARGET_RAMFS).xz: $(TARGET_RAMFS)
 	xz --check=crc32 $<
 
 ###########################################################################
 #
-# Download the debian kernel and modules to use for testing or booting
-
-ifeq ($(CONFIG_KERNEL),debian)
+# Download the kernel and modules to use for testing or booting
 
 ifeq ($(CONFIG_KERNEL_ARCH),amd64)
-    TEST_KERNEL_URL = http://httpredir.debian.org/debian/dists/$(CONFIG_DEBIAN_KERNEL)/main/installer-$(CONFIG_KERNEL_ARCH)/current/images/netboot/debian-installer/$(CONFIG_KERNEL_ARCH)/linux
-    TEST_INITRD_URL = http://httpredir.debian.org/debian/dists/$(CONFIG_DEBIAN_KERNEL)/main/installer-$(CONFIG_KERNEL_ARCH)/current/images/netboot/debian-installer/$(CONFIG_KERNEL_ARCH)/initrd.gz
-endif
 
-TEST_KERNEL=kernel/debian.$(CONFIG_DEBIAN_KERNEL).$(CONFIG_KERNEL_ARCH).kernel
-TEST_INITRD=kernel/debian.$(CONFIG_DEBIAN_KERNEL).$(CONFIG_KERNEL_ARCH).initrd.gz
-TEST_MODULES=kernel/debian.$(CONFIG_DEBIAN_KERNEL).$(CONFIG_KERNEL_ARCH).modules.cpio
+ifeq ($(CONFIG_KERNEL),debian)
+TEST_KERNEL_URL = http://httpredir.debian.org/debian/dists/$(CONFIG_KERNEL_VERSION)/main/installer-$(CONFIG_KERNEL_ARCH)/current/images/netboot/debian-installer/$(CONFIG_KERNEL_ARCH)/linux
+TEST_INITRD_URL = http://httpredir.debian.org/debian/dists/$(CONFIG_KERNEL_VERSION)/main/installer-$(CONFIG_KERNEL_ARCH)/current/images/netboot/debian-installer/$(CONFIG_KERNEL_ARCH)/initrd.gz
 
-endif
+TEST_INITRD=kernel/$(CONFIG_KERNEL).$(CONFIG_KERNEL_VERSION).$(CONFIG_KERNEL_ARCH).initrd.gz
+TEST_MODULES=kernel/$(CONFIG_KERNEL).$(CONFIG_KERNEL_VERSION).$(CONFIG_KERNEL_ARCH).modules.cpio
 
-$(TEST_KERNEL):
-	mkdir -p $(dir $@)
+$(TARGET_KERNEL):
 	wget -O $@ $(TEST_KERNEL_URL)
 	touch $@
 
@@ -236,7 +238,7 @@ $(TEST_INITRD):
 	wget -O $@ $(TEST_INITRD_URL)
 	touch $@
 
-$(addsuffix .cpio,$(basename $(TEST_MODULES))): $(TEST_INITRD)
+$(TEST_MODULES): $(TEST_INITRD)
 	( \
 	    mkdir -p $(basename $@); \
 	    cd $(basename $@); \
@@ -244,21 +246,29 @@ $(addsuffix .cpio,$(basename $(TEST_MODULES))): $(TEST_INITRD)
 	    find lib -print0 | cpio -0 -H newc -R 0:0 -o \
 	) <$< >$@
 
-root.$(CONFIG_KERNEL_ARCH).combined:	$(TEST_MODULES) $(TARGET)
+$(TARGET_COMBINED): $(TARGET_RAMFS) $(TEST_MODULES)
 	cat $^ >$@
+
+endif
+
+ifeq ($(CONFIG_KERNEL),ubuntu)
+    TEST_KERNEL_URL = http://archive.ubuntu.com/ubuntu/dists/$(CONFIG_KERNEL_VERSION)/main/installer-$(CONFIG_KERNEL_ARCH)/current/images/netboot/ubuntu-installer/$(CONFIG_KERNEL_ARCH)/linux
+    TEST_INITRD_URL = http://archive.ubuntu.com/ubuntu/dists/$(CONFIG_KERNEL_VERSION)/main/installer-$(CONFIG_KERNEL_ARCH)/current/images/netboot/ubuntu-installer/$(CONFIG_KERNEL_ARCH)/initrd.gz
+endif
+endif
 
 
 ###########################################################################
 #
 
-test: 	root.$(CONFIG_KERNEL_ARCH).combined $(TEST_KERNEL)
+test: 	$(TARGET_COMBINED) $(TARGET_KERNEL)
 	qemu-system-$(CONFIG_QEMU_ARCH) -enable-kvm \
 		-m 1024 \
 		-serial stdio \
 		-append console=ttyS0 \
-		-kernel $(TEST_KERNEL) -initrd root.$(CONFIG_KERNEL_ARCH).combined
+		-kernel $(TARGET_KERNEL) -initrd $(TARGET_COMBINED)
 
-#test.iso: $(TARGET)
+#test.iso: $(TARGET_RAMFS)
 #	mkisofs -o $@ \
 #		-c isolinux/boot.cat \
 #		-b isolinux/isolinux.bin -no-emul-boot -boot-load-size 32 \
@@ -269,13 +279,13 @@ test: 	root.$(CONFIG_KERNEL_ARCH).combined $(TEST_KERNEL)
 #		-J \
 #		-R \
 #		-graft-points \
-#		test $(TARGET)
+#		test $(TARGET_RAMFS)
 #
 #test_cdrom: test.iso
 #	kvm -cdrom test.iso 
 
 clean:
-	rm -f $(TARGET) multistrap.conf test.iso .depfiles
+	rm -f $(TARGET_RAMFS) multistrap.conf test.iso .depfiles
 	rm -rf $(DEBOOT)
 
 
