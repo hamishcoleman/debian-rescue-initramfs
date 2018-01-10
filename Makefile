@@ -33,7 +33,7 @@ fakeroot=fakeroot -i $(SAVEPERM) -s $(SAVEPERM)
 all: bootstrap $(TARGET)
 
 build-depends:
-	sudo apt install multistrap
+	sudo apt install multistrap qemu-user-static
 
 
 # FIXME - perl module docs with two colons confuses make
