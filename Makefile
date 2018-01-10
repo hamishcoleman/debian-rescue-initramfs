@@ -8,16 +8,16 @@
 #  make test
 #
 
-CONFIG_ARCH_DEBIAN=i386
-CONFIG_ARCH_QEMU=i386
-CONFIG_ARCH_LIBS=i386-linux-gnu
+CONFIG_DEBIAN_ARCH=i386
+CONFIG_DEBIAN_ARCH_LIBS=i386-linux-gnu
+CONFIG_QEMU_ARCH=i386
 
-#CONFIG_ARCH_DEBIAN=armhf
-#CONFIG_ARCH_QEMU=arm
-#CONFIG_ARCH_LIBS=arm-linux-gnueabihf
+#CONFIG_DEBIAN_ARCH=armhf
+#CONFIG_DEBIAN_ARCH_LIBS=arm-linux-gnueabihf
+#CONFIG_QEMU_ARCH=arm
 
 DEBIAN_MIRROR=http://httpredir.debian.org/debian
-TARGET=root.$(CONFIG_ARCH_DEBIAN).ramfs
+TARGET=root.$(CONFIG_DEBIAN_ARCH).ramfs
 
 TMPDIR=$(HOME)/tmp/boot/linuxrescue3
 DEBOOT=$(TMPDIR)/files
@@ -58,7 +58,7 @@ debcache: $(TMPDIR) $(DEBOOT)
 	mkdir -p $(DEBOOT)/var/cache/apt/archives/
 	mkdir -p $(DEBOOT)/var/lib/apt/lists/
 	-cp -a $(TMPDIR)/cache/archives/*_all.deb $(DEBOOT)/var/cache/apt/archives/
-	-cp -a $(TMPDIR)/cache/archives/*_$(CONFIG_ARCH_DEBIAN).deb $(DEBOOT)/var/cache/apt/archives/
+	-cp -a $(TMPDIR)/cache/archives/*_$(CONFIG_DEBIAN_ARCH).deb $(DEBOOT)/var/cache/apt/archives/
 	cp -a $(TMPDIR)/cache/lists/ $(DEBOOT)/var/lib/apt/
 
 
@@ -86,7 +86,7 @@ packages = $(shell sed -e 's/\#.*//' packages.txt)
 debootstrap: $(DEBOOT) packages.txt
 	mkdir -p $(DEBOOT)
 	sudo /usr/sbin/qemu-debootstrap \
-		--arch=$(CONFIG_ARCH_DEBIAN) --variant=minbase \
+		--arch=$(CONFIG_DEBIAN_ARCH) --variant=minbase \
 		--include=$(subst $(SPACE),$(COMMA),$(packages)) \
 		$(VERSION) \
 		$(DEBOOT)/ \
@@ -108,7 +108,7 @@ multistrap_pre: $(DEBOOT) multistrap.conf
 	mkdir -p $(DEBOOT)/dev
 	sudo mknod $(DEBOOT)/dev/urandom c 1 9
 	sudo /usr/sbin/multistrap \
-		-a $(CONFIG_ARCH_DEBIAN) -d $(DEBOOT) -f multistrap.conf
+		-a $(CONFIG_DEBIAN_ARCH) -d $(DEBOOT) -f multistrap.conf
 
 $(DEBOOT)/usr/sbin/policy-rc.d: policy-rc.d
 	sudo cp $< $@
@@ -120,7 +120,7 @@ multistrap_fixup: $(DEBOOT)/usr/sbin/policy-rc.d
 	sudo perl -pi -e 's/ invoke-rc.d/ true/' $(DEBOOT)/var/lib/dpkg/info/dropbear.postinst
 
 multistrap_post: multistrap.configscript
-	sudo cp /usr/bin/qemu-$(CONFIG_ARCH_QEMU)-static $(DEBOOT)/usr/bin/
+	sudo cp /usr/bin/qemu-$(CONFIG_QEMU_ARCH)-static $(DEBOOT)/usr/bin/
 	sudo chroot $(DEBOOT) ./multistrap.configscript
 	sudo rm -f $(DEBOOT)/multistrap.configscript
 
@@ -162,14 +162,14 @@ findlinks: $(DEBOOT)
 #
 fixup: $(DEBOOT)
 	rm -f $(DEBOOT)/usr/sbin/policy-rc.d
-	./packages.addextra $(DEBOOT) $(CONFIG_ARCH_LIBS) fixup
-	./packages.runscripts $(DEBOOT) $(CONFIG_ARCH_LIBS) fixup
+	./packages.addextra $(DEBOOT) $(CONFIG_DEBIAN_ARCH_LIBS) fixup
+	./packages.runscripts $(DEBOOT) $(CONFIG_DEBIAN_ARCH_LIBS) fixup
 
 # customisations are things that go beyond makeing the image work
 #
 customise: $(DEBOOT)
-	./packages.addextra $(DEBOOT) $(CONFIG_ARCH_LIBS) customise
-	./packages.runscripts $(DEBOOT) $(CONFIG_ARCH_LIBS) customise
+	./packages.addextra $(DEBOOT) $(CONFIG_DEBIAN_ARCH_LIBS) customise
+	./packages.runscripts $(DEBOOT) $(CONFIG_DEBIAN_ARCH_LIBS) customise
 	echo "root:root" >$(DEBOOT)/etc/mactelnetd.users
 
 # TODO:
@@ -177,16 +177,16 @@ customise: $(DEBOOT)
 #   also use that for any authorised keys, etc)
 
 busybox: $(DEBOOT)
-	./packages.addextra $(DEBOOT) $(CONFIG_ARCH_LIBS) busybox
-	./packages.runscripts $(DEBOOT) $(CONFIG_ARCH_LIBS) busybox
+	./packages.addextra $(DEBOOT) $(CONFIG_DEBIAN_ARCH_LIBS) busybox
+	./packages.runscripts $(DEBOOT) $(CONFIG_DEBIAN_ARCH_LIBS) busybox
 	echo "NOSWAP=yes" >> $(DEBOOT)/etc/default/rcS
 	echo "unset QUIET_SYSCTL" >> $(DEBOOT)/etc/default/rcS
 
 # TODO - automatic dependancies for the runscripts
 minimise: $(DEBOOT) debcache_save
-	./packages.runfiles $(DEBOOT) $(CONFIG_ARCH_LIBS) verbose
-	./packages.addextra $(DEBOOT) $(CONFIG_ARCH_LIBS) minimise
-	./packages.runscripts $(DEBOOT) $(CONFIG_ARCH_LIBS) minimise
+	./packages.runfiles $(DEBOOT) $(CONFIG_DEBIAN_ARCH_LIBS) verbose
+	./packages.addextra $(DEBOOT) $(CONFIG_DEBIAN_ARCH_LIBS) minimise
+	./packages.runscripts $(DEBOOT) $(CONFIG_DEBIAN_ARCH_LIBS) minimise
 	rm -rf \
 		$(DEBOOT)/usr/share/doc/* \
 		$(DEBOOT)/usr/share/info/* \
@@ -208,7 +208,7 @@ $(TARGET).xz: $(TARGET)
 	xz --check=crc32 $<
 
 test: 	$(TARGET) $(TESTKERN)
-	qemu-system-$(CONFIG_ARCH_QEMU) -enable-kvm \
+	qemu-system-$(CONFIG_QEMU_ARCH) -enable-kvm \
 		-m 512 \
 		-serial stdio \
 		-append console=ttyS0 \
