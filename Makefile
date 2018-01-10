@@ -22,7 +22,6 @@ TARGET=root.$(CONFIG_DEBIAN_ARCH).ramfs
 TMPDIR=$(HOME)/tmp/boot/linuxrescue3
 DEBOOT=$(TMPDIR)/files
 SAVEPERM=$(TMPDIR)/fakeroot.save
-TESTKERN=kernel/4.6-15
 
 # Not simply user changable - the minimisation process will break differently
 # for other debian versions, so the fixup process will need adjustments
@@ -194,7 +193,7 @@ minimise: $(DEBOOT) debcache_save
 		$(DEBOOT)/usr/share/locale/* \
 		$(DEBOOT)/usr/share/man/* \
 		$(DEBOOT)/usr/share/info/* \
-		$(DEBOOT)/usr/bin/qemu-$(CONFIG_ARCH_QEMU)-static \
+		$(DEBOOT)/usr/bin/qemu-$(CONFIG_QEMU_ARCH)-static \
 
 bootstrap: multistrap save_perms minimise busybox fixup customise
 
@@ -207,12 +206,50 @@ $(TARGET): $(DEBOOT)
 $(TARGET).xz: $(TARGET)
 	xz --check=crc32 $<
 
-test: 	$(TARGET) $(TESTKERN)
+###########################################################################
+#
+# Download the debian kernel and modules to use for testing or booting
+
+ifeq ($(CONFIG_DEBIAN_ARCH),i386)
+    DEBIAN_KERNEL_URL = http://httpredir.debian.org/debian/dists/$(VERSION)/main/installer-$(CONFIG_DEBIAN_ARCH)/current/images/netboot/debian-installer/$(CONFIG_DEBIAN_ARCH)/linux
+    DEBIAN_INITRD_URL = http://httpredir.debian.org/debian/dists/$(VERSION)/main/installer-$(CONFIG_DEBIAN_ARCH)/current/images/netboot/debian-installer/$(CONFIG_DEBIAN_ARCH)/initrd.gz
+endif
+
+DEBIAN_KERNEL=kernel/debian.$(VERSION).$(CONFIG_DEBIAN_ARCH).kernel
+DEBIAN_INITRD=kernel/debian.$(VERSION).$(CONFIG_DEBIAN_ARCH).initrd.gz
+DEBIAN_MODULES=kernel/debian.$(VERSION).$(CONFIG_DEBIAN_ARCH).modules.cpio
+
+$(DEBIAN_KERNEL):
+	mkdir -p $(dir $@)
+	wget -O $@ $(DEBIAN_KERNEL_URL)
+	touch $@
+
+$(DEBIAN_INITRD):
+	mkdir -p $(dir $@)
+	wget -O $@ $(DEBIAN_INITRD_URL)
+	touch $@
+
+$(addsuffix .cpio,$(basename $(DEBIAN_MODULES))): $(DEBIAN_INITRD)
+	( \
+	    mkdir -p $(basename $@); \
+	    cd $(basename $@); \
+	    gzip -dc | cpio --make-directories -i lib/modules/*; \
+	    find lib -print0 | cpio -0 -H newc -R 0:0 -o \
+	) <$< >$@
+
+root.$(CONFIG_DEBIAN_ARCH).combined:	$(DEBIAN_MODULES) $(TARGET)
+	cat $^ >$@
+
+
+###########################################################################
+#
+
+test: 	root.$(CONFIG_DEBIAN_ARCH).combined $(DEBIAN_KERNEL)
 	qemu-system-$(CONFIG_QEMU_ARCH) -enable-kvm \
 		-m 512 \
 		-serial stdio \
 		-append console=ttyS0 \
-		-kernel $(TESTKERN) -initrd $(TARGET)
+		-kernel $(DEBIAN_KERNEL) -initrd root.$(CONFIG_DEBIAN_ARCH).combined
 
 #test.iso: $(TARGET)
 #	mkisofs -o $@ \
