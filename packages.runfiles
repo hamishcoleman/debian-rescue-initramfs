@@ -2,7 +2,7 @@
 #
 # Process the packages/*.files lists for each package installed in the deboot
 #
-# Copyright (C) 2017 Hamish Coleman <hamish@zot.org>
+# Copyright (C) 2018 Hamish Coleman <hamish@zot.org>
 
 if [ $# -lt 3 ]; then
     echo "Usage: $0 DEBOOT ARCH"
@@ -18,7 +18,7 @@ else
     unset VERBOSE
 fi
 
-PACKAGEDIR=packages.d
+${PACKAGEDIRS=packages.d}
 PACKAGES=$(dpkg-query --admindir="${DEBOOT}/var/lib/dpkg" --show --showformat='${Package}\n')
 
 check_file() {
@@ -38,22 +38,21 @@ check_file() {
     # it must be existing, unless it is a symlink - where it could be
     # a dangling pointer and exist, but fail the "-e"..  Ungh.. I need
     # to replace this stuff
-    if [ ! -e "$file" -a ! -L "$file" ]; then
+    if [ ! -e "$file" ] && [ ! -L "$file" ]; then
         echo "MISSING $package $origfile"
         RESULT=2
     fi
 }
 
-do_files_list() {
-    local package=$1
+do_files_list_one() {
+    local filename=$1
 
-    if [ ! -e "$PACKAGEDIR/${package}.files" ]; then
-        NO_FILES+="${package} "
+    if [ ! -e "$filename" ]; then
         return
     fi
 
     if [ -n "$VERBOSE" ]; then
-        echo -n "${package}.files "
+        echo -n "${filename} "
     fi
 
     RESULT=0
@@ -90,9 +89,30 @@ do_files_list() {
             RESULT=2
             ;;
         esac
-    done <"$PACKAGEDIR/${package}.files"
-    DO_FILES+="${package} "
+    done <"$filename"
     return $RESULT
+}
+
+do_files_list() {
+    local package=$1
+
+    for dir in $PACKAGEDIRS; do
+        if [ ! -e "$dir/${package}.files" ]; then
+            continue
+        fi
+
+        if [ -n "$VERBOSE" ]; then
+            echo -n "$dir/${package}.files "
+        fi
+
+        do_files_list_one "$dir/${package}.files"
+        S=$?
+
+        if [ $S -gt 0 ]; then
+            echo "ERROR: processing $dir/${package}.files"
+            exit $S
+        fi
+    done
 }
 
 if [ -n "$VERBOSE" ]; then
