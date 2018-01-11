@@ -41,6 +41,7 @@ lvm2
 wodim
 testdisk
 kpartx
+dosfstools
 
 # monitoring
 cpufrequtils
