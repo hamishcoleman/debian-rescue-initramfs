@@ -388,7 +388,7 @@ todo    /lib/systemd/systemd-sysv-install
 todo    /usr/bin/bootctl
 todo    /usr/bin/kernel-install
 todo    /usr/bin/systemd-mount
-rm      /usr/bin/systemd-resolve
+keep    /usr/bin/systemd-resolve
 todo    /usr/bin/systemd-socket-activate
 todo    /usr/lib/kernel/install.d/50-depmod.install
 todo    /usr/lib/kernel/install.d/85-initrd.install
