@@ -23,6 +23,9 @@ fi
 : ${PACKAGEDIRS=packages.d}
 PACKAGES=$(dpkg-query --admindir="${DEBOOT}/var/lib/dpkg" --show --showformat='${Package}\n')
 
+# Add an always present virtual package
+PACKAGES+=" _ALWAYS"
+
 do_package() {
     local package=$1
     local retval=0
