@@ -18,7 +18,7 @@ else
     unset VERBOSE
 fi
 
-${PACKAGEDIRS=packages.d}
+: ${PACKAGEDIRS=packages.d}
 PACKAGES=$(dpkg-query --admindir="${DEBOOT}/var/lib/dpkg" --show --showformat='${Package}\n')
 
 check_file() {
