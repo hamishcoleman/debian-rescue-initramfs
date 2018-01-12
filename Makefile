@@ -197,12 +197,6 @@ minimise: $(DEBOOT) debcache_save
 	./packages.addextra $(DEBOOT) $(CONFIG_DEBIAN_ARCH_LIBS) minimise
 	./packages.runscripts $(DEBOOT) $(CONFIG_DEBIAN_ARCH_LIBS) minimise
 	rm -rf \
-		$(DEBOOT)/usr/share/doc/* \
-		$(DEBOOT)/usr/share/info/* \
-		$(DEBOOT)/usr/share/lintian/* \
-		$(DEBOOT)/usr/share/locale/* \
-		$(DEBOOT)/usr/share/man/* \
-		$(DEBOOT)/usr/share/info/* \
 		$(DEBOOT)/usr/bin/qemu-$(CONFIG_QEMU_ARCH)-static \
 
 bootstrap: multistrap save_perms minimise busybox fixup customise

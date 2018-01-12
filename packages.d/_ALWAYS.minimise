@@ -1,0 +1,18 @@
+#!/bin/bash
+# Copyright (C) 2018 Hamish Coleman <hamish@zot.org>
+
+
+DEBOOT="$1"
+ARCH="$2"
+
+# Always minimise the image by removing these large chunks of files
+rm -rf ${DEBOOT}/usr/share/locale/*
+
+# While these could be removed in the per-package .files rules, doing it
+# in one big chunk is simpler
+rm -rf \
+    ${DEBOOT}/usr/share/doc/* \
+    ${DEBOOT}/usr/share/info/* \
+    ${DEBOOT}/usr/share/lintian/* \
+    ${DEBOOT}/usr/share/man/*
+
