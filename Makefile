@@ -29,6 +29,9 @@ TARGET_RAMFS=root.$(CONFIG_DEBIAN_ARCH).ramfs
 TARGET_KERNEL=root.$(CONFIG_KERNEL_ARCH).kernel
 TARGET_COMBINED=root.$(CONFIG_KERNEL_ARCH).combined # ramfs + modules
 
+# Default to just looking in the local directory for configs
+CONFIGDIRS ?= .
+
 TMPDIR=$(HOME)/tmp/boot/linuxrescue3
 DEBOOT=$(TMPDIR)/files
 SAVEPERM=$(TMPDIR)/fakeroot.save
@@ -86,13 +89,17 @@ debcache_save: $(TMPDIR) $(DEBOOT)
 # busybox for many things
 # avoid sudo
 
+# a list of files containing lists of packages
+packages_lists = $(wildcard $(addsuffix /packages.txt,$(CONFIGDIRS)))
+
+# the actual list of packages to install
+packages = $(shell sed -e 's/\#.*//' $(packages_lists))
+
 SPACE :=
 SPACE +=
 COMMA :=,
 
-packages = $(shell sed -e 's/\#.*//' packages.txt)
-
-debootstrap: $(DEBOOT) packages.txt
+debootstrap: $(DEBOOT) $(packages_lists)
 	mkdir -p $(DEBOOT)
 	sudo /usr/sbin/qemu-debootstrap \
 		--arch=$(CONFIG_DEBIAN_ARCH) --variant=minbase \
@@ -101,7 +108,7 @@ debootstrap: $(DEBOOT) packages.txt
 		$(DEBOOT)/ \
 		$(DEBIAN_MIRROR)
 
-multistrap.conf: packages.txt
+multistrap.conf: $(packages_lists)
 	echo "[General]" >$@
 	echo "bootstrap=DebianRescue" >>$@
 	echo "aptsources=DebianRescue" >>$@
